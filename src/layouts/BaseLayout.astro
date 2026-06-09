@@ -1,0 +1,61 @@
+---
+import { nav, pathPairs, site } from "@/data/site";
+
+type Props = {
+  title: string;
+  description: string;
+  lang?: "es" | "en";
+  path: string;
+  pairId?: string;
+};
+
+const { title, description, lang = "es", path, pairId } = Astro.props;
+const canonical = new URL(path, site.url).toString();
+const currentNav = nav[lang];
+const languageUrl = pairId ? pathPairs[pairId]?.[lang === "es" ? "en" : "es"] : undefined;
+const alternates = pairId ? pathPairs[pairId] : undefined;
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {alternates && <link rel="alternate" hreflang="es" href={new URL(alternates.es, site.url).toString()} />}
+    {alternates && <link rel="alternate" hreflang="en" href={new URL(alternates.en, site.url).toString()} />}
+    {pairId === "home" && <link rel="alternate" hreflang="x-default" href={site.url + "/"} />}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <link rel="stylesheet" href="/styles/global.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href={lang === "es" ? "/" : "/en/"}>
+        <strong>MUSICARTES</strong>
+        <span>{lang === "es" ? "Gestión colectiva de derechos" : "Collective rights management"}</span>
+      </a>
+      <nav aria-label="Principal">
+        {currentNav.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+      {languageUrl && <a class="lang-switch" href={languageUrl}>{lang === "es" ? "EN" : "ES"}</a>}
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div>
+        <strong>{site.legalName}</strong>
+        <p>{site.address}</p>
+      </div>
+      <div>
+        <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+        <p>{site.phone}</p>
+        <p>{site.hours}</p>
+      </div>
+    </footer>
+  </body>
+</html>

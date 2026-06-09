@@ -1,0 +1,26 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const posts = (await getCollection("blog"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+---
+<BaseLayout title="Blog | MUSICARTES" description="Artículos educativos y noticias para músicos en Guatemala." path="/blog/" lang="es">
+  <section class="hero">
+    <div class="hero-copy">
+      <h1>Blog</h1>
+      <p>Artículos en español sobre industria musical, autogestión, salud del músico, propiedad intelectual y formación.</p>
+    </div>
+  </section>
+  <section class="post-list">
+    {posts.map((post) => (
+      <a class="post-card" href={`/${post.data.slug}/`}>
+        <span>{post.data.category}</span>
+        <h2>{post.data.title}</h2>
+        <p>{post.data.description}</p>
+        <time datetime={new Date(post.data.date).toISOString()}>{new Date(post.data.date).toLocaleDateString("es-GT", { year: "numeric", month: "long", day: "numeric" })}</time>
+      </a>
+    ))}
+  </section>
+</BaseLayout>
