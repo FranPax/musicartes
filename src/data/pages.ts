@@ -225,7 +225,7 @@ const esPages: Page[] = [
 ];
 
 const enCopy: Record<string, Partial<Page>> = {
-  home: { h1: "MUSICARTES", intro: "Collective management society for musicians, performers and audiovisual artists in Guatemala.", title: "MUSICARTES | Neighboring rights for musicians in Guatemala", description: "Collective rights management organization protecting performers and musicians in Guatemala." },
+  home: { h1: "MUSICARTES", intro: "Collective Management Organization for musicians, performers and audiovisual artists in Guatemala.", title: "MUSICARTES | Neighboring rights for musicians in Guatemala", description: "Collective rights management organization protecting performers and musicians in Guatemala." },
   about: { h1: "About MUSICARTES Guatemala", intro: "MUSICARTES protects neighboring rights for music performers in Guatemala.", title: "About us | MUSICARTES Guatemala", description: "Learn about MUSICARTES, neighboring rights and collective management in Guatemala." },
   member: { h1: "Become a member", intro: "If you are a music performer in Guatemala, MUSICARTES can help identify and protect your repertoire.", title: "Become a member | MUSICARTES", description: "Membership information for musicians and performers in Guatemala." },
   legal: { h1: "Legal resources", intro: "National legislation and international treaties provide the legal framework for protecting performers and their recordings.", title: "Legal resources | MUSICARTES", description: "Legal framework, authorizations and international treaties related to MUSICARTES." },
