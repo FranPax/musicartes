@@ -8,7 +8,15 @@ type Page = {
   intro: string;
   sections: { title: string; body: string; items?: string[]; links?: { label: string; href: string }[] }[];
   cta?: { label: string; href: string };
+  translate?: boolean;
 };
+
+const honoraryLinks = [
+  { label: "Maestro Vinicio Quezada", href: "/vinicio-quezada/" },
+  { label: "Maestro Roberto Rey", href: "/roberto-rey/" },
+  { label: "Maestro Fernando Pérez", href: "/fernando-perez/" },
+  { label: "Maestro Juan Carlos Sánchez", href: "/juan-carlos-sanchez/" }
+];
 
 const esPages: Page[] = [
   {
@@ -50,8 +58,9 @@ const esPages: Page[] = [
     h1: "Hazte Socio de Musicartes",
     intro: "Intérprete o ejecutante, te damos la cordial bienvenida. Completa el proceso de postulación y registra tu repertorio para que podamos identificar tus obras.",
     sections: [
-      { title: "Paso 1", body: "Descarga y completa el archivo Excel requerido para el registro de tu primera canción. Esta información estará sujeta a revisión." },
-      { title: "Paso 2", body: "Completa el formulario de afiliación con tus datos y adjunta la información solicitada." },
+      { title: "Antes de postularte", body: "Musicartes representa derechos conexos de intérpretes y ejecutantes. Para iniciar el proceso conviene tener claridad sobre tu participación en grabaciones fonográficas y contar con información verificable de tu repertorio." },
+      { title: "Registro de repertorio", body: "Descarga y completa el archivo Excel requerido para declarar tu primera canción o fonograma. La información se revisa antes de incorporarse a los procesos internos de gestión." },
+      { title: "Formulario de afiliación", body: "Completa el formulario de afiliación con tus datos personales, información artística y documentos solicitados. Si el formulario se administra en un sistema externo, esta página servirá como entrada pública y clara hacia ese proceso." },
       { title: "Dudas y asistencia", body: "Si tienes alguna duda, puedes escribir a los correos de contacto de Musicartes.", links: [{ label: "Escribir a info@musicartes.org", href: "mailto:info@musicartes.org" }, { label: "Escribir a asistencia@musicartes.org", href: "mailto:asistencia@musicartes.org" }] }
     ],
     cta: { label: "Contacta a Musicartes", href: "/contacto/" }
@@ -118,11 +127,14 @@ const esPages: Page[] = [
     title: "Preguntas frecuentes | MUSICARTES",
     description: "Respuestas básicas para músicos sobre afiliación, derechos conexos, licencias y contacto.",
     h1: "Preguntas frecuentes",
-    intro: "Respuestas rápidas para resolver dudas comunes de intérpretes, ejecutantes, socios y usuarios de música.",
+    intro: "Respuestas rápidas para resolver dudas comunes de intérpretes, ejecutantes, socios y usuarios de música en Guatemala.",
     sections: [
-      { title: "¿Quién puede afiliarse?", body: "Para afiliarte necesitas ser intérprete o ejecutante de música en Guatemala y contar con grabaciones fonográficas publicadas con código ISRC." },
+      { title: "¿Quién puede afiliarse?", body: "Pueden postularse intérpretes y ejecutantes vinculados a grabaciones fonográficas. El proceso requiere información personal, datos artísticos y declaración de repertorio para que Musicartes pueda identificar participaciones." },
+      { title: "¿Qué son los derechos conexos?", body: "Son derechos que protegen la interpretación o ejecución fijada en un fonograma. No sustituyen el derecho de autor de la composición; reconocen la participación de quienes interpretan o ejecutan la música grabada." },
       { title: "¿Dónde inicio el proceso?", body: "Puedes iniciar tu proceso de postulación en la página Hazte socio.", links: [{ label: "Ir a Hazte socio", href: "/hazte-socio/" }] },
-      { title: "¿Qué pasa si un usuario no paga licencia?", body: "MUSICARTES tiene facultad legal para fiscalizar y exigir el pago de licencias correspondientes, incluyendo regalías retroactivas y sanciones cuando aplique." }
+      { title: "¿Cómo declaro obras o fonogramas?", body: "La declaración de repertorio debe incluir la información solicitada por Musicartes para identificar tema, artista, participación e identificadores disponibles. Los socios pueden consultar la zona de socios y la página de obras no declaradas." },
+      { title: "¿Qué pasa si un usuario no paga licencia?", body: "Musicartes puede realizar gestiones de fiscalización y exigir el pago de licencias correspondientes conforme al marco legal aplicable." },
+      { title: "¿Dónde encuentro documentos institucionales?", body: "Los estatutos, reglamentos, memorias y estados financieros se organizan en las páginas de gestión y transparencia del sitio.", links: [{ label: "Recursos legales", href: "/recursos-legales/" }, { label: "Estados financieros", href: "/estados-financieros/" }] }
     ],
     cta: { label: "Contacta a Musicartes", href: "/contacto/" }
   },
@@ -178,8 +190,11 @@ const esPages: Page[] = [
     h1: "Socios Honorarios Musicartes",
     intro: "Por disposición de la Asamblea General, MUSICARTES reconoce a luminarias musicales y personalidades intérpretes y ejecutantes de la música.",
     sections: [
-      { title: "Maestros y maestras reconocidos", body: "Este grupo crece gracias al fondo socio-cultural y a los programas de apoyo de MUSICARTES.", items: ["Maestro Joaquín Orellana.", "Maestro Vinicio Quezada.", "Maestra Ivonne Reyna.", "Maestro Roberto Rey.", "Maestro Juan Carlos Sánchez.", "Maestro Fernando Pérez.", "Maestra Maritza Estrada.", "Maestro Byron Sosa.", "Maestro Carlos Duarte.", "Maestro Héctor Castro.", "Maestro Guillermo de León Ruiz.", "Maestro German Giordano.", "Maestro Leonel Franco.", "Maestro Miguel Ángel Villagrán."] }
-    ]
+      { title: "Memoria y reconocimiento", body: "Esta sección debe convertirse en un archivo vivo de memoria cultural. Cada perfil individual se trabajará con cuidado editorial, fuentes verificadas y respeto por la trayectoria de cada maestra o maestro." },
+      { title: "Perfiles prioritarios", body: "Estas biografías tienen prioridad por relevancia cultural y señal de búsqueda en Search Console.", links: honoraryLinks },
+      { title: "Maestros y maestras reconocidos", body: "Listado base de socios honorarios identificados en el sitio actual.", items: ["Maestro Joaquín Orellana.", "Maestro Vinicio Quezada.", "Maestra Ivonne Reyna.", "Maestro Roberto Rey.", "Maestro Juan Carlos Sánchez.", "Maestro Fernando Pérez.", "Maestra Maritza Estrada.", "Maestro Byron Sosa.", "Maestro Carlos Duarte.", "Maestro Héctor Castro.", "Maestro Guillermo de León Ruiz.", "Maestro German Giordano.", "Maestro Leonel Franco.", "Maestro Miguel Ángel Villagrán."] }
+    ],
+    translate: false
   },
   {
     id: "active",
@@ -188,8 +203,107 @@ const esPages: Page[] = [
     title: "Socios activos | MUSICARTES",
     description: "Información institucional sobre socios activos de MUSICARTES.",
     h1: "Socios activos",
-    intro: "Espacio para organizar información pública sobre socios activos conforme a los criterios institucionales vigentes.",
-    sections: [{ title: "Información en mantenimiento", body: "La página conserva la URL y queda preparada para cargar listados o documentos oficiales." }]
+    intro: "Listado público de socios activos de Musicartes y punto de referencia para quienes buscan confirmar pertenencia institucional.",
+    sections: [
+      { title: "Criterio editorial", body: "El listado completo debe publicarse a partir de una fuente oficial actualizada. En esta fase se conserva la URL, se mejora el contexto y se prepara la estructura para cargar el directorio definitivo." },
+      { title: "Socios identificados en el sitio actual", body: "El sitio vigente contiene un listado extenso de socios activos. Antes de migrarlo completo conviene validar nombres, acentos, duplicados y estado de afiliación.", items: ["Ada Gabriela Marroquín Salas.", "Carlos Enrique Peña Aldana.", "Dieter Hasso Lehnhoff Temme.", "Fernando Pérez Barreda.", "Francisco Antonio Páez Méndez.", "Jacobo Nitsch Velásquez.", "Juan Carlos Garcia Romero.", "Magda Angélica García Von Hoegen.", "Miguel Angel Villagran Galindo."] },
+      { title: "Relación con socios honorarios", body: "Los socios honorarios cuentan con una sección independiente de memoria cultural.", links: [{ label: "Ver socios honorarios", href: "/socios-honorarios/" }] }
+    ]
+  },
+  {
+    id: "undeclared-works",
+    lang: "es",
+    path: "/obras-no-declaradas/",
+    title: "Canciones o fonogramas no declarados | MUSICARTES",
+    description: "Información para consultar y reclamar interpretaciones o ejecuciones de fonogramas pendientes de declarar ante Musicartes.",
+    h1: "Canciones o fonogramas no declarados",
+    intro: "Musicartes conserva información sobre interpretaciones y ejecuciones de fonogramas pendientes de declarar para que los artistas representados puedan revisar posibles participaciones.",
+    sections: [
+      { title: "Plazo de resguardo", body: "Las interpretaciones y ejecuciones pendientes de declarar se resguardan por un periodo de cinco años. Después de ese plazo los montos prescriben y ya no pueden reclamarse." },
+      { title: "Qué debe revisar el artista", body: "La consulta debe permitir identificar año, tema, ISRC cuando exista y artista relacionado. El listado completo requiere una migración controlada para evitar duplicados y errores de formato." },
+      { title: "Cómo proceder", body: "Si reconoces una participación pendiente, comunícate con Musicartes o utiliza el proceso indicado en la zona de socios para completar la declaración correspondiente.", links: [{ label: "Ir a zona de socios", href: "/zona-de-socios/" }, { label: "Contactar a Musicartes", href: "/contacto/" }] }
+    ],
+    translate: false
+  },
+  {
+    id: "member-zone",
+    lang: "es",
+    path: "/zona-de-socios/",
+    title: "Zona de socios | MUSICARTES",
+    description: "Guía para socios de MUSICARTES sobre portal, declaración de canciones grabadas y reglas internas de participación de fonogramas.",
+    h1: "Zona de socios",
+    intro: "Espacio de orientación para socios de Musicartes sobre declaración de repertorio, portal de socios y reglas internas de participación de fonogramas.",
+    sections: [
+      { title: "Portal de socios", body: "Musicartes utiliza un sistema digital para la gestión de repertorios. Esta página debe funcionar como entrada pública al portal y como guía para quienes necesitan declarar obras o actualizar información.", links: [{ label: "Portal de socios", href: "https://website.sociosmusicartes.org" }] },
+      { title: "Declaración de participación", body: "La declaración de canciones grabadas permite identificar intérpretes, ejecutantes, artista principal y participación en cada fonograma. Esa información es necesaria para procesos de distribución." },
+      { title: "Reglas internas", body: "El sitio vigente explica reglas generales de distribución entre intérpretes y ejecutantes, así como la posibilidad de contratos privados válidos por escrito cuando las partes acuerden porcentajes específicos." },
+      { title: "Soporte", body: "Para dudas sobre acceso, declaración de repertorio o información pendiente, el socio puede comunicarse con Musicartes.", links: [{ label: "Contactar", href: "/contacto/" }, { label: "Obras no declaradas", href: "/obras-no-declaradas/" }] }
+    ],
+    translate: false
+  },
+  {
+    id: "vinicio-quezada",
+    lang: "es",
+    path: "/vinicio-quezada/",
+    title: "Vinicio Quezada | Socios honorarios MUSICARTES",
+    description: "Perfil del maestro Vinicio Quezada, pianista, arreglista y compositor guatemalteco reconocido como socio honorario de MUSICARTES.",
+    h1: "Vinicio Quezada",
+    intro: "Pianista, arreglista y compositor guatemalteco, integrante del grupo de socios honorarios de MUSICARTES desde 2016.",
+    sections: [
+      { title: "Trayectoria", body: "El maestro Vinicio Quezada inició su formación musical desde niño y desarrolló una amplia carrera como pianista, arreglista, productor y director musical." },
+      { title: "Formación y escenarios", body: "Su formación incluye estudios en Guatemala, Costa Rica y Estados Unidos. Se ha presentado como pianista, director y arreglista en Centroamérica, Estados Unidos, Sudamérica y Europa." },
+      { title: "Aportes", body: "Ha sido solista con orquestas, pianista acompañante, productor y arreglista. El sitio actual de Musicartes destaca su trabajo como productor y arreglista del cantautor Ricardo Arjona y su labor docente." },
+      { title: "Reconocimiento MUSICARTES", body: "Musicartes lo reconoce como un orgullo guatemalteco y socio honorario por su trayectoria y aporte a la música nacional.", links: [{ label: "Volver a socios honorarios", href: "/socios-honorarios/" }] }
+    ],
+    translate: false
+  },
+  {
+    id: "roberto-rey",
+    lang: "es",
+    path: "/roberto-rey/",
+    title: "Roberto Rey | Socios honorarios MUSICARTES",
+    description: "Perfil del maestro Roberto Rey, cantante guatemalteco reconocido por su trayectoria en bolero y balada romántica.",
+    h1: "Roberto Rey",
+    intro: "Julio Roberto Sandoval Orizábal, conocido artísticamente como Roberto Rey, es uno de los cantantes guatemaltecos más destacados de su generación.",
+    sections: [
+      { title: "Una voz para el bolero y la balada", body: "El sitio actual de Musicartes lo presenta como una de las grandes voces guatemaltecas, con dominio del bolero, la balada romántica y formatos de entretenimiento musical en vivo." },
+      { title: "Trayectoria", body: "Nacido en Antigua Guatemala en 1959, inició su camino musical en tríos románticos y escenarios nocturnos. Su carrera supera las cuatro décadas de actividad artística." },
+      { title: "Representación internacional", body: "Representó a Guatemala en el Festival Internacional OTI de la Canción en Miami en 1989 con el tema Traigo la voz." },
+      { title: "Reconocimientos", body: "Entre sus reconocimientos figuran premios como intérprete, distinciones en Guatemala y Estados Unidos, y la declaración como Embajador de la Música por la Municipalidad de La Antigua Guatemala en 2009.", links: [{ label: "Volver a socios honorarios", href: "/socios-honorarios/" }] }
+    ],
+    translate: false
+  },
+  {
+    id: "fernando-perez",
+    lang: "es",
+    path: "/fernando-perez/",
+    title: "Fernando Pérez | Socios honorarios MUSICARTES",
+    description: "Perfil del maestro Fernando Pérez, percusionista guatemalteco especializado en percusión latina, jazz y ritmos afrocubanos.",
+    h1: "Fernando Pérez",
+    intro: "Percusionista guatemalteco con trayectoria en percusión latina, jazz, salsa, rock y ritmos afrocubanos.",
+    sections: [
+      { title: "Formación", body: "Inició estudios musicales en 1981 en el Conservatorio Nacional de Música, donde cursó solfeo, flauta, piano y percusión." },
+      { title: "Especialidad", body: "Se especializó en instrumentos de percusión latina como bongó, timbales, tumbadoras y recursos de percusión utilizados en ritmos afrocubanos." },
+      { title: "Escenarios y colaboraciones", body: "Su trayectoria incluye proyectos de latin jazz, participación con agrupaciones guatemaltecas y alternancia con artistas internacionales de jazz, salsa y música latina." },
+      { title: "Reconocimientos", body: "Ha recibido distinciones por su aporte a la música, entre ellas reconocimientos a su trayectoria artística y a su trabajo por la cultura musical guatemalteca.", links: [{ label: "Volver a socios honorarios", href: "/socios-honorarios/" }, { label: "Clases con Fernando Pérez", href: "/clases-con-fernando-perez/" }] }
+    ],
+    translate: false
+  },
+  {
+    id: "juan-carlos-sanchez",
+    lang: "es",
+    path: "/juan-carlos-sanchez/",
+    title: "Juan Carlos Sánchez | Socios honorarios MUSICARTES",
+    description: "Perfil del maestro Juan Carlos Sánchez, músico y compositor garífuna de Livingston, Guatemala.",
+    h1: "Juan Carlos Sánchez",
+    intro: "Músico, compositor y líder espiritual garífuna de Livingston, Guatemala, reconocido por su labor en la parranda o paranda garífuna.",
+    sections: [
+      { title: "Raíces", body: "Juan Carlos Sánchez Álvarez nació en Livingston, Izabal, el 21 de noviembre de 1966. La música estuvo presente desde su infancia y marcó su camino artístico." },
+      { title: "Parranda garífuna", body: "Desde 1989 se ha dedicado a cultivar la música tradicional garífuna, especialmente la parranda o paranda, género asociado a serenatas y a la memoria oral de su pueblo." },
+      { title: "Rescate cultural", body: "Su obra se centra en mantener viva la música garífuna, formar a nuevas generaciones y compartir tradiciones musicales en Guatemala y escenarios internacionales." },
+      { title: "Liderazgo comunitario", body: "Además de su trabajo musical, el sitio actual de Musicartes destaca su papel como líder espiritual, activista cultural y colaborador en proyectos de salvaguarda garífuna.", links: [{ label: "Volver a socios honorarios", href: "/socios-honorarios/" }] }
+    ],
+    translate: false
   },
   {
     id: "agreements",
@@ -249,30 +363,31 @@ const englishSections = [
   { title: "For musicians and partners", body: "Use these pages to understand MUSICARTES, membership, legal resources, transparency, workshops and contact channels." }
 ];
 
+const enSlugs: Record<string, string> = {
+  about: "about-us",
+  member: "become-a-member",
+  legal: "legal-resources",
+  financial: "financial-statements",
+  reports: "annual-reports",
+  workshops: "workshops",
+  faq: "faq",
+  contact: "contact",
+  news: "news",
+  events: "events",
+  statutes: "statutes",
+  active: "active-members",
+  agreements: "international-agreements",
+  distribution: "distribution-regulations",
+  press: "press"
+};
+
 export const pages: Page[] = [
   ...esPages,
-  ...esPages.map((page) => ({
+  ...esPages.filter((page) => page.translate !== false && (page.id === "home" || enSlugs[page.id])).map((page) => ({
     ...page,
     ...enCopy[page.id],
     lang: "en" as const,
-    path: page.id === "home" ? "/en/" : `/en/${{
-      about: "about-us",
-      member: "become-a-member",
-      legal: "legal-resources",
-      financial: "financial-statements",
-      reports: "annual-reports",
-      workshops: "workshops",
-      faq: "faq",
-      contact: "contact",
-      news: "news",
-      events: "events",
-      statutes: "statutes",
-      honorary: "honorary-members",
-      active: "active-members",
-      agreements: "international-agreements",
-      distribution: "distribution-regulations",
-      press: "press"
-    }[page.id]}/`,
+    path: page.id === "home" ? "/en/" : `/en/${enSlugs[page.id]}/`,
     sections: englishSections,
     cta: page.cta ? { label: page.id === "member" ? "Contact MUSICARTES" : "Become a member", href: page.id === "member" ? "/en/contact/" : "/en/become-a-member/" } : undefined
   }))

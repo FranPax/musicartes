@@ -41,7 +41,6 @@ export const pathPairs: Record<string, { es: string; en: string }> = {
   news: { es: "/noticias/", en: "/en/news/" },
   events: { es: "/eventos/", en: "/en/events/" },
   statutes: { es: "/estatutos/", en: "/en/statutes/" },
-  honorary: { es: "/socios-honorarios/", en: "/en/honorary-members/" },
   active: { es: "/socios-activos/", en: "/en/active-members/" },
   agreements: { es: "/acuerdos-internacionales/", en: "/en/international-agreements/" },
   distribution: { es: "/reglamento-distribucion/", en: "/en/distribution-regulations/" },
