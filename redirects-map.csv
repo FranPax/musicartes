@@ -1,4 +1,47 @@
 old_url,new_url,reason,status
-https://musicartes.org/hazte-socio-obras/,https://musicartes.org/hazte-socio/,Contenido de registro de obras integrado al proceso de afiliación,301
-https://musicartes.org/recursos/,https://musicartes.org/recursos-legales/,Página de recursos consolidada con recursos legales institucionales,301
-https://musicartes.org/5-errores-comunes-de-la-autogestion-musical/,https://musicartes.org/10-errores-fatales-en-la-autogestion-musical-y-como-evitarlos-en-2026/,Contenido de autogestión consolidado,301
+https://musicartes.org/algunos-socios/,https://musicartes.org/socios-activos/,FUSIONAR: 3 clicks. Redundante con /socios-activos/. Fusionar o redirigir. Valor como galería de artistas conocidos.,301
+https://musicartes.org/labores-2019/,https://musicartes.org/memoria-de-labores/,REDIRIGIR: No aparece en GSC. URL irregular (labores-2019). Redirigir a /memoria-de-labores/ y consolidar.,301
+https://musicartes.org/noticias/,https://musicartes.org/blog/,"FUSIONAR: 0 clicks, 44 imp. Duplica función del blog. En Astro unificar en /blog/ o /noticias/.",301
+https://musicartes.org/hazte-socio-obras/,https://musicartes.org/hazte-socio/,ELIMINAR: 1 click. URL interna de flujo de registro. No debe ser indexable. Redirigir a /hazte-socio/ o noindex.,301
+https://musicartes.org/hazte-socio-uploads/,https://musicartes.org/hazte-socio/,ELIMINAR: No aparece en GSC. URL interna de flujo de registro. Misma situación que hazte-socio-obras.,301
+https://musicartes.org/agregar-obras/,https://musicartes.org/zona-de-socios/,"ELIMINAR: No aparece en GSC. Funcionalidad interna de socios. Debe estar detrás de login, no indexable.",301
+https://musicartes.org/fallece-el-maestro-guillermo-de-leon-ruiz/,https://musicartes.org/guillermo-de-leon-ruiz/,"ELIMINAR: 1 click, 206 imp. Fusionar con perfil del maestro. Redirigir esta URL al perfil.",301
+https://musicartes.org/german-giordano-2/,https://musicartes.org/german-giordano/,MANTENER: No aparece en GSC. URL con sufijo -2 es señal de duplicado en WordPress. Revisar y limpiar URL.,301
+https://musicartes.org/wp-content/uploads/2021/12/Escritura-Constitutiva-MUSICARTES.pdf,https://musicartes.org/documentos/escritura-constitutiva.pdf,"SE MOVERA A OTRO HOSTING: 2 clicks, CTR 7.4%. Documento legal indexado. En Astro crear /documentos/ para centralizar PDFs institucionales.",301
+https://musicartes.org/wp-content/uploads/2022/01/Formato-Acta-Notarial-*.pdf,https://musicartes.org/documentos/formato-acta-notarial.pdf,SE MOVERA A OTRO HOSTING: 1 click. Documento electoral. Centralizar en /documentos/.,301
+https://musicartes.org/wp-content/uploads/2018/05/Estados-Finacieros-MUSICARTES-*.pdf,https://musicartes.org/documentos/estados-financieros-2018.pdf,SE MOVERA A OTRO HOSTING: 1 click. PDF de estados financieros. Centralizar.,301
+https://musicartes.org/estrategia-de-lanzamiento-musical-para-artistas-independientes-en-2025/,https://musicartes.org/estrategia-de-lanzamiento-musical-para-artistas-independientes-en-2026/,"REESCRIBIR: 6 clicks, 3,098 imp, pos 7.8. Año en URL ya desactualizado. Reescribir para 2026 con nueva URL.",301
+https://musicartes.org/5-formas-en-las-que-el-streaming-cambio-la-industria-musical-global/,https://musicartes.org/como-el-streaming-cambio-la-industria-musical/,"REESCRIBIR: 6 clicks, 731 imp. Actualizar con datos 2025-26. Mejorar URL quitando el '5-formas'.",301
+https://musicartes.org/steve-lacy-usa-lo-que-tienes/,https://musicartes.org/distribucion-digital-de-musica/,"ELIMINAR: 4 clicks pero 2,014 imp. Es una nota sobre un artista específico, no contenido institucional de Musicartes. Redirigir a contenido relacionado.",301
+https://musicartes.org/9-tendencias-musicales-que-todo-artista-debe-conocer-en-2025/,https://musicartes.org/tendencias-musicales-2026/,"REESCRIBIR: 3 clicks, 967 imp. Año 2025 ya obsoleto. Actualizar o crear versión 2026.",301
+https://musicartes.org/el-cuidado-de-la-salud-de-los-musicos/,https://musicartes.org/tu-salud-como-musico-en-2026-la-guia-completa-que-necesitas-conocer/,FUSIONAR: 3 clicks. Tema duplicado con post nuevo de salud 2026. Fusionar o redirigir.,301
+https://musicartes.org/por-que-debes-proteger-tus-oidos-si-eres-musico/,https://musicartes.org/tu-salud-como-musico-en-2026-la-guia-completa-que-necesitas-conocer/,FUSIONAR: 3 clicks. Subtema de salud del músico. Puede fusionarse con el post guía de salud 2026.,301
+https://musicartes.org/22-de-noviembre-dia-internacional-del-musico/,https://musicartes.org/dia-internacional-del-musico/,"REESCRIBIR: 2 clicks, 4,323 imp, pos 13.6. El volumen es alto pero posiciona en pág 2. Reescribir con URL sin fecha.",301
+https://musicartes.org/guia-para-mas-plays-en-spotify/,https://musicartes.org/como-conseguir-mas-oyentes-mensuales-en-spotify/,"FUSIONAR: 2 clicks, 504 imp. Duplicado temático con /como-conseguir-mas-oyentes-mensuales/. Fusionar.",301
+https://musicartes.org/como-conseguir-mas-oyentes-mensuales-en-spotify/,https://musicartes.org/guia-completa-spotify-para-artistas/,"FUSIONAR: 1 click, 854 imp, pos 15.3. Muy baja posición. Fusionar con guía de plays en Spotify. Nueva URL canónica.",301
+https://musicartes.org/como-aprovechar-las-ventajas-de-spotify-para-artistas/,https://musicartes.org/guia-completa-spotify-para-artistas/,"FUSIONAR: 1 click, 194 imp. Tercero en triada Spotify. Los 3 posts de Spotify deben fusionarse en una guía definitiva.",301
+https://musicartes.org/como-construir-una-base-de-fans-a-largo-plazo-en-spotify/,https://musicartes.org/como-incrementar-tu-base-de-fans/,FUSIONAR: Redireccion normalizada para evitar ciclo. Canonica propuesta para base de fans por mejor senal GSC.,301
+https://musicartes.org/la-salud-mental-del-musico-en-pandemia/,https://musicartes.org/tu-salud-como-musico-en-2026-la-guia-completa-que-necesitas-conocer/,"ELIMINAR: 0 clicks, 30 imp. Contenido pandémico desactualizado. Redirigir al post de salud 2026.",301
+https://musicartes.org/5-errores-comunes-de-la-autogestion-musical/,https://musicartes.org/10-errores-fatales-en-la-autogestion-musical-y-como-evitarlos-en-2026/,FUSIONAR: Redireccion normalizada. Canonica propuesta: version 2026 de autogestion musical.,301
+https://musicartes.org/20-estrategias-para-poder-lanzar-un-disco-en-la-era-digital/,https://musicartes.org/estrategia-de-lanzamiento-musical-para-artistas-independientes-en-2026/,FUSIONAR: Evitar cadena de redireccion; enviar directo a la guia de lanzamiento actualizada 2026.,301
+https://musicartes.org/emprender-innovar-en-la-musica/,https://musicartes.org/los-generos-musicales-mas-escuchados/,"ELIMINAR: 1 click, 535 imp. Título vago, poco específico. Sin señal de búsqueda clara. Evaluar eliminar.",301
+https://musicartes.org/asedio-a-la-capacidad-creadora-de-la-propiedad-intelectual/,https://musicartes.org/propiedad-intelectual-en-guatemala/,"ELIMINAR: 0 clicks, 14 imp. Título muy poco claro, no hay búsqueda real. Redirigir a /propiedad-intelectual-en-guatemala/.",301
+https://musicartes.org/cuatro-cosas-que-todo-musico-tiene-que-probar-en-2018/,,ELIMINAR: No indexado. Contenido de 2018 muy desactualizado ('cosas a probar en 2018'). Eliminar.,410
+https://musicartes.org/por-que-es-importante-tener-buenas-fotos/,https://musicartes.org/fotos-profesionales-para-musicos/,REESCRIBIR: No indexado. Tema con demanda real. Reescribir con URL limpia y contenido actualizado.,301
+https://musicartes.org/feliz-dia-de-la-propiedad-intelectual/,https://musicartes.org/dia-de-la-propiedad-intelectual-2025-protegiendo-el-latido-del-arte-musical/,ELIMINAR: No indexado. Post de efeméride sin contenido evergreen. Redirigir a edición 2025.,301
+https://musicartes.org/qepd-maestro-robelio-mendez/,https://musicartes.org/blog/,ELIMINAR: No indexado. Nota de fallecimiento sin valor SEO. Evaluar si tiene sentido archival histórico.,301
+https://musicartes.org/el-confort-del-bar/,,ELIMINAR: No indexado. Título sin intención de búsqueda clara. Contenido sin propósito SEO.,410
+https://musicartes.org/todos-quieren-ser-comerciales/,,ELIMINAR: No indexado. Título de opinión sin búsqueda real. Sin valor SEO.,410
+https://musicartes.org/la-musica-tambien-es-literatura/,,ELIMINAR: No indexado. Ensayo de opinión sin búsqueda. Sin valor SEO para la estrategia de Musicartes.,410
+https://musicartes.org/punto-de-encuentro/,,ELIMINAR: No indexado. Título extremadamente vago. Sin intención de búsqueda identificable.,410
+https://musicartes.org/gestion-colectiva-en-la-industria-musical-actual/,https://musicartes.org/gestion-colectiva-musica-guatemala/,REESCRIBIR: No indexado. TEMA CORE de Musicartes. Reescribir con autoridad y nueva URL más limpia.,301
+https://musicartes.org/reporte-ejecutivo-de-musicartes-avances-en-febrero-2025/,https://musicartes.org/blog/,"ELIMINAR: Evitar cadena con /noticias/. Si se conserva publicamente, enviarlo al hub /blog/.",301
+https://musicartes.org/el-futuro-de-la-radio/,,"ELIMINAR: 1 click, 40 imp. Contenido muy fechado, la 'radio' cambió completamente. Eliminar o redirigir.",410
+https://musicartes.org/el-circulo-virtuoso/,,"ELIMINAR: 1 click, pos 26. Contenido de opinión sin búsqueda real. Eliminar.",410
+https://musicartes.org/multiplica-el-contenido-sobre-tu-musica-en-la-red/,,"ELIMINAR: 0 clicks, 14 imp. Poco tráfico, título desactualizado.",410
+https://musicartes.org/centroamerica-para-centroamericanos/,,ELIMINAR: 0 clicks. Contenido de opinión regional sin búsqueda SEO real.,410
+https://musicartes.org/aniversarios-y-premios/,,ELIMINAR: 1 click. Post de efeméride interna sin valor SEO.,410
+https://musicartes.org/september-do-you-remember/,,"ELIMINAR: 0 clicks. Título en inglés, contenido de efeméride. Sin valor SEO.",410
+https://musicartes.org/rita-un-viaje-entre-la-fantasia-y-la-cruda-realidad/,,ELIMINAR: 1 click. Reseña/opinión sin búsqueda real. Off-brand.,410
+https://musicartes.org/conoce-los-nominados-de-premios-estela-2017-2/,,ELIMINAR: 0 clicks. Contenido de 2017 sobre premios pasados. Eliminar.,410
+https://musicartes.org/felices-fiestas/,,ELIMINAR: 0 clicks. Saludo navideño. Sin valor SEO. Eliminar.,410
