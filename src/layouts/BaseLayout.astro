@@ -9,9 +9,15 @@ type Props = {
   pairId?: string;
 };
 
+type NavItem = {
+  label: string;
+  href: string;
+  children?: { label: string; href: string }[];
+};
+
 const { title, description, lang = "es", path, pairId } = Astro.props;
 const canonical = new URL(path, site.url).toString();
-const currentNav = nav[lang];
+const currentNav = nav[lang] as NavItem[];
 const languageUrl = pairId ? pathPairs[pairId]?.[lang === "es" ? "en" : "es"] : undefined;
 const alternates = pairId ? pathPairs[pairId] : undefined;
 ---
@@ -39,7 +45,19 @@ const alternates = pairId ? pathPairs[pairId] : undefined;
         <span>{lang === "es" ? "Gestión colectiva de derechos" : "Collective rights management"}</span>
       </a>
       <nav aria-label="Principal">
-        {currentNav.map((item) => <a href={item.href}>{item.label}</a>)}
+        {currentNav.map((item) => (
+          item.children ? (
+            <details class="nav-group">
+              <summary>{item.label}</summary>
+              <div class="nav-menu">
+                <a href={item.href}>Ver sección</a>
+                {item.children.map((child) => <a href={child.href}>{child.label}</a>)}
+              </div>
+            </details>
+          ) : (
+            <a href={item.href}>{item.label}</a>
+          )
+        ))}
       </nav>
       {languageUrl && <a class="lang-switch" href={languageUrl}>{lang === "es" ? "EN" : "ES"}</a>}
     </header>

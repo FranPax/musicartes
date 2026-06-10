@@ -68,14 +68,66 @@ nav {
   flex: 1;
   justify-content: center;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 nav a,
-.lang-switch {
+.lang-switch,
+.nav-group summary {
   text-decoration: none;
   color: var(--ink);
   font-size: 14px;
   font-weight: 650;
+}
+
+.nav-group {
+  position: relative;
+}
+
+.nav-group summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+.nav-group summary::-webkit-details-marker {
+  display: none;
+}
+
+.nav-group summary::after {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  margin-left: 8px;
+}
+
+.nav-menu {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 2px;
+  left: 50%;
+  min-width: 230px;
+  padding: 10px;
+  position: absolute;
+  top: calc(100% + 14px);
+  transform: translateX(-50%);
+  z-index: 12;
+}
+
+.nav-menu a {
+  border-radius: 6px;
+  display: block;
+  padding: 10px 12px;
+}
+
+.nav-menu a:hover {
+  background: var(--surface);
 }
 
 .lang-switch,
@@ -290,6 +342,11 @@ nav a,
 
   nav {
     justify-content: flex-start;
+  }
+
+  .nav-menu {
+    left: 0;
+    transform: none;
   }
 
   .hero,

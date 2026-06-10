@@ -104,6 +104,34 @@ const esPages: Page[] = [
     cta: { label: "Ver memoria de labores", href: "/memoria-de-labores/" }
   },
   {
+    id: "financial-2017",
+    lang: "es",
+    path: "/estados-financieros/estados-financieros-2017/",
+    title: "Estados financieros 2017 | MUSICARTES",
+    description: "Página de consulta para estados financieros 2017 de MUSICARTES.",
+    h1: "Estados financieros 2017",
+    intro: "Página de continuidad para la consulta pública de los estados financieros 2017 de MUSICARTES.",
+    sections: [
+      { title: "Documento de transparencia", body: "Esta URL se conserva por continuidad institucional y SEO. El documento final debe enlazarse desde el repositorio externo de activos que defina MUSICARTES, como Google Drive, Cloudinary u otro gestor documental." },
+      { title: "Siguiente paso", body: "Cuando el PDF definitivo esté alojado, esta página debe incluir el enlace directo, fecha de aprobación y cualquier nota de Asamblea General que corresponda.", links: [{ label: "Estados financieros", href: "/estados-financieros/" }, { label: "Memoria de labores", href: "/memoria-de-labores/" }] }
+    ],
+    translate: false
+  },
+  {
+    id: "financial-2018",
+    lang: "es",
+    path: "/estados-financieros/estados-financieros-2018/",
+    title: "Estados financieros 2018 | MUSICARTES",
+    description: "Página de consulta para estados financieros 2018 de MUSICARTES.",
+    h1: "Estados financieros 2018",
+    intro: "Página de continuidad para la consulta pública de los estados financieros 2018 de MUSICARTES.",
+    sections: [
+      { title: "Documento de transparencia", body: "Esta página mantiene una URL previamente indexada y debe funcionar como destino estable para el documento financiero del año 2018." },
+      { title: "Activo externo", body: "El PDF puede alojarse fuera del repositorio Astro, pero el sitio principal debe conservar una página legible de contexto, enlace y respaldo institucional.", links: [{ label: "Estados financieros", href: "/estados-financieros/" }] }
+    ],
+    translate: false
+  },
+  {
     id: "reports",
     lang: "es",
     path: "/memoria-de-labores/",
@@ -115,6 +143,79 @@ const esPages: Page[] = [
       { title: "Memorias publicadas", body: "Aquí se organizan vínculos a documentos de soporte o videos presentados durante las Asambleas Generales correspondientes.", items: ["Memoria de labores 2024.", "Memoria de labores 2021.", "Memoria de labores 2020.", "Memoria de labores 2019.", "Memoria de labores 2018.", "Memoria de labores 2017."] }
     ],
     cta: { label: "Revisa documentos institucionales", href: "/estados-financieros/" }
+  },
+  {
+    id: "president",
+    lang: "es",
+    path: "/presidente/",
+    title: "Presidente | MUSICARTES",
+    description: "Perfil institucional del presidente de MUSICARTES.",
+    h1: "Presidente",
+    intro: "Perfil institucional para la Presidencia de MUSICARTES y su función dentro de la Junta Directiva.",
+    sections: [
+      { title: "Rol institucional", body: "La Presidencia representa a la entidad conforme a los estatutos y participa en la conducción de la política institucional, la relación con socios y el seguimiento de acuerdos de Asamblea General." },
+      { title: "Contenido pendiente de validación", body: "Antes de publicar una biografía definitiva debe validarse el nombre, periodo, fotografía, trayectoria y enlaces oficiales. Esta página conserva la URL y deja preparada la estructura de contenido." },
+      { title: "Relación con la Junta Directiva", body: "La información ampliada de Junta Directiva se centraliza en la página Nosotros.", links: [{ label: "Nosotros", href: "/nosotros/" }] }
+    ],
+    translate: false
+  },
+  {
+    id: "secretary",
+    lang: "es",
+    path: "/secretario/",
+    title: "Secretario | MUSICARTES",
+    description: "Perfil institucional del secretario de MUSICARTES.",
+    h1: "Secretario",
+    intro: "Perfil institucional para la Secretaría de MUSICARTES y su función dentro de la Junta Directiva.",
+    sections: [
+      { title: "Rol institucional", body: "La Secretaría participa en la documentación de acuerdos, comunicación formal y seguimiento de procesos internos de la entidad conforme a estatutos y decisiones de Asamblea." },
+      { title: "Contenido pendiente de validación", body: "Antes de publicar una biografía definitiva debe validarse el nombre, periodo, fotografía, trayectoria y enlaces oficiales. Esta página conserva la URL y evita pérdida de continuidad." },
+      { title: "Relación con la Junta Directiva", body: "La información ampliada de Junta Directiva se centraliza en la página Nosotros.", links: [{ label: "Nosotros", href: "/nosotros/" }] }
+    ],
+    translate: false
+  },
+  {
+    id: "elections-2026",
+    lang: "es",
+    path: "/elecciones-2026/",
+    title: "Elecciones 2026 | MUSICARTES",
+    description: "Información institucional sobre el proceso electoral 2026 de MUSICARTES.",
+    h1: "Elecciones 2026",
+    intro: "Página informativa para socios sobre el proceso electoral 2026 de MUSICARTES.",
+    sections: [
+      { title: "Información para socios", body: "Esta URL tiene relevancia coyuntural para socios. Debe concentrar calendario, requisitos, convocatoria, bases, documentos y comunicaciones oficiales relacionadas con el proceso electoral." },
+      { title: "Documentos relacionados", body: "La información puede conectarse con páginas específicas de convocatoria, calendario y bases para mantener cada documento en una URL limpia.", links: [{ label: "Convocatoria", href: "/convocatoria/" }, { label: "Calendario y bases", href: "/calendario-y-bases/" }] },
+      { title: "Criterio editorial", body: "Por tratarse de un proceso institucional, toda fecha, requisito y documento debe validarse antes de publicarse como definitivo." }
+    ],
+    translate: false
+  },
+  {
+    id: "convocation",
+    lang: "es",
+    path: "/convocatoria/",
+    title: "Convocatoria | MUSICARTES",
+    description: "Convocatorias institucionales de MUSICARTES.",
+    h1: "Convocatoria",
+    intro: "Página para publicar convocatorias oficiales de MUSICARTES, incluyendo procesos electorales y comunicaciones a socios.",
+    sections: [
+      { title: "Uso de la página", body: "Esta URL debe conservarse como destino estable para convocatorias formales. Puede enlazar documentos externos, formularios o comunicados aprobados por la institución." },
+      { title: "Proceso electoral", body: "Para 2026, esta página debe vincularse con la información general de elecciones, calendario y bases.", links: [{ label: "Elecciones 2026", href: "/elecciones-2026/" }, { label: "Calendario y bases", href: "/calendario-y-bases/" }] }
+    ],
+    translate: false
+  },
+  {
+    id: "calendar-rules",
+    lang: "es",
+    path: "/calendario-y-bases/",
+    title: "Calendario y bases | MUSICARTES",
+    description: "Calendario, bases y documentos institucionales para procesos de MUSICARTES.",
+    h1: "Calendario y bases",
+    intro: "Página para organizar calendario, bases y documentos de procesos institucionales.",
+    sections: [
+      { title: "Documentos del proceso", body: "Esta página debe reunir fechas clave, bases de participación, requisitos y enlaces a documentos oficiales cuando el proceso esté activo." },
+      { title: "Relación con elecciones", body: "Para el periodo electoral 2026, funciona como página complementaria de la convocatoria y la página general de elecciones.", links: [{ label: "Elecciones 2026", href: "/elecciones-2026/" }, { label: "Convocatoria", href: "/convocatoria/" }] }
+    ],
+    translate: false
   },
   {
     id: "workshops",
@@ -174,6 +275,20 @@ const esPages: Page[] = [
     sections: [
       { title: "MUSICARTES Guatemala", body: "Dirección: 21 Avenida B 0-10 zona 15 Vista Hermosa 2, Guatemala. Teléfono: +502 2316 8116. Horarios de atención: lunes a viernes de 9:00am a 4:00pm." }
     ]
+  },
+  {
+    id: "login",
+    lang: "es",
+    path: "/login/",
+    title: "Login | MUSICARTES",
+    description: "Acceso para socios y sistemas relacionados con MUSICARTES.",
+    h1: "Login",
+    intro: "Acceso a herramientas digitales relacionadas con socios de MUSICARTES.",
+    sections: [
+      { title: "Portal de socios", body: "Si eres socio, utiliza el portal correspondiente para gestionar información de repertorio y procesos internos habilitados por MUSICARTES.", links: [{ label: "Entrar al portal de socios", href: "https://website.sociosmusicartes.org" }] },
+      { title: "Soporte de acceso", body: "Si tienes problemas para ingresar, contacta a MUSICARTES indicando tu nombre, correo, teléfono y una breve descripción del problema.", links: [{ label: "Contacto", href: "/contacto/" }] }
+    ],
+    translate: false
   },
   {
     id: "news",
@@ -334,6 +449,66 @@ const esPages: Page[] = [
       { title: "Parranda garífuna", body: "Desde 1989 se ha dedicado a cultivar la música tradicional garífuna, especialmente la parranda o paranda, género asociado a serenatas y a la memoria oral de su pueblo." },
       { title: "Rescate cultural", body: "Su obra se centra en mantener viva la música garífuna, formar a nuevas generaciones y compartir tradiciones musicales en Guatemala y escenarios internacionales." },
       { title: "Liderazgo comunitario", body: "Además de su trabajo musical, el sitio actual de Musicartes destaca su papel como líder espiritual, activista cultural y colaborador en proyectos de salvaguarda garífuna.", links: [{ label: "Volver a socios honorarios", href: "/socios-honorarios/" }] }
+    ],
+    translate: false
+  },
+  {
+    id: "carlos-duarte",
+    lang: "es",
+    path: "/carlos-duarte/",
+    title: "Carlos Duarte | Socios honorarios MUSICARTES",
+    description: "Perfil del maestro Carlos Duarte, socio honorario de MUSICARTES.",
+    h1: "Carlos Duarte",
+    intro: "Perfil del maestro Carlos Duarte, integrante del archivo de socios honorarios de MUSICARTES.",
+    sections: [
+      { title: "Biografía por completar", body: "Esta página conserva una URL con señal de búsqueda y debe completarse con una biografía verificada, fotografía, trayectoria, reconocimientos y aportes a la música guatemalteca." },
+      { title: "Criterio editorial", body: "La biografía definitiva debe trabajarse con fuentes confiables y revisión institucional para honrar correctamente su trayectoria." },
+      { title: "Socios honorarios", body: "Este perfil forma parte del archivo de memoria cultural de MUSICARTES.", links: [{ label: "Volver a socios honorarios", href: "/socios-honorarios/" }] }
+    ],
+    translate: false
+  },
+  {
+    id: "byron-sosa",
+    lang: "es",
+    path: "/byron-sosa/",
+    title: "Byron Sosa | Socios honorarios MUSICARTES",
+    description: "Perfil del maestro Byron Sosa, socio honorario de MUSICARTES.",
+    h1: "Byron Sosa",
+    intro: "Perfil del maestro Byron Sosa, integrante del archivo de socios honorarios de MUSICARTES.",
+    sections: [
+      { title: "Biografía por completar", body: "Esta página conserva una URL con señal de búsqueda y debe completarse con una biografía verificada, fotografía, trayectoria, reconocimientos y aportes a la música guatemalteca." },
+      { title: "Criterio editorial", body: "La biografía definitiva debe trabajarse con fuentes confiables y revisión institucional para honrar correctamente su trayectoria." },
+      { title: "Socios honorarios", body: "Este perfil forma parte del archivo de memoria cultural de MUSICARTES.", links: [{ label: "Volver a socios honorarios", href: "/socios-honorarios/" }] }
+    ],
+    translate: false
+  },
+  {
+    id: "german-giordano",
+    lang: "es",
+    path: "/german-giordano/",
+    title: "German Giordano | Socios honorarios MUSICARTES",
+    description: "Perfil del maestro German Giordano, socio honorario de MUSICARTES.",
+    h1: "German Giordano",
+    intro: "Perfil del maestro German Giordano, integrante del archivo de socios honorarios de MUSICARTES.",
+    sections: [
+      { title: "URL limpia", body: "El análisis detectó que el sitio anterior usaba una URL con sufijo duplicado. Esta página conserva la versión limpia `/german-giordano/` y debe recibir la redirección desde la URL antigua." },
+      { title: "Biografía por completar", body: "La biografía definitiva debe completarse con datos verificados, fotografía, trayectoria, reconocimientos y aportes a la música guatemalteca." },
+      { title: "Socios honorarios", body: "Este perfil forma parte del archivo de memoria cultural de MUSICARTES.", links: [{ label: "Volver a socios honorarios", href: "/socios-honorarios/" }] }
+    ],
+    translate: false
+  },
+  {
+    id: "fernando-perez-classes",
+    lang: "es",
+    path: "/clases-con-fernando-perez/",
+    title: "Clases con Fernando Pérez | MUSICARTES",
+    description: "Página informativa sobre clases y formación con el maestro Fernando Pérez.",
+    h1: "Clases con Fernando Pérez",
+    intro: "Página de continuidad para información sobre clases, talleres o formación vinculada al maestro Fernando Pérez.",
+    sections: [
+      { title: "Página vinculada al perfil", body: "El análisis de Search Console muestra que esta URL tiene buena eficiencia. Debe mantenerse y enlazarse desde el perfil del maestro Fernando Pérez." },
+      { title: "Contenido pendiente", body: "Antes de publicarla como definitiva, conviene confirmar modalidad, disponibilidad, temario, fechas, costos y mecanismo de inscripción." },
+      { title: "Perfil relacionado", body: "Consulta también el perfil institucional del maestro Fernando Pérez.", links: [{ label: "Fernando Pérez", href: "/fernando-perez/" }, { label: "Talleres", href: "/talleres/" }] }
     ],
     translate: false
   },

@@ -11,11 +11,47 @@ export const site = {
 
 export const nav = {
   es: [
-    { label: "Nosotros", href: "/nosotros/" },
-    { label: "Hazte socio", href: "/hazte-socio/" },
-    { label: "Recursos legales", href: "/recursos-legales/" },
-    { label: "Transparencia", href: "/estados-financieros/" },
-    { label: "Blog", href: "/blog/" },
+    {
+      label: "Socios",
+      href: "/hazte-socio/",
+      children: [
+        { label: "Hazte socio", href: "/hazte-socio/" },
+        { label: "Zona de socios", href: "/zona-de-socios/" },
+        { label: "Obras no declaradas", href: "/obras-no-declaradas/" },
+        { label: "Socios activos", href: "/socios-activos/" }
+      ]
+    },
+    {
+      label: "Conócenos",
+      href: "/nosotros/",
+      children: [
+        { label: "Nosotros", href: "/nosotros/" },
+        { label: "Socios honorarios", href: "/socios-honorarios/" },
+        { label: "Preguntas frecuentes", href: "/preguntas-frecuentes-faq/" }
+      ]
+    },
+    {
+      label: "Gestión",
+      href: "/recursos-legales/",
+      children: [
+        { label: "Recursos legales", href: "/recursos-legales/" },
+        { label: "Reglamento distribución", href: "/reglamento-distribucion/" },
+        { label: "Estados financieros", href: "/estados-financieros/" },
+        { label: "Memoria de labores", href: "/memoria-de-labores/" },
+        { label: "Estatutos", href: "/estatutos/" },
+        { label: "Acuerdos internacionales", href: "/acuerdos-internacionales/" }
+      ]
+    },
+    {
+      label: "Recursos",
+      href: "/blog/",
+      children: [
+        { label: "Blog", href: "/blog/" },
+        { label: "Talleres", href: "/talleres/" },
+        { label: "Prensa", href: "/prensa/" },
+        { label: "Eventos", href: "/eventos/" }
+      ]
+    },
     { label: "Contacto", href: "/contacto/" }
   ],
   en: [
