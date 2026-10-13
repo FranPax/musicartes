@@ -1,0 +1,520 @@
+<meta charset="UTF-8">
+<!-- ============================================================
+     Buscador de Códigos Postales de Guatemala - GuiaLocal.com.gt
+     App autónoma. Pegar dentro de un bloque HTML en WordPress.
+     Sin fondo propio: hereda el del tema.
+============================================================ -->
+<div id="cpgt-app" lang="es-GT">
+  <div class="cpgt-head">
+    <span class="cpgt-kicker">Guialocal Guatemala</span>
+    <h2 class="cpgt-title">Buscador de Códigos Postales de Guatemala</h2>
+    <p class="cpgt-sub">Escribe el nombre de tu municipio, zona o departamento y encuentra el código postal correspondiente al instante.</p>
+  </div>
+
+  <div class="cpgt-searchwrap">
+    <svg class="cpgt-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4a7 7 0 1 0 4.2 12.6l4.1 4.1 1.4-1.4-4.1-4.1A7 7 0 0 0 11 4zm0 2a5 5 0 1 1 0 10 5 5 0 0 1 0-10z"></path></svg>
+    <input id="cpgt-input" type="text" autocomplete="off" spellcheck="false" placeholder="Ej: Antigua, Zona 10, Cobán, Mixco..." aria-label="Buscar municipio o zona">
+    <button id="cpgt-clear" type="button" aria-label="Limpiar" hidden="">×</button>
+  </div>
+
+  <div class="cpgt-chips" id="cpgt-chips">
+    <span class="cpgt-chip" data-q="Zona 10">Zona 10</span>
+    <span class="cpgt-chip" data-q="Antigua">Antigua</span>
+    <span class="cpgt-chip" data-q="Mixco">Mixco</span>
+    <span class="cpgt-chip" data-q="Quetzaltenango">Xela</span>
+    <span class="cpgt-chip" data-q="Cobán">Cobán</span>
+    <span class="cpgt-chip" data-q="Villa Nueva">Villa Nueva</span>
+  </div>
+
+  <div id="cpgt-results" class="cpgt-results" aria-live="polite"></div>
+</div>
+
+<script>
+(function(){
+  var DATA = [{"n":"Zona 1, Ciudad de Guatemala","c":"01001","d":"Guatemala"},{"n":"Zona 2, Ciudad de Guatemala","c":"01002","d":"Guatemala"},{"n":"Zona 3, Ciudad de Guatemala","c":"01003","d":"Guatemala"},{"n":"Zona 4, Ciudad de Guatemala","c":"01004","d":"Guatemala"},{"n":"Zona 5, Ciudad de Guatemala","c":"01005","d":"Guatemala"},{"n":"Zona 6, Ciudad de Guatemala","c":"01006","d":"Guatemala"},{"n":"Zona 7, Ciudad de Guatemala","c":"01007","d":"Guatemala"},{"n":"Zona 8, Ciudad de Guatemala","c":"01008","d":"Guatemala"},{"n":"Zona 9, Ciudad de Guatemala","c":"01009","d":"Guatemala"},{"n":"Zona 10, Ciudad de Guatemala (Zona Viva)","c":"01010","d":"Guatemala"},{"n":"Zona 11, Ciudad de Guatemala","c":"01011","d":"Guatemala"},{"n":"Zona 12, Ciudad de Guatemala","c":"01012","d":"Guatemala"},{"n":"Zona 13, Ciudad de Guatemala (Aeropuerto)","c":"01013","d":"Guatemala"},{"n":"Zona 14, Ciudad de Guatemala","c":"01014","d":"Guatemala"},{"n":"Zona 15, Ciudad de Guatemala","c":"01015","d":"Guatemala"},{"n":"Zona 16, Ciudad de Guatemala","c":"01016","d":"Guatemala"},{"n":"Zona 17, Ciudad de Guatemala","c":"01017","d":"Guatemala"},{"n":"Zona 18, Ciudad de Guatemala","c":"01018","d":"Guatemala"},{"n":"Zona 19, Ciudad de Guatemala","c":"01019","d":"Guatemala"},{"n":"Zona 21, Ciudad de Guatemala","c":"01021","d":"Guatemala"},{"n":"Departamento de Guatemala","c":"01000","d":"Guatemala"},{"n":"Santa Catarina Pinula","c":"01051","d":"Guatemala"},{"n":"San José Pinula","c":"01052","d":"Guatemala"},{"n":"San José del Golfo","c":"01053","d":"Guatemala"},{"n":"Palencia","c":"01054","d":"Guatemala"},{"n":"Chinautla","c":"01055","d":"Guatemala"},{"n":"San Pedro Ayampuc","c":"01056","d":"Guatemala"},{"n":"Mixco","c":"01057","d":"Guatemala"},{"n":"San Pedro Sacatepéquez (Guatemala)","c":"01058","d":"Guatemala"},{"n":"San Juan Sacatepéquez","c":"01059","d":"Guatemala"},{"n":"San Raymundo","c":"01060","d":"Guatemala"},{"n":"Chuarrancho","c":"01061","d":"Guatemala"},{"n":"Fraijanes","c":"01062","d":"Guatemala"},{"n":"Amatitlán","c":"01063","d":"Guatemala"},{"n":"Villa Nueva","c":"01064","d":"Guatemala"},{"n":"Villa Canales","c":"01065","d":"Guatemala"},{"n":"Petapa","c":"01066","d":"Guatemala"},{"n":"Canalitos (Zona 21)","c":"01067","d":"Guatemala"},{"n":"El Fiscal (Palencia)","c":"01068","d":"Guatemala"},{"n":"Boca del Monte (Villa Canales)","c":"01069","d":"Guatemala"},{"n":"Vuelta Grande (San Raymundo)","c":"01070","d":"Guatemala"},{"n":"Trapiche Grande (Chuarrancho)","c":"01071","d":"Guatemala"},{"n":"Santa Elena Barillas (Villa Canales)","c":"01072","d":"Guatemala"},{"n":"Puerta Parada (Santa Catarina Pinula)","c":"01073","d":"Guatemala"},{"n":"Departamento de El Progreso","c":"02000","d":"El Progreso"},{"n":"Guastatoya","c":"02001","d":"El Progreso"},{"n":"Morazán","c":"02002","d":"El Progreso"},{"n":"San Agustín Acasaguastlán","c":"02003","d":"El Progreso"},{"n":"San Cristóbal Acasaguastlán","c":"02004","d":"El Progreso"},{"n":"El Jícaro","c":"02005","d":"El Progreso"},{"n":"Sansare","c":"02006","d":"El Progreso"},{"n":"Sanarate","c":"02007","d":"El Progreso"},{"n":"San Antonio La Paz","c":"02008","d":"El Progreso"},{"n":"Tulumajillo (San Agustín Acasaguastlán)","c":"02009","d":"El Progreso"},{"n":"Estación Jalapa (Sansare)","c":"02010","d":"El Progreso"},{"n":"Tulumaje (San Agustín Acasaguastlán)","c":"02011","d":"El Progreso"},{"n":"Estancia de la Virgen (San Cristóbal Acasaguastlán)","c":"02012","d":"El Progreso"},{"n":"Paso de los Jalapas (El Jícaro)","c":"02013","d":"El Progreso"},{"n":"Santa Rita (Guastatoya)","c":"02014","d":"El Progreso"},{"n":"El Rancho (San Agustín Acasaguastlán)","c":"02015","d":"El Progreso"},{"n":"Departamento de Sacatepéquez","c":"03000","d":"Sacatepéquez"},{"n":"Antigua Guatemala","c":"03001","d":"Sacatepéquez"},{"n":"Jocotenango","c":"03002","d":"Sacatepéquez"},{"n":"Pastores","c":"03003","d":"Sacatepéquez"},{"n":"Sumpango","c":"03004","d":"Sacatepéquez"},{"n":"Santo Domingo Xenacoj","c":"03005","d":"Sacatepéquez"},{"n":"Santiago Sacatepéquez","c":"03006","d":"Sacatepéquez"},{"n":"San Bartolomé Milpas Altas","c":"03007","d":"Sacatepéquez"},{"n":"San Lucas Sacatepéquez","c":"03008","d":"Sacatepéquez"},{"n":"Santa Lucía Milpas Altas","c":"03009","d":"Sacatepéquez"},{"n":"Magdalena Milpas Altas","c":"03010","d":"Sacatepéquez"},{"n":"Santa María de Jesús","c":"03011","d":"Sacatepéquez"},{"n":"Ciudad Vieja","c":"03012","d":"Sacatepéquez"},{"n":"San Miguel Dueñas","c":"03013","d":"Sacatepéquez"},{"n":"Alotenango","c":"03014","d":"Sacatepéquez"},{"n":"San Antonio Aguas Calientes","c":"03015","d":"Sacatepéquez"},{"n":"Santa Catarina Barahona","c":"03016","d":"Sacatepéquez"},{"n":"Santa María Cauqué (Santiago Sacatepéquez)","c":"03017","d":"Sacatepéquez"},{"n":"Departamento de Chimaltenango","c":"04000","d":"Chimaltenango"},{"n":"Chimaltenango","c":"04001","d":"Chimaltenango"},{"n":"San José Poaquil","c":"04002","d":"Chimaltenango"},{"n":"San Martín Jilotepeque","c":"04003","d":"Chimaltenango"},{"n":"Comalapa","c":"04004","d":"Chimaltenango"},{"n":"Santa Apolonia","c":"04005","d":"Chimaltenango"},{"n":"Tecpán Guatemala","c":"04006","d":"Chimaltenango"},{"n":"Patzún","c":"04007","d":"Chimaltenango"},{"n":"Pochuta","c":"04008","d":"Chimaltenango"},{"n":"Patzicía","c":"04009","d":"Chimaltenango"},{"n":"Santa Cruz Balanyá","c":"04010","d":"Chimaltenango"},{"n":"Acatenango","c":"04011","d":"Chimaltenango"},{"n":"Yepocapa","c":"04012","d":"Chimaltenango"},{"n":"San Andrés Itzapa","c":"04013","d":"Chimaltenango"},{"n":"Parramos","c":"04014","d":"Chimaltenango"},{"n":"Zaragoza","c":"04015","d":"Chimaltenango"},{"n":"El Tejar","c":"04016","d":"Chimaltenango"},{"n":"Departamento de Escuintla","c":"05000","d":"Escuintla"},{"n":"Escuintla","c":"05001","d":"Escuintla"},{"n":"Santa Lucía Cotzumalguapa","c":"05002","d":"Escuintla"},{"n":"La Democracia","c":"05003","d":"Escuintla"},{"n":"Siquinalá","c":"05004","d":"Escuintla"},{"n":"Masagua","c":"05005","d":"Escuintla"},{"n":"Tiquisate","c":"05006","d":"Escuintla"},{"n":"La Gomera","c":"05007","d":"Escuintla"},{"n":"San José (Escuintla)","c":"05009","d":"Escuintla"},{"n":"Itzapa (Escuintla)","c":"05010","d":"Escuintla"},{"n":"Palín","c":"05011","d":"Escuintla"},{"n":"San Vicente Pacaya","c":"05012","d":"Escuintla"},{"n":"Nueva Concepción","c":"05013","d":"Escuintla"},{"n":"Obero (Masagua)","c":"05014","d":"Escuintla"},{"n":"Brito (Guanagazapa)","c":"05015","d":"Escuintla"},{"n":"Santa Ana Mixtán (Nueva Concepción)","c":"05016","d":"Escuintla"},{"n":"El Naranjo (Masagua)","c":"05017","d":"Escuintla"},{"n":"San Andrés Osuna (Escuintla)","c":"05018","d":"Escuintla"},{"n":"Cuyuta (Masagua)","c":"05019","d":"Escuintla"},{"n":"El Porvenir Ticanlú (Tiquisate)","c":"05020","d":"Escuintla"},{"n":"Sipacate (La Gomera)","c":"05021","d":"Escuintla"},{"n":"Departamento de Santa Rosa","c":"06000","d":"Santa Rosa"},{"n":"Cuilapa","c":"06001","d":"Santa Rosa"},{"n":"Barberena","c":"06002","d":"Santa Rosa"},{"n":"Santa Rosa de Lima","c":"06003","d":"Santa Rosa"},{"n":"Casillas","c":"06004","d":"Santa Rosa"},{"n":"San Rafael Las Flores","c":"06005","d":"Santa Rosa"},{"n":"Oratorio","c":"06006","d":"Santa Rosa"},{"n":"San Juan Tecuaco","c":"06007","d":"Santa Rosa"},{"n":"Chiquimulilla","c":"06008","d":"Santa Rosa"},{"n":"Taxisco","c":"06009","d":"Santa Rosa"},{"n":"Santa María Ixhuatán","c":"06010","d":"Santa Rosa"},{"n":"Guazacapán","c":"06011","d":"Santa Rosa"},{"n":"Santa Cruz Naranjo","c":"06012","d":"Santa Rosa"},{"n":"Pueblo Nuevo Viñas","c":"06013","d":"Santa Rosa"},{"n":"Nueva Santa Rosa","c":"06014","d":"Santa Rosa"},{"n":"El Ahumado (Chiquimulilla)","c":"06015","d":"Santa Rosa"},{"n":"Los Cerritos (Chiquimulilla)","c":"06016","d":"Santa Rosa"},{"n":"Casas Viejas (Chiquimulilla)","c":"06017","d":"Santa Rosa"},{"n":"Ayarza (Casillas)","c":"06018","d":"Santa Rosa"},{"n":"El Molino (Cuilapa)","c":"06019","d":"Santa Rosa"},{"n":"Nancinta (Chiquimulilla)","c":"06020","d":"Santa Rosa"},{"n":"San Miguel Aroche (Chiquimulilla)","c":"06021","d":"Santa Rosa"},{"n":"Los Esclavos (Cuilapa)","c":"06022","d":"Santa Rosa"},{"n":"El Serinal (Barberena)","c":"06023","d":"Santa Rosa"},{"n":"Monterico (Taxisco)","c":"06024","d":"Santa Rosa"},{"n":"San Juan de Arana (Cuilapa)","c":"06025","d":"Santa Rosa"},{"n":"El Rinconcito (Santa Rosa de Lima)","c":"06026","d":"Santa Rosa"},{"n":"Cerro Gordo (Santa Rosa de Lima)","c":"06027","d":"Santa Rosa"},{"n":"Departamento de Sololá","c":"07000","d":"Sololá"},{"n":"Sololá","c":"07001","d":"Sololá"},{"n":"San José Chacayá","c":"07002","d":"Sololá"},{"n":"Santa María Visitación","c":"07003","d":"Sololá"},{"n":"Santa Lucía Utatlán","c":"07004","d":"Sololá"},{"n":"Nahualá","c":"07005","d":"Sololá"},{"n":"Santa Catarina Ixtahuacán","c":"07006","d":"Sololá"},{"n":"Santa Clara La Laguna","c":"07007","d":"Sololá"},{"n":"Concepción (Sololá)","c":"07008","d":"Sololá"},{"n":"San Andrés Semetabaj","c":"07009","d":"Sololá"},{"n":"Panajachel","c":"07010","d":"Sololá"},{"n":"Santa Catarina Palopó","c":"07011","d":"Sololá"},{"n":"San Antonio Palopó","c":"07012","d":"Sololá"},{"n":"San Lucas Tolimán","c":"07013","d":"Sololá"},{"n":"Santa Cruz La Laguna","c":"07014","d":"Sololá"},{"n":"San Pablo La Laguna","c":"07015","d":"Sololá"},{"n":"San Marcos La Laguna","c":"07016","d":"Sololá"},{"n":"San Juan La Laguna","c":"07017","d":"Sololá"},{"n":"San Pedro La Laguna","c":"07018","d":"Sololá"},{"n":"Santiago Atitlán","c":"07019","d":"Sololá"},{"n":"Los Encuentros (Sololá)","c":"07020","d":"Sololá"},{"n":"Godínez (San Andrés Semetabaj)","c":"07021","d":"Sololá"},{"n":"Agua Escondida (San Antonio Palopó)","c":"07022","d":"Sololá"},{"n":"Argueta (Sololá)","c":"07023","d":"Sololá"},{"n":"Pixabaj (Sololá)","c":"07024","d":"Sololá"},{"n":"Departamento de Totonicapán","c":"08000","d":"Totonicapán"},{"n":"Totonicapán","c":"08001","d":"Totonicapán"},{"n":"San Cristóbal Totonicapán","c":"08002","d":"Totonicapán"},{"n":"San Francisco El Alto","c":"08003","d":"Totonicapán"},{"n":"San Andrés Xecul","c":"08004","d":"Totonicapán"},{"n":"Momostenango","c":"08005","d":"Totonicapán"},{"n":"Santa María Chiquimula","c":"08006","d":"Totonicapán"},{"n":"Santa Lucía La Reforma","c":"08007","d":"Totonicapán"},{"n":"San Bartolo","c":"08008","d":"Totonicapán"},{"n":"Departamento de Quetzaltenango","c":"09000","d":"Quetzaltenango"},{"n":"Quetzaltenango (Xela)","c":"09001","d":"Quetzaltenango"},{"n":"Salcajá","c":"09002","d":"Quetzaltenango"},{"n":"Olintepeque","c":"09003","d":"Quetzaltenango"},{"n":"San Carlos Sija","c":"09004","d":"Quetzaltenango"},{"n":"Sibilia","c":"09005","d":"Quetzaltenango"},{"n":"Cabricán","c":"09006","d":"Quetzaltenango"},{"n":"Cajolá","c":"09007","d":"Quetzaltenango"},{"n":"San Miguel Siguilá","c":"09008","d":"Quetzaltenango"},{"n":"Ostuncalco","c":"09009","d":"Quetzaltenango"},{"n":"San Mateo (Quetzaltenango)","c":"09010","d":"Quetzaltenango"},{"n":"Concepción Chiquirichapa","c":"09011","d":"Quetzaltenango"},{"n":"San Martín Sacatepéquez","c":"09012","d":"Quetzaltenango"},{"n":"Almolonga","c":"09013","d":"Quetzaltenango"},{"n":"Cantel","c":"09014","d":"Quetzaltenango"},{"n":"Huitán","c":"09015","d":"Quetzaltenango"},{"n":"Zunil","c":"09016","d":"Quetzaltenango"},{"n":"Colomba","c":"09017","d":"Quetzaltenango"},{"n":"San Francisco La Unión","c":"09018","d":"Quetzaltenango"},{"n":"El Palmar","c":"09019","d":"Quetzaltenango"},{"n":"Coatepeque","c":"09020","d":"Quetzaltenango"},{"n":"Génova","c":"09021","d":"Quetzaltenango"},{"n":"Flores Costa Cuca","c":"09022","d":"Quetzaltenango"},{"n":"La Esperanza","c":"09023","d":"Quetzaltenango"},{"n":"Palestina de Los Altos","c":"09024","d":"Quetzaltenango"},{"n":"Santa María de Jesús (Zunil)","c":"09025","d":"Quetzaltenango"},{"n":"Chiquibal (San Carlos Sija)","c":"09026","d":"Quetzaltenango"},{"n":"Las Palmas (Coatepeque)","c":"09027","d":"Quetzaltenango"},{"n":"Cuicalba (Sibilia)","c":"09028","d":"Quetzaltenango"},{"n":"San José Chiquilajá (Quetzaltenango)","c":"09029","d":"Quetzaltenango"},{"n":"El Edén (Palestina de Los Altos)","c":"09030","d":"Quetzaltenango"},{"n":"Chuatuj (San Carlos Sija)","c":"09031","d":"Quetzaltenango"},{"n":"El Tambor (El Palmar)","c":"09032","d":"Quetzaltenango"},{"n":"Las Mercedes (Colomba)","c":"09033","d":"Quetzaltenango"},{"n":"Palmira (Colomba)","c":"09034","d":"Quetzaltenango"},{"n":"Departamento de Suchitepéquez","c":"10000","d":"Suchitepéquez"},{"n":"Mazatenango","c":"10001","d":"Suchitepéquez"},{"n":"Cuyotenango","c":"10002","d":"Suchitepéquez"},{"n":"San Francisco Zapotitlán","c":"10003","d":"Suchitepéquez"},{"n":"San Bernardino","c":"10004","d":"Suchitepéquez"},{"n":"San José El Ídolo","c":"10005","d":"Suchitepéquez"},{"n":"Santo Domingo Suchitepéquez","c":"10006","d":"Suchitepéquez"},{"n":"San Lorenzo (Suchitepéquez)","c":"10007","d":"Suchitepéquez"},{"n":"Samayac","c":"10008","d":"Suchitepéquez"},{"n":"San Pablo Jocopilas","c":"10009","d":"Suchitepéquez"},{"n":"San Antonio Suchitepéquez","c":"10010","d":"Suchitepéquez"},{"n":"San Miguel Panán","c":"10011","d":"Suchitepéquez"},{"n":"San Gabriel","c":"10012","d":"Suchitepéquez"},{"n":"Chicacao","c":"10013","d":"Suchitepéquez"},{"n":"Patulul","c":"10014","d":"Suchitepéquez"},{"n":"Santa Bárbara (Suchitepéquez)","c":"10015","d":"Suchitepéquez"},{"n":"San Juan Bautista","c":"10016","d":"Suchitepéquez"},{"n":"Santo Tomás La Unión","c":"10017","d":"Suchitepéquez"},{"n":"Zunilito","c":"10018","d":"Suchitepéquez"},{"n":"Pueblo Nuevo (Suchitepéquez)","c":"10019","d":"Suchitepéquez"},{"n":"Río Bravo","c":"10020","d":"Suchitepéquez"},{"n":"Cocales (Patulul)","c":"10021","d":"Suchitepéquez"},{"n":"Chocolá (San Pablo Jocopilas)","c":"10022","d":"Suchitepéquez"},{"n":"Tahuexco (Mazatenango)","c":"10023","d":"Suchitepéquez"},{"n":"Guatalón (Río Bravo)","c":"10024","d":"Suchitepéquez"},{"n":"Palo Gordo (San Antonio Suchitepéquez)","c":"10025","d":"Suchitepéquez"},{"n":"San Rafael Panán (Santa Bárbara)","c":"10026","d":"Suchitepéquez"},{"n":"Bracitos (Mazatenango)","c":"10027","d":"Suchitepéquez"},{"n":"Bolivia (Santo Domingo Suchitepéquez)","c":"10028","d":"Suchitepéquez"},{"n":"Monterrey (Santo Domingo Suchitepéquez)","c":"10029","d":"Suchitepéquez"},{"n":"La Máquina (Cuyotenango)","c":"10030","d":"Suchitepéquez"},{"n":"Departamento de Retalhuleu","c":"11000","d":"Retalhuleu"},{"n":"Retalhuleu","c":"11001","d":"Retalhuleu"},{"n":"San Sebastián (Retalhuleu)","c":"11002","d":"Retalhuleu"},{"n":"Santa Cruz Muluá","c":"11003","d":"Retalhuleu"},{"n":"San Martín Zapotitlán","c":"11004","d":"Retalhuleu"},{"n":"San Felipe (Retalhuleu)","c":"11005","d":"Retalhuleu"},{"n":"San Andrés Villa Seca","c":"11006","d":"Retalhuleu"},{"n":"Champerico","c":"11007","d":"Retalhuleu"},{"n":"Nuevo San Carlos","c":"11008","d":"Retalhuleu"},{"n":"El Asintal","c":"11009","d":"Retalhuleu"},{"n":"Caballo Blanco (Retalhuleu)","c":"11010","d":"Retalhuleu"},{"n":"Candelaria Xolhuitz (Nuevo San Carlos)","c":"11011","d":"Retalhuleu"},{"n":"Sinaivá (El Asintal)","c":"11012","d":"Retalhuleu"},{"n":"El Xab (El Asintal)","c":"11013","d":"Retalhuleu"},{"n":"La Máquina (San Andrés Villa Seca)","c":"11014","d":"Retalhuleu"},{"n":"Departamento de San Marcos","c":"12000","d":"San Marcos"},{"n":"San Marcos","c":"12001","d":"San Marcos"},{"n":"San Pedro Sacatepéquez (San Marcos)","c":"12002","d":"San Marcos"},{"n":"San Antonio Sacatepéquez","c":"12003","d":"San Marcos"},{"n":"Comitancillo","c":"12004","d":"San Marcos"},{"n":"San Miguel Ixtahuacán","c":"12005","d":"San Marcos"},{"n":"Concepción Tutuapa","c":"12006","d":"San Marcos"},{"n":"Tacaná","c":"12007","d":"San Marcos"},{"n":"Sibinal","c":"12008","d":"San Marcos"},{"n":"Tajumulco","c":"12009","d":"San Marcos"},{"n":"Tejutla","c":"12010","d":"San Marcos"},{"n":"San Rafael Pie de la Cuesta","c":"12011","d":"San Marcos"},{"n":"Nuevo Progreso","c":"12012","d":"San Marcos"},{"n":"El Tumbador","c":"12013","d":"San Marcos"},{"n":"El Rodeo","c":"12014","d":"San Marcos"},{"n":"Malacatán","c":"12015","d":"San Marcos"},{"n":"Catarina","c":"12016","d":"San Marcos"},{"n":"Tecún Umán","c":"12017","d":"San Marcos"},{"n":"Ocós","c":"12018","d":"San Marcos"},{"n":"San Pablo (San Marcos)","c":"12019","d":"San Marcos"},{"n":"El Quetzal","c":"12020","d":"San Marcos"},{"n":"La Reforma (San Marcos)","c":"12021","d":"San Marcos"},{"n":"Pajapita","c":"12022","d":"San Marcos"},{"n":"Ixchiguán","c":"12023","d":"San Marcos"},{"n":"San José Ojetenam","c":"12024","d":"San Marcos"},{"n":"San Cristóbal Cucho","c":"12025","d":"San Marcos"},{"n":"Sipacapa","c":"12026","d":"San Marcos"},{"n":"Esquipulas Palo Gordo","c":"12027","d":"San Marcos"},{"n":"Río Blanco (San Marcos)","c":"12028","d":"San Marcos"},{"n":"San Lorenzo (San Marcos)","c":"12029","d":"San Marcos"},{"n":"El Carmen (Malacatán)","c":"12030","d":"San Marcos"},{"n":"Zanjón San Lorenzo (Tecún Umán)","c":"12031","d":"San Marcos"},{"n":"San Jerónimo (El Tumbador)","c":"12032","d":"San Marcos"},{"n":"Serchil (San Marcos)","c":"12033","d":"San Marcos"},{"n":"La Democracia (El Tumbador)","c":"12034","d":"San Marcos"},{"n":"San Francisco (El Rodeo)","c":"12035","d":"San Marcos"},{"n":"El Amparo (El Tumbador)","c":"12036","d":"San Marcos"},{"n":"San Sebastián (San Marcos)","c":"12037","d":"San Marcos"},{"n":"Los Limones (Ocós)","c":"12038","d":"San Marcos"},{"n":"La Blanca (Ocós)","c":"12039","d":"San Marcos"},{"n":"El Cielo (El Tumbador)","c":"12040","d":"San Marcos"},{"n":"San José Ixtal (Nuevo Progreso)","c":"12041","d":"San Marcos"},{"n":"Platanares (Ocós)","c":"12042","d":"San Marcos"},{"n":"Las Delicias (El Tumbador)","c":"12043","d":"San Marcos"},{"n":"Calapté (Ixchiguán)","c":"12044","d":"San Marcos"},{"n":"Tocaché (San Pablo)","c":"12045","d":"San Marcos"},{"n":"La Conquista (Nuevo Progreso)","c":"12046","d":"San Marcos"},{"n":"Champollap (San Pedro Sacatepéquez)","c":"12047","d":"San Marcos"},{"n":"Piedra Grande (San Pedro Sacatepéquez)","c":"12048","d":"San Marcos"},{"n":"Santa Lucía Ixcamal (San Marcos)","c":"12049","d":"San Marcos"},{"n":"El Sitio (Catarina)","c":"12050","d":"San Marcos"},{"n":"Departamento de Huehuetenango","c":"13000","d":"Huehuetenango"},{"n":"Huehuetenango","c":"13001","d":"Huehuetenango"},{"n":"Chiantla","c":"13002","d":"Huehuetenango"},{"n":"Malacatancito","c":"13003","d":"Huehuetenango"},{"n":"Cuilco","c":"13004","d":"Huehuetenango"},{"n":"Nentón","c":"13005","d":"Huehuetenango"},{"n":"San Pedro Necta","c":"13006","d":"Huehuetenango"},{"n":"Jacaltenango","c":"13007","d":"Huehuetenango"},{"n":"Soloma","c":"13008","d":"Huehuetenango"},{"n":"Ixtahuacán (Huehuetenango)","c":"13009","d":"Huehuetenango"},{"n":"Santa Bárbara (Huehuetenango)","c":"13010","d":"Huehuetenango"},{"n":"La Libertad (Huehuetenango)","c":"13011","d":"Huehuetenango"},{"n":"La Democracia (Huehuetenango)","c":"13012","d":"Huehuetenango"},{"n":"San Miguel Acatán","c":"13013","d":"Huehuetenango"},{"n":"San Rafael La Independencia","c":"13014","d":"Huehuetenango"},{"n":"Todos Santos Cuchumatán","c":"13015","d":"Huehuetenango"},{"n":"San Juan Atitán","c":"13016","d":"Huehuetenango"},{"n":"Santa Eulalia","c":"13017","d":"Huehuetenango"},{"n":"San Mateo Ixtatán","c":"13018","d":"Huehuetenango"},{"n":"Colotenango","c":"13019","d":"Huehuetenango"},{"n":"San Sebastián Huehuetenango","c":"13020","d":"Huehuetenango"},{"n":"Tectitán","c":"13021","d":"Huehuetenango"},{"n":"Concepción (Huehuetenango)","c":"13022","d":"Huehuetenango"},{"n":"San Juan Ixcoy","c":"13023","d":"Huehuetenango"},{"n":"San Antonio Huista","c":"13024","d":"Huehuetenango"},{"n":"San Sebastián Coatán","c":"13025","d":"Huehuetenango"},{"n":"Barillas","c":"13026","d":"Huehuetenango"},{"n":"Aguacatán","c":"13027","d":"Huehuetenango"},{"n":"San Rafael Petzal","c":"13028","d":"Huehuetenango"},{"n":"San Gaspar Ixchil","c":"13029","d":"Huehuetenango"},{"n":"Santiago Chimaltenango","c":"13030","d":"Huehuetenango"},{"n":"Santa Ana Huista","c":"13031","d":"Huehuetenango"},{"n":"Gracias a Dios (Nentón)","c":"13032","d":"Huehuetenango"},{"n":"San Lorenzo (Huehuetenango)","c":"13033","d":"Huehuetenango"},{"n":"San Martín Cuchumatán (Todos Santos Cuchumatán)","c":"13034","d":"Huehuetenango"},{"n":"San Marcos Huista (Jacaltenango)","c":"13035","d":"Huehuetenango"},{"n":"Petatán (Concepción)","c":"13036","d":"Huehuetenango"},{"n":"Paquix (Chiantla)","c":"13037","d":"Huehuetenango"},{"n":"Michicoy (San Pedro Necta)","c":"13038","d":"Huehuetenango"},{"n":"San Andrés Huista (Jacaltenango)","c":"13039","d":"Huehuetenango"},{"n":"Chalum (La Libertad)","c":"13040","d":"Huehuetenango"},{"n":"La Mesilla","c":"13041","d":"Huehuetenango"},{"n":"Departamento del Quiché","c":"14000","d":"Quiché"},{"n":"Santa Cruz del Quiché","c":"14001","d":"Quiché"},{"n":"Quiché","c":"14002","d":"Quiché"},{"n":"Chinique","c":"14003","d":"Quiché"},{"n":"Zacualpa","c":"14004","d":"Quiché"},{"n":"Chajul","c":"14005","d":"Quiché"},{"n":"Chichicastenango","c":"14006","d":"Quiché"},{"n":"Patzité","c":"14007","d":"Quiché"},{"n":"San Antonio Ilotenango","c":"14008","d":"Quiché"},{"n":"San Pedro Jocopilas","c":"14009","d":"Quiché"},{"n":"Cunén","c":"14010","d":"Quiché"},{"n":"San Juan Cotzal","c":"14011","d":"Quiché"},{"n":"Joyabaj","c":"14012","d":"Quiché"},{"n":"Nebaj","c":"14013","d":"Quiché"},{"n":"San Andrés Sajcabajá","c":"14014","d":"Quiché"},{"n":"Uspantán","c":"14015","d":"Quiché"},{"n":"Sacapulas","c":"14016","d":"Quiché"},{"n":"San Bartolomé Jocotenango","c":"14017","d":"Quiché"},{"n":"Canillá","c":"14018","d":"Quiché"},{"n":"Playa Grande (Ixcán)","c":"14019","d":"Quiché"},{"n":"Chicamán","c":"14020","d":"Quiché"},{"n":"Santa Rosa Chujuyub (Santa Cruz del Quiché)","c":"14021","d":"Quiché"},{"n":"Pachalum","c":"14022","d":"Quiché"},{"n":"Cantabal","c":"14023","d":"Quiché"},{"n":"San José La 20 (Uspantán-Ixcán)","c":"14024","d":"Quiché"},{"n":"Xacbal","c":"14025","d":"Quiché"},{"n":"Departamento de Baja Verapaz","c":"15000","d":"Baja Verapaz"},{"n":"Salamá","c":"15001","d":"Baja Verapaz"},{"n":"San Miguel Chicaj","c":"15002","d":"Baja Verapaz"},{"n":"Rabinal","c":"15003","d":"Baja Verapaz"},{"n":"Cubulco","c":"15004","d":"Baja Verapaz"},{"n":"Granados","c":"15005","d":"Baja Verapaz"},{"n":"El Chol","c":"15006","d":"Baja Verapaz"},{"n":"San Jerónimo (Baja Verapaz)","c":"15007","d":"Baja Verapaz"},{"n":"Purulhá","c":"15008","d":"Baja Verapaz"},{"n":"Los Amates (El Chol)","c":"15009","d":"Baja Verapaz"},{"n":"La Canoa (Salamá)","c":"15010","d":"Baja Verapaz"},{"n":"Saltán (Granados)","c":"15011","d":"Baja Verapaz"},{"n":"San Gabriel Pantzuy (San Miguel Chicaj)","c":"15012","d":"Baja Verapaz"},{"n":"Departamento de Alta Verapaz","c":"16000","d":"Alta Verapaz"},{"n":"Cobán","c":"16001","d":"Alta Verapaz"},{"n":"Santa Cruz Verapaz","c":"16002","d":"Alta Verapaz"},{"n":"San Cristóbal Verapaz","c":"16003","d":"Alta Verapaz"},{"n":"Tactic","c":"16004","d":"Alta Verapaz"},{"n":"Tamahú","c":"16005","d":"Alta Verapaz"},{"n":"Tucurú","c":"16006","d":"Alta Verapaz"},{"n":"Panzós","c":"16007","d":"Alta Verapaz"},{"n":"Senahú","c":"16008","d":"Alta Verapaz"},{"n":"San Pedro Carchá","c":"16009","d":"Alta Verapaz"},{"n":"San Juan Chamelco","c":"16010","d":"Alta Verapaz"},{"n":"Lanquín","c":"16011","d":"Alta Verapaz"},{"n":"Cahabón","c":"16012","d":"Alta Verapaz"},{"n":"Chisec","c":"16013","d":"Alta Verapaz"},{"n":"Chahal","c":"16014","d":"Alta Verapaz"},{"n":"Fray Bartolomé de Las Casas","c":"16015","d":"Alta Verapaz"},{"n":"La Tinta (Panzós)","c":"16016","d":"Alta Verapaz"},{"n":"Telemán (Panzós)","c":"16017","d":"Alta Verapaz"},{"n":"Pancajché (Tucurú)","c":"16018","d":"Alta Verapaz"},{"n":"Sebol (Fray Bartolomé)","c":"16019","d":"Alta Verapaz"},{"n":"Boloncó (Fray Bartolomé)","c":"16020","d":"Alta Verapaz"},{"n":"Campur (San Pedro Carchá)","c":"16021","d":"Alta Verapaz"},{"n":"Las Casas","c":"16022","d":"Alta Verapaz"},{"n":"Salacuín","c":"16023","d":"Alta Verapaz"},{"n":"El Rosario (Alta Verapaz)","c":"16024","d":"Alta Verapaz"},{"n":"Las Conchas","c":"16025","d":"Alta Verapaz"},{"n":"Raxruhá (Chisec)","c":"16026","d":"Alta Verapaz"},{"n":"Departamento de Petén","c":"17000","d":"Petén"},{"n":"Flores","c":"17001","d":"Petén"},{"n":"San José (Petén)","c":"17002","d":"Petén"},{"n":"San Benito","c":"17003","d":"Petén"},{"n":"San Andrés (Petén)","c":"17004","d":"Petén"},{"n":"La Libertad (Petén)","c":"17005","d":"Petén"},{"n":"San Francisco (Petén)","c":"17006","d":"Petén"},{"n":"Santa Ana (Petén)","c":"17007","d":"Petén"},{"n":"Dolores","c":"17008","d":"Petén"},{"n":"San Luis (Petén)","c":"17009","d":"Petén"},{"n":"Sayaxché","c":"17010","d":"Petén"},{"n":"Melchor de Mencos","c":"17011","d":"Petén"},{"n":"Poptún","c":"17012","d":"Petén"},{"n":"Tikal (Flores)","c":"17013","d":"Petén"},{"n":"Dos Lagunas (Flores)","c":"17014","d":"Petén"},{"n":"Santo Toribio (Dolores)","c":"17015","d":"Petén"},{"n":"Paso Caballos (San Andrés)","c":"17016","d":"Petén"},{"n":"Uaxactún (Flores)","c":"17017","d":"Petén"},{"n":"Carmelita (San Andrés)","c":"17018","d":"Petén"},{"n":"Machaquilá (Dolores)","c":"17019","d":"Petén"},{"n":"El Chal (Dolores)","c":"17020","d":"Petén"},{"n":"Macanché (Dolores)","c":"17021","d":"Petén"},{"n":"El Remate (Flores)","c":"17022","d":"Petén"},{"n":"La Felicidad (Sayaxché)","c":"17023","d":"Petén"},{"n":"El Naranjo (La Libertad)","c":"17024","d":"Petén"},{"n":"Sacpuy (San Andrés)","c":"17025","d":"Petén"},{"n":"Paxcamán (Flores)","c":"17026","d":"Petén"},{"n":"Las Cruces (La Libertad)","c":"17027","d":"Petén"},{"n":"Sabaneta (Dolores)","c":"17028","d":"Petén"},{"n":"Santa Elena (Petén)","c":"17029","d":"Petén"},{"n":"Departamento de Izabal","c":"18000","d":"Izabal"},{"n":"Puerto Barrios","c":"18001","d":"Izabal"},{"n":"Lívingston","c":"18002","d":"Izabal"},{"n":"El Estor","c":"18003","d":"Izabal"},{"n":"Morales","c":"18004","d":"Izabal"},{"n":"Los Amates (Izabal)","c":"18005","d":"Izabal"},{"n":"Playitas (Morales)","c":"18006","d":"Izabal"},{"n":"El Rico (Los Amates)","c":"18007","d":"Izabal"},{"n":"Cayuga (Morales)","c":"18008","d":"Izabal"},{"n":"Quiriguá (Los Amates)","c":"18009","d":"Izabal"},{"n":"El Cinchado (Puerto Barrios)","c":"18010","d":"Izabal"},{"n":"Las Quebradas (Morales)","c":"18011","d":"Izabal"},{"n":"Entre Ríos (Puerto Barrios)","c":"18012","d":"Izabal"},{"n":"Santo Tomás de Castilla (Puerto Barrios)","c":"18013","d":"Izabal"},{"n":"El Mitchal (Morales)","c":"18014","d":"Izabal"},{"n":"Las Viñas (Morales)","c":"18015","d":"Izabal"},{"n":"El Refugio (Los Amates)","c":"18016","d":"Izabal"},{"n":"Santa Inés (Los Amates)","c":"18017","d":"Izabal"},{"n":"Tenedores (Morales)","c":"18018","d":"Izabal"},{"n":"San Felipe (Lívingston)","c":"18019","d":"Izabal"},{"n":"Bananera (Morales)","c":"18020","d":"Izabal"},{"n":"Fronteras (Lívingston)","c":"18021","d":"Izabal"},{"n":"Mariscos (Los Amates)","c":"18022","d":"Izabal"},{"n":"Buenos Aires (Morales)","c":"18023","d":"Izabal"},{"n":"Departamento de Zacapa","c":"19000","d":"Zacapa"},{"n":"Zacapa","c":"19001","d":"Zacapa"},{"n":"Estanzuela","c":"19002","d":"Zacapa"},{"n":"Río Hondo","c":"19003","d":"Zacapa"},{"n":"Gualán","c":"19004","d":"Zacapa"},{"n":"Teculután","c":"19005","d":"Zacapa"},{"n":"Usumatlán","c":"19006","d":"Zacapa"},{"n":"Cabañas","c":"19007","d":"Zacapa"},{"n":"San Diego (Zacapa)","c":"19008","d":"Zacapa"},{"n":"La Unión (Zacapa)","c":"19009","d":"Zacapa"},{"n":"Huité","c":"19010","d":"Zacapa"},{"n":"La Reforma (Huité)","c":"19011","d":"Zacapa"},{"n":"San José (Teculután)","c":"19012","d":"Zacapa"},{"n":"San Jorge (Zacapa)","c":"19013","d":"Zacapa"},{"n":"Santa Rosalía (Zacapa)","c":"19014","d":"Zacapa"},{"n":"Santa Lucía (Zacapa)","c":"19015","d":"Zacapa"},{"n":"La Fragua (Zacapa)","c":"19016","d":"Zacapa"},{"n":"San Pablo (Zacapa)","c":"19017","d":"Zacapa"},{"n":"San Vicente (Zacapa)","c":"19018","d":"Zacapa"},{"n":"Departamento de Chiquimula","c":"20000","d":"Chiquimula"},{"n":"Chiquimula","c":"20001","d":"Chiquimula"},{"n":"San José La Arada","c":"20002","d":"Chiquimula"},{"n":"San Juan Ermita","c":"20003","d":"Chiquimula"},{"n":"Jocotán","c":"20004","d":"Chiquimula"},{"n":"Camotán","c":"20005","d":"Chiquimula"},{"n":"Olopa","c":"20006","d":"Chiquimula"},{"n":"Esquipulas","c":"20007","d":"Chiquimula"},{"n":"Concepción Las Minas","c":"20008","d":"Chiquimula"},{"n":"Quezaltepeque","c":"20009","d":"Chiquimula"},{"n":"San Jacinto","c":"20010","d":"Chiquimula"},{"n":"Ipala","c":"20011","d":"Chiquimula"},{"n":"Anguiatú (Concepción Las Minas)","c":"20012","d":"Chiquimula"},{"n":"El Amatillo (Jocotán)","c":"20013","d":"Chiquimula"},{"n":"El Florido (Camotán)","c":"20014","d":"Chiquimula"},{"n":"Santa Elena (Chiquimula)","c":"20015","d":"Chiquimula"},{"n":"Valdo Hondo (Chiquimula)","c":"20016","d":"Chiquimula"},{"n":"San Esteban (Chiquimula)","c":"20017","d":"Chiquimula"},{"n":"Tierra Colorada (San José La Arada)","c":"20018","d":"Chiquimula"},{"n":"Agua Caliente (Esquipulas)","c":"20019","d":"Chiquimula"},{"n":"Nueva Anguiatú (Concepción Las Minas)","c":"20020","d":"Chiquimula"},{"n":"Departamento de Jalapa","c":"21000","d":"Jalapa"},{"n":"Jalapa","c":"21001","d":"Jalapa"},{"n":"San Pedro Pinula","c":"21002","d":"Jalapa"},{"n":"San Luis Jilotepeque","c":"21003","d":"Jalapa"},{"n":"San Manuel Chaparrón","c":"21004","d":"Jalapa"},{"n":"San Carlos Alzatate","c":"21005","d":"Jalapa"},{"n":"Monjas","c":"21006","d":"Jalapa"},{"n":"Mataquescuintla","c":"21007","d":"Jalapa"},{"n":"Llano Grande (Jalapa)","c":"21008","d":"Jalapa"},{"n":"Departamento de Jutiapa","c":"22000","d":"Jutiapa"},{"n":"Jutiapa","c":"22001","d":"Jutiapa"},{"n":"El Progreso (Jutiapa)","c":"22002","d":"Jutiapa"},{"n":"Santa Catarina Mita","c":"22003","d":"Jutiapa"},{"n":"Agua Blanca","c":"22004","d":"Jutiapa"},{"n":"Asunción Mita","c":"22005","d":"Jutiapa"},{"n":"Yupiltepeque","c":"22006","d":"Jutiapa"},{"n":"Atescatempa","c":"22007","d":"Jutiapa"},{"n":"Jerez","c":"22008","d":"Jutiapa"},{"n":"El Adelanto","c":"22009","d":"Jutiapa"},{"n":"Zapotitlán (Jutiapa)","c":"22010","d":"Jutiapa"},{"n":"Comapa","c":"22011","d":"Jutiapa"},{"n":"Jalpatagua","c":"22012","d":"Jutiapa"},{"n":"Conguaco","c":"22013","d":"Jutiapa"},{"n":"Moyuta","c":"22014","d":"Jutiapa"},{"n":"Pasaco","c":"22015","d":"Jutiapa"},{"n":"San José Acatempa","c":"22016","d":"Jutiapa"},{"n":"Quesada","c":"22017","d":"Jutiapa"},{"n":"Ciudad Pedro de Alvarado (Moyuta)","c":"22018","d":"Jutiapa"},{"n":"San Cristóbal Frontera (Atescatempa)","c":"22019","d":"Jutiapa"},{"n":"Valle Nuevo (Jalpatagua)","c":"22020","d":"Jutiapa"},{"n":"Río de Paz","c":"22021","d":"Jutiapa"},{"n":"Horcones (Santa Catarina Mita)","c":"22022","d":"Jutiapa"},{"n":"El Ovejero (El Progreso)","c":"22023","d":"Jutiapa"},{"n":"Contepeque (Atescatempa)","c":"22024","d":"Jutiapa"},{"n":"La Esmeralda (Jerez)","c":"22025","d":"Jutiapa"},{"n":"Horcones (Atescatempa)","c":"22026","d":"Jutiapa"},{"n":"Tiucal (Asunción Mita)","c":"22027","d":"Jutiapa"}];
+
+  var norm = function(s){
+    return (s||'').toString().toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+      .replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
+  };
+
+  // pre-cálculo de campos normalizados
+  DATA.forEach(function(x){ x._n = norm(x.n); x._d = norm(x.d); x._c = x.c; });
+
+  var input   = document.getElementById('cpgt-input');
+  var results = document.getElementById('cpgt-results');
+  var clearBt = document.getElementById('cpgt-clear');
+  var chips   = document.getElementById('cpgt-chips');
+
+  function score(item, q){
+    var n = item._n, d = item._d;
+    if (item._c === q) return 100;
+    if (n === q) return 95;
+    if (n.indexOf(q) === 0) return 80;
+    if (n.indexOf(' '+q) > -1) return 70;
+    if (n.indexOf(q) > -1) return 55;
+    if (d.indexOf(q) > -1) return 40;
+    if (item._c.indexOf(q) > -1) return 35;
+    return 0;
+  }
+
+  function search(raw){
+    var q = norm(raw);
+    if (!q) return [];
+    var out = [];
+    for (var i=0;i<DATA.length;i++){
+      var s = score(DATA[i], q);
+      if (s>0) out.push({s:s, it:DATA[i]});
+    }
+    out.sort(function(a,b){ return b.s - a.s || a.it._n.localeCompare(b.it._n); });
+    return out.slice(0,40).map(function(o){return o.it;});
+  }
+
+  function highlight(text, q){
+    if(!q) return text;
+    var nq = norm(q);
+    var nt = norm(text);
+    var idx = nt.indexOf(nq);
+    if(idx<0) return text;
+    return text.slice(0,idx)+'<mark>'+text.slice(idx,idx+nq.length)+'</mark>'+text.slice(idx+nq.length);
+  }
+
+  function render(list, raw){
+    if(!raw){ results.innerHTML=''; return; }
+    if(!list.length){
+      results.innerHTML = '<div class="cpgt-empty">No encontramos "<strong>'+
+        raw.replace(/</g,'&lt;')+'</strong>". Probá con el nombre del municipio o la zona.</div>';
+      return;
+    }
+    var html = '';
+    list.forEach(function(it){
+      html += '<div class="cpgt-card">'+
+                '<div class="cpgt-cinfo">'+
+                  '<span class="cpgt-name">'+highlight(it.n, raw)+'</span>'+
+                  '<span class="cpgt-depto">'+it.d+'</span>'+
+                '</div>'+
+                '<button class="cpgt-code" data-code="'+it.c+'" title="Copiar código">'+
+                  '<span>'+it.c+'</span>'+
+                  '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 1H4a2 2 0 0 0-2 2v12h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>'+
+                '</button>'+
+              '</div>';
+    });
+    results.innerHTML = html;
+  }
+
+  var t;
+  function onType(){
+    var v = input.value;
+    clearBt.hidden = !v;
+    chips.style.display = v ? 'none' : '';
+    clearTimeout(t);
+    t = setTimeout(function(){ render(search(v), v); }, 90);
+  }
+
+  input.addEventListener('input', onType);
+
+  clearBt.addEventListener('click', function(){
+    input.value=''; clearBt.hidden=true; chips.style.display='';
+    results.innerHTML=''; input.focus();
+  });
+
+  chips.addEventListener('click', function(e){
+    var c = e.target.closest('.cpgt-chip');
+    if(!c) return;
+    input.value = c.getAttribute('data-q');
+    onType(); input.focus();
+  });
+
+  results.addEventListener('click', function(e){
+    var b = e.target.closest('.cpgt-code');
+    if(!b) return;
+    var code = b.getAttribute('data-code');
+    var done = function(){
+      b.classList.add('cpgt-copied');
+      var sp = b.querySelector('span'); var old = sp.textContent;
+      sp.textContent = 'Copiado';
+      setTimeout(function(){ sp.textContent = old; b.classList.remove('cpgt-copied'); }, 1100);
+    };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(code).then(done).catch(done);
+    } else {
+      var ta=document.createElement('textarea'); ta.value=code; document.body.appendChild(ta);
+      ta.select(); try{document.execCommand('copy');}catch(e){} document.body.removeChild(ta); done();
+    }
+  });
+})();
+</script>
+
+<style>
+#cpgt-app{
+  --cpgt-accent:#1f7a4d;
+  --cpgt-accent2:#2aa06a;
+  --cpgt-ink:#1a2b22;
+  --cpgt-muted:#6b7d74;
+  --cpgt-line:rgba(31,122,77,.18);
+  --cpgt-card:rgba(255,255,255,.55);
+  max-width:640px; margin:0 auto;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color:var(--cpgt-ink); line-height:1.45; box-sizing:border-box;
+}
+#cpgt-app *,#cpgt-app *::before,#cpgt-app *::after{box-sizing:border-box;}
+#cpgt-app .cpgt-head{text-align:center; margin-bottom:18px;}
+#cpgt-app .cpgt-title{
+  font-size:1.5rem; font-weight:800; margin:0 0 6px; letter-spacing:-.02em;
+  color:var(--cpgt-ink);
+}
+#cpgt-app .cpgt-sub{font-size:.95rem; color:var(--cpgt-muted); margin:0;}
+
+#cpgt-app .cpgt-searchwrap{
+  position:relative; display:flex; align-items:center;
+  background:rgba(255,255,255,.7); border:1.5px solid var(--cpgt-line);
+  border-radius:14px; padding:0 12px; transition:border-color .18s, box-shadow .18s;
+  backdrop-filter:blur(4px);
+}
+#cpgt-app .cpgt-searchwrap:focus-within{
+  border-color:var(--cpgt-accent); box-shadow:0 0 0 4px rgba(42,160,106,.14);
+}
+#cpgt-app .cpgt-ico{width:20px; height:20px; fill:var(--cpgt-accent); flex:0 0 auto; opacity:.8;}
+#cpgt-app #cpgt-input{
+  flex:1; border:0; outline:0; background:transparent;
+  font-size:1.05rem; padding:14px 8px; color:var(--cpgt-ink); min-width:0;
+}
+#cpgt-app #cpgt-input::placeholder{color:var(--cpgt-muted); opacity:.7;}
+#cpgt-app #cpgt-clear{
+  border:0; background:transparent; font-size:1.6rem; line-height:1;
+  color:var(--cpgt-muted); cursor:pointer; padding:0 6px; transition:color .15s;
+}
+#cpgt-app #cpgt-clear:hover{color:var(--cpgt-accent);}
+
+#cpgt-app .cpgt-chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;}
+#cpgt-app .cpgt-chip{
+  font-size:.82rem; padding:6px 13px; border-radius:999px; cursor:pointer;
+  background:rgba(42,160,106,.1); color:var(--cpgt-accent); border:1px solid transparent;
+  transition:background .15s, border-color .15s; user-select:none;
+}
+#cpgt-app .cpgt-chip:hover{background:rgba(42,160,106,.2); border-color:var(--cpgt-line);}
+
+#cpgt-app .cpgt-results{margin-top:14px; display:flex; flex-direction:column; gap:8px;}
+#cpgt-app .cpgt-card{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:13px 15px; border-radius:12px;
+  background:var(--cpgt-card); border:1px solid var(--cpgt-line);
+  animation:cpgt-in .22s ease both; backdrop-filter:blur(3px);
+}
+@keyframes cpgt-in{from{opacity:0; transform:translateY(5px);}to{opacity:1; transform:none;}}
+#cpgt-app .cpgt-cinfo{display:flex; flex-direction:column; min-width:0;}
+#cpgt-app .cpgt-name{font-weight:650; font-size:1rem; color:var(--cpgt-ink);}
+#cpgt-app .cpgt-name mark{background:rgba(245,221,90,.55); color:inherit; padding:0 1px; border-radius:3px;}
+#cpgt-app .cpgt-depto{font-size:.8rem; color:var(--cpgt-muted); margin-top:2px;}
+#cpgt-app .cpgt-code{
+  flex:0 0 auto; display:flex; align-items:center; gap:7px;
+  font-family:"SFMono-Regular",ui-monospace,Menlo,Consolas,monospace;
+  font-size:1.1rem; font-weight:700; letter-spacing:.04em;
+  color:#fff; background:linear-gradient(135deg,var(--cpgt-accent),var(--cpgt-accent2));
+  border:0; border-radius:9px; padding:9px 13px; cursor:pointer;
+  transition:transform .12s, filter .15s; white-space:nowrap;
+}
+#cpgt-app .cpgt-code:hover{filter:brightness(1.07); transform:translateY(-1px);}
+#cpgt-app .cpgt-code:active{transform:translateY(0);}
+#cpgt-app .cpgt-code svg{width:15px; height:15px; fill:rgba(255,255,255,.85);}
+#cpgt-app .cpgt-code.cpgt-copied{background:linear-gradient(135deg,#138a52,#1fa862);}
+#cpgt-app .cpgt-code.cpgt-copied svg{display:none;}
+
+#cpgt-app .cpgt-empty{
+  padding:18px 16px; text-align:center; color:var(--cpgt-muted);
+  background:var(--cpgt-card); border:1px dashed var(--cpgt-line); border-radius:12px; font-size:.95rem;
+}
+
+@media (max-width:480px){
+  #cpgt-app .cpgt-title{font-size:1.25rem;}
+  #cpgt-app .cpgt-code{font-size:1rem; padding:8px 11px;}
+  #cpgt-app .cpgt-name{font-size:.94rem;}
+}
+@media (prefers-reduced-motion:reduce){
+  #cpgt-app .cpgt-card{animation:none;}
+  #cpgt-app .cpgt-code{transition:none;}
+}
+</style>
+
+<style>
+/* Estilo Guialocal.com.gt */
+#cpgt-app{
+  --cpgt-accent:#f9ce0b;
+  --cpgt-ink:#171717;
+  --cpgt-muted:#555555;
+  --cpgt-line:#e7e7e7;
+  --cpgt-soft:rgba(249,206,11,.14);
+  --cpgt-card:#ffffff;
+  color:var(--cpgt-ink);
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  font-weight:400;
+  line-height:1.5;
+  margin:34px 0;
+  max-width:100%;
+}
+
+#cpgt-app *,#cpgt-app *::before,#cpgt-app *::after{box-sizing:border-box;}
+
+#cpgt-app .cpgt-head{
+  border:1px solid var(--cpgt-line);
+  border-left:10px solid var(--cpgt-accent);
+  border-radius:10px 10px 0 0;
+  margin:0;
+  padding:clamp(22px,4vw,34px);
+  text-align:left;
+}
+
+#cpgt-app .cpgt-kicker{
+  align-items:center;
+  background:var(--cpgt-soft);
+  border-radius:999px;
+  color:var(--cpgt-ink);
+  display:inline-flex;
+  font-size:13px;
+  font-weight:850;
+  line-height:1;
+  margin:0 0 14px;
+  min-height:30px;
+  padding:0 12px;
+}
+
+#cpgt-app .cpgt-title{
+  color:var(--cpgt-ink);
+  font-size:clamp(30px,4.6vw,48px);
+  font-weight:900;
+  letter-spacing:0;
+  line-height:1.1;
+  margin:0;
+  max-width:920px;
+}
+
+#cpgt-app .cpgt-sub{
+  color:var(--cpgt-muted);
+  font-size:clamp(16px,2vw,19px);
+  line-height:1.7;
+  margin:14px 0 0;
+  max-width:880px;
+}
+
+#cpgt-app .cpgt-searchwrap{
+  align-items:center;
+  background:#fff;
+  backdrop-filter:none;
+  border:1px solid var(--cpgt-line);
+  border-radius:0;
+  border-top:0;
+  box-shadow:none;
+  display:flex;
+  margin:0;
+  padding:clamp(16px,3vw,24px);
+  position:relative;
+  transition:border-color .18s, box-shadow .18s;
+}
+
+#cpgt-app .cpgt-searchwrap:focus-within{
+  border-color:var(--cpgt-line);
+  box-shadow:inset 10px 0 0 var(--cpgt-accent);
+}
+
+#cpgt-app .cpgt-ico{
+  fill:var(--cpgt-ink);
+  flex:0 0 auto;
+  height:22px;
+  opacity:.72;
+  width:22px;
+}
+
+#cpgt-app #cpgt-input{
+  background:#fff;
+  border:1px solid var(--cpgt-line);
+  border-radius:8px;
+  color:var(--cpgt-ink);
+  flex:1;
+  font:inherit;
+  font-size:18px;
+  margin-left:12px;
+  min-height:58px;
+  min-width:0;
+  outline:0;
+  padding:0 44px 0 16px;
+}
+
+#cpgt-app #cpgt-input:focus{
+  border-color:var(--cpgt-accent);
+  box-shadow:0 0 0 4px rgba(249,206,11,.22);
+}
+
+#cpgt-app #cpgt-input::placeholder{color:#777;opacity:1;}
+
+#cpgt-app #cpgt-clear{
+  align-items:center;
+  background:transparent;
+  border:0;
+  border-radius:50%;
+  color:var(--cpgt-muted);
+  cursor:pointer;
+  display:inline-flex;
+  font-size:26px;
+  height:38px;
+  justify-content:center;
+  line-height:1;
+  padding:0;
+  position:absolute;
+  right:34px;
+  width:38px;
+}
+
+#cpgt-app #cpgt-clear:hover{background:var(--cpgt-soft);color:var(--cpgt-ink);}
+
+#cpgt-app .cpgt-chips{
+  border-left:1px solid var(--cpgt-line);
+  border-right:1px solid var(--cpgt-line);
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin:0;
+  padding:0 clamp(16px,3vw,24px) clamp(18px,3vw,24px);
+}
+
+#cpgt-app .cpgt-chip{
+  background:#fff;
+  border:1px solid var(--cpgt-line);
+  border-left:6px solid var(--cpgt-accent);
+  border-radius:8px;
+  color:var(--cpgt-ink);
+  cursor:pointer;
+  font-size:14px;
+  font-weight:800;
+  padding:10px 13px;
+  transition:background .16s,border-color .16s,transform .16s;
+  user-select:none;
+}
+
+#cpgt-app .cpgt-chip:hover{
+  background:var(--cpgt-accent);
+  border-color:var(--cpgt-accent);
+  transform:translateY(-1px);
+}
+
+#cpgt-app .cpgt-results{
+  border:1px solid var(--cpgt-line);
+  border-radius:0 0 10px 10px;
+  border-top:0;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin:0;
+  min-height:18px;
+  padding:0 clamp(16px,3vw,24px) clamp(20px,3vw,26px);
+}
+
+#cpgt-app .cpgt-card{
+  align-items:center;
+  animation:cpgt-in .18s ease both;
+  background:#fff;
+  backdrop-filter:none;
+  border:1px solid var(--cpgt-line);
+  border-left:8px solid var(--cpgt-accent);
+  border-radius:8px;
+  display:flex;
+  gap:14px;
+  justify-content:space-between;
+  padding:14px 14px 14px 16px;
+}
+
+#cpgt-app .cpgt-cinfo{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+
+#cpgt-app .cpgt-name{
+  color:var(--cpgt-ink);
+  font-size:17px;
+  font-weight:850;
+  line-height:1.3;
+}
+
+#cpgt-app .cpgt-name mark{
+  background:var(--cpgt-soft);
+  border-radius:4px;
+  color:inherit;
+  padding:0 2px;
+}
+
+#cpgt-app .cpgt-depto{
+  color:var(--cpgt-muted);
+  font-size:13px;
+  font-weight:650;
+  line-height:1.4;
+  margin-top:4px;
+}
+
+#cpgt-app .cpgt-code{
+  align-items:center;
+  background:var(--cpgt-accent);
+  border:1px solid #e2b900;
+  border-radius:8px;
+  color:var(--cpgt-ink);
+  cursor:pointer;
+  display:flex;
+  flex:0 0 auto;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:18px;
+  font-weight:900;
+  gap:8px;
+  letter-spacing:.04em;
+  min-height:48px;
+  padding:0 14px;
+  transition:transform .14s,filter .14s,background .14s;
+  white-space:nowrap;
+}
+
+#cpgt-app .cpgt-code:hover{filter:brightness(1.03);transform:translateY(-1px);}
+#cpgt-app .cpgt-code:active{transform:translateY(0);}
+#cpgt-app .cpgt-code svg{fill:currentColor;height:16px;width:16px;}
+#cpgt-app .cpgt-code.cpgt-copied{background:#171717;color:#fff;border-color:#171717;}
+
+#cpgt-app .cpgt-empty{
+  background:#fff;
+  border:1px dashed var(--cpgt-line);
+  border-left:8px solid var(--cpgt-accent);
+  border-radius:8px;
+  color:var(--cpgt-muted);
+  font-size:15px;
+  line-height:1.55;
+  padding:18px 16px;
+  text-align:left;
+}
+
+@media (max-width:640px){
+  #cpgt-app{margin:28px 0;}
+  #cpgt-app .cpgt-searchwrap{
+    display:grid;
+    grid-template-columns:22px minmax(0,1fr);
+    padding:18px;
+  }
+  #cpgt-app #cpgt-input{
+    font-size:16px;
+    margin-left:8px;
+    min-height:56px;
+    padding-right:42px;
+  }
+  #cpgt-app #cpgt-clear{right:26px;}
+  #cpgt-app .cpgt-card{
+    align-items:stretch;
+    flex-direction:column;
+  }
+  #cpgt-app .cpgt-code{
+    justify-content:center;
+    width:100%;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  #cpgt-app .cpgt-card{animation:none;}
+  #cpgt-app .cpgt-chip,
+  #cpgt-app .cpgt-code{transition:none;}
+}
+</style>

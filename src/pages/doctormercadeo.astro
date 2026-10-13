@@ -1,0 +1,1330 @@
+---
+const title = "Marketing medico y sistemas de captacion de pacientes | DoctorMercadeo";
+const description =
+  "Infraestructura digital para medicos y clinicas de Guatemala, El Salvador y Honduras: web medica, Google Ads, SEO local, WhatsApp automatizado y seguimiento de pacientes.";
+
+const benefits = [
+  "Responda cada consulta en minutos, no en horas.",
+  "Presencia digital que transmite confianza medica.",
+  "Agenda mas estable, menos dependencia de referidos."
+];
+
+const leaks = [
+  "WhatsApp respondido tres horas tarde, cuando el paciente ya escribio a otra clinica.",
+  "Consultas que llegan fuera de horario y nadie retoma al dia siguiente.",
+  "Secretaria saturada entre telefono, recepcion y mensajes.",
+  "Web lenta o desactualizada que no refleja la calidad de su consulta.",
+  "Personas que preguntan precio, dicen que lo pensaran y nunca reciben seguimiento.",
+  "Publicaciones con likes, pero una agenda irregular."
+];
+
+const comparison = [
+  ["Vende anuncios o publicaciones", "Instala el recorrido completo del paciente"],
+  ["Mide likes y alcance", "Mide consultas atendidas y citas"],
+  ["La respuesta depende de quien este disponible", "WhatsApp responde y filtra automaticamente"],
+  ["Sin seguimiento a interesados", "Seguimiento sistematico a cada consulta"],
+  ["Piezas sueltas", "Todo conectado: Google, web, WhatsApp, agenda"]
+];
+
+const steps = [
+  ["1", "El paciente lo encuentra", "Google, busquedas locales de su especialidad y DirectorioMedico.net."],
+  ["2", "Su web genera confianza", "Una web medica rapida y clara responde las preguntas antes de escribir."],
+  ["3", "WhatsApp responde y filtra", "Cada mensaje recibe respuesta inmediata y captura datos importantes."],
+  ["4", "Su equipo recibe conversaciones ordenadas", "La secretaria recibe contexto, clasificacion y conversaciones listas para agendar."],
+  ["5", "Las consultas se convierten en citas", "Quien no agenda de inmediato recibe seguimiento organizado."]
+];
+
+const solutions = [
+  ["Web medica de alta conversion", "Sitios rapidos, claros y disenados para que el visitante agende.", "Mas visitantes que se convierten en consultas reales."],
+  ["Google Ads y captacion", "Campanas enfocadas en personas que ya buscan su especialidad en su ciudad.", "Mas oportunidades de consulta con intencion real."],
+  ["SEO medico local", "Posicionamiento en busquedas de especialidad y zona, incluyendo perfil de Google.", "Pacientes que lo encuentran sin pagar por cada clic."],
+  ["Automatizacion de WhatsApp", "Con DMChamp, cada mensaje se responde, clasifica y llega ordenado a su equipo.", "Menos consultas perdidas por respuestas tardias."],
+  ["Asistente con inteligencia artificial", "Con ChatNode, un asistente entrenado resuelve preguntas iniciales.", "Su secretaria dedica mas tiempo a agendar."],
+  ["Reputacion y seguimiento", "Seguimiento a interesados, gestion de resenas y mejora del recorrido completo.", "Agenda mas estable y pacientes que recomiendan."]
+];
+
+const specialties = [
+  "Cirugia plastica",
+  "Dermatologia",
+  "Odontologia",
+  "Ginecologia",
+  "Oftalmologia",
+  "Psicologia",
+  "Fisioterapia",
+  "Centros medicos",
+  "Clinicas multidisciplinarias",
+  "Especialistas con consulta privada"
+];
+
+const notFit = [
+  "Busca solo publicaciones baratas para redes sociales.",
+  "Espera resultados instantaneos sin invertir en presencia digital.",
+  "No tiene disposicion de mejorar sus procesos de atencion.",
+  "Quiere delegar todo y desentenderse por completo."
+];
+
+const diagnosisItems = [
+  "Revision de su presencia digital actual.",
+  "Como aparece en Google frente a su competencia local.",
+  "Estado de su web: velocidad, claridad y capacidad de convertir.",
+  "Su WhatsApp: tiempos de respuesta y consultas que se enfrian.",
+  "Oportunidades concretas de captacion y automatizacion.",
+  "Recomendacion priorizada: que resolver primero y por que."
+];
+
+const faqs = [
+  ["Esto funciona para mi especialidad?", "El sistema se adapta a cualquier especialidad con consulta privada. Lo que cambia es la estrategia: no se capta igual un paciente de ortodoncia que uno de cirugia plastica. Por eso el proceso empieza con un diagnostico y no con un paquete generico."],
+  ["Necesito tener pagina web?", "No. Si no tiene web, la disenamos como parte del sistema. Si ya tiene una, la evaluamos: a veces se optimiza, a veces conviene rehacerla. El diagnostico se lo dira con claridad."],
+  ["Pueden trabajar con mi secretaria o equipo actual?", "Si, y es lo ideal. El sistema no reemplaza a su equipo: le quita carga. La automatizacion responde y ordena; su secretaria agenda y da el trato humano."],
+  ["Que pasa si todavia no invierto en anuncios?", "Puede empezar sin anuncios. Muchas clinicas primero necesitan arreglar la base: web, Google, WhatsApp y seguimiento. Invertir en anuncios antes de tener eso resuelto suele ser dinero desperdiciado."],
+  ["Necesito saber de marketing?", "No. Su trabajo es atender pacientes. El nuestro es que lleguen. Le explicamos cada decision en lenguaje claro y le mostramos resultados que pueda entender sin tecnicismos."],
+  ["Que incluye el diagnostico?", "Una revision de su presencia digital, su posicion en Google, el estado de su web, tiempos de respuesta en WhatsApp y una recomendacion priorizada de que resolver primero."],
+  ["Trabajan en Guatemala, El Salvador y Honduras?", "Si. Atendemos clinicas y medicos de los tres paises. Todo el proceso puede hacerse de forma remota, con reuniones virtuales y comunicacion por WhatsApp."]
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map(([question, answer]) => ({
+    "@type": "Question",
+    name: question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: answer
+    }
+  }))
+};
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  </head>
+  <body>
+    <header class="topbar" aria-label="DoctorMercadeo">
+      <a class="logo" href="#top" aria-label="DoctorMercadeo">
+        <img src="/images/doctormercadeo-logo-2024.png" alt="DoctorMercadeo" width="450" height="53" />
+      </a>
+      <a class="top-cta" href="#diagnostico">Solicitar diagnostico</a>
+    </header>
+
+    <main id="top">
+      <section class="hero section">
+        <div class="hero-copy">
+          <p class="eyebrow">Para medicos, clinicas y centros de salud privados de Guatemala, El Salvador y Honduras</p>
+          <h1>Deje de perder pacientes entre el primer mensaje y la cita.</h1>
+          <p class="lead">
+            DoctorMercadeo diseña e instala el sistema completo: web medica rapida, Google, WhatsApp automatizado y seguimiento.
+            Todo conectado para que cada persona interesada reciba respuesta a tiempo, entienda el siguiente paso y tenga mas razones para agendar.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="#diagnostico">Solicitar diagnostico de captacion</a>
+            <a class="button secondary" href="#como-funciona">Ver como funciona</a>
+          </div>
+          <p class="microcopy">Diagnostico inicial sin costo y sin compromiso. Respondemos en horario habil, normalmente el mismo dia.</p>
+        </div>
+
+        <div class="hero-system" aria-label="Sistema DoctorMercadeo conectado">
+          <div class="signal google">Google</div>
+          <div class="mock browser">
+            <span>clinica privada</span>
+            <strong>Agenda su evaluacion</strong>
+            <div class="browser-lines"></div>
+          </div>
+          <div class="mock chat">
+            <small>WhatsApp</small>
+            <p>Gracias por escribir. Para ayudarle mejor, ¿en que ciudad desea agendar?</p>
+          </div>
+          <div class="mock calendar">
+            <small>Calendario</small>
+            <strong>Cita preconfirmada</strong>
+            <span>Jueves 10:30</span>
+          </div>
+          <svg class="flow-lines" viewBox="0 0 560 420" aria-hidden="true">
+            <path d="M97 92 C160 45 220 47 281 95" />
+            <path d="M345 138 C423 154 466 209 477 279" />
+            <path d="M303 238 C244 306 185 330 114 309" />
+          </svg>
+        </div>
+      </section>
+
+      <section class="benefit-strip" aria-label="Beneficios rapidos">
+        {benefits.map((benefit) => (
+          <article>
+            <span class="check">✓</span>
+            <p>{benefit}</p>
+          </article>
+        ))}
+      </section>
+
+      <section class="section pain">
+        <div class="section-heading">
+          <h2>Su clinica pierde pacientes todos los dias. Y casi nunca se nota.</h2>
+          <p>El problema rara vez es la falta de interes. Es lo que pasa entre el momento en que alguien pregunta y el momento en que agenda.</p>
+        </div>
+        <div class="leak-grid">
+          {leaks.map((item) => (
+            <article class="leak">
+              <span></span>
+              <p>{item}</p>
+            </article>
+          ))}
+        </div>
+        <a class="soft-link" href="#diagnostico">Descubrir donde se fugan mis consultas</a>
+      </section>
+
+      <section class="section system">
+        <div class="section-heading narrow">
+          <h2>No necesita otra agencia. Necesita un sistema.</h2>
+          <p>
+            Contratar anuncios, una web y redes por separado es como tener recepcionista, doctor y laboratorio que nunca se hablan entre si.
+          </p>
+        </div>
+        <div class="comparison">
+          <div class="comparison-head muted">Agencia tradicional</div>
+          <div class="comparison-head highlighted">Sistema DoctorMercadeo</div>
+          {comparison.map(([oldWay, newWay]) => (
+            <>
+              <div>{oldWay}</div>
+              <div class="wins">{newWay}</div>
+            </>
+          ))}
+        </div>
+      </section>
+
+      <section class="section steps" id="como-funciona">
+        <div class="section-heading">
+          <h2>Asi funciona el sistema, paso a paso</h2>
+          <p>Cinco etapas conectadas. Cada una empuja a la persona interesada hacia la cita.</p>
+        </div>
+        <div class="timeline">
+          {steps.map(([number, heading, body]) => (
+            <article>
+              <span>{number}</span>
+              <h3>{heading}</h3>
+              <p>{body}</p>
+            </article>
+          ))}
+        </div>
+        <div class="center-action">
+          <a class="button primary" href="#diagnostico">Solicitar diagnostico de captacion</a>
+          <p>Le mostramos como se veria este flujo aplicado a su clinica.</p>
+        </div>
+      </section>
+
+      <section class="section solutions">
+        <div class="section-heading">
+          <h2>Las piezas del sistema</h2>
+          <p>Cada solucion funciona bien por separado. Conectadas, cambian la operacion de su clinica.</p>
+        </div>
+        <div class="solution-grid">
+          {solutions.map(([heading, body, result]) => (
+            <article>
+              <span class="solution-icon"></span>
+              <h3>{heading}</h3>
+              <p>{body}</p>
+              <strong>Resultado: {result}</strong>
+            </article>
+          ))}
+        </div>
+        <p class="micro-note">No necesita contratar todo. El diagnostico define que piezas le hacen falta y en que orden.</p>
+      </section>
+
+      <section class="section ecosystem">
+        <div class="ecosystem-copy">
+          <h2>No vendemos herramientas aisladas. Conectamos todo el recorrido del paciente.</h2>
+          <p>
+            Desde la primera busqueda en Google hasta la reseña despues de la consulta. Usted no tiene que entender la parte tecnica:
+            ese es nuestro trabajo.
+          </p>
+        </div>
+        <div class="ecosystem-map" aria-label="Ecosistema DoctorMercadeo">
+          <div class="core">Clinica</div>
+          <span>Google</span>
+          <span>SEO local</span>
+          <span>DirectorioMedico.net</span>
+          <span>TarjetaMedica.org</span>
+          <span>Web medica</span>
+          <span>DMChamp</span>
+          <span>ChatNode</span>
+          <span>Seguimiento</span>
+        </div>
+      </section>
+
+      <section class="section patient">
+        <div>
+          <h2>El paciente decide antes de llegar a su consultorio.</h2>
+          <p>
+            Usted cuida cada detalle dentro del consultorio: el diagnostico, el trato, la explicacion clara.
+            Pero el paciente empezo a formarse una opinion mucho antes de entrar.
+          </p>
+          <p>
+            Una buena experiencia del paciente es velocidad de respuesta, claridad, trato humano y seguimiento.
+            Nuestro sistema no reemplaza el trato de su equipo: le quita carga operativa para que ese trato sea posible en cada conversacion.
+          </p>
+        </div>
+        <blockquote>La primera impresion ya no ocurre en la sala de espera.</blockquote>
+      </section>
+
+      <section class="section fit">
+        <div class="section-heading">
+          <h2>Diseñado para clinicas que dependen de su agenda privada</h2>
+          <p>Si su consulta vive de pacientes privados, este sistema es para usted.</p>
+        </div>
+        <div class="specialties">
+          {specialties.map((specialty) => <span>{specialty}</span>)}
+        </div>
+        <div class="not-fit">
+          <h3>No es para usted si...</h3>
+          <ul>
+            {notFit.map((item) => <li>{item}</li>)}
+          </ul>
+          <p>Si ese es el caso, hay opciones mas economicas en el mercado y se lo diremos con gusto.</p>
+        </div>
+      </section>
+
+      <section class="credibility">
+        <div>
+          <strong>DirectorioMedico.net</strong>
+          <span>Descubrimiento y autoridad profesional medica</span>
+        </div>
+        <div>
+          <strong>TarjetaMedica.org</strong>
+          <span>Identidad digital profesional: QR, enlaces y presencia unificada</span>
+        </div>
+        <div>
+          <strong>Centroamerica</strong>
+          <span>Experiencia en salud, SEO, web y presencia profesional medica</span>
+        </div>
+      </section>
+
+      <section class="diagnosis" id="diagnostico">
+        <div class="diagnosis-copy">
+          <h2>Descubra donde se estan perdiendo sus consultas.</h2>
+          <p>Solicite un diagnostico de captacion para su clinica. Sin costo y sin compromiso.</p>
+          <ul>
+            {diagnosisItems.map((item) => <li>{item}</li>)}
+          </ul>
+          <p class="honest">No es una llamada de ventas disfrazada. Es una radiografia honesta. Si podemos ayudarle, se lo decimos. Si no, tambien.</p>
+        </div>
+        <div class="form-card">
+          <div class="form-header">
+            <span>Diagnostico de captacion</span>
+            <h3>Solicitar mi diagnostico</h3>
+          </div>
+
+          <!-- Pegue aqui el script o iframe oficial de AidaForm. El contenedor mantiene el diseno y espacio del embed. -->
+          <div class="aidaform-embed" data-aidaform-embed>
+            <form>
+              <label>
+                Nombre completo
+                <input type="text" name="nombre" autocomplete="name" />
+              </label>
+              <label>
+                Especialidad o tipo de clinica
+                <input type="text" name="especialidad" />
+              </label>
+              <label>
+                Ciudad y pais
+                <select name="pais">
+                  <option>Guatemala</option>
+                  <option>El Salvador</option>
+                  <option>Honduras</option>
+                </select>
+              </label>
+              <label>
+                WhatsApp
+                <input type="tel" name="whatsapp" autocomplete="tel" />
+                <small>Le escribiremos por este medio para coordinar.</small>
+              </label>
+              <label>
+                Principal reto para conseguir pacientes
+                <textarea name="reto" rows="3"></textarea>
+              </label>
+              <label>
+                Actualmente invierte en publicidad digital?
+                <select name="inversion">
+                  <option>No</option>
+                  <option>Menos de USD 300 al mes</option>
+                  <option>USD 300 a USD 1,000</option>
+                  <option>Mas de USD 1,000</option>
+                </select>
+                <small>Nos ayuda a preparar recomendaciones realistas para su etapa actual.</small>
+              </label>
+              <button type="button">Solicitar mi diagnostico</button>
+              <p>Sus datos estan seguros. Solo los usamos para preparar su diagnostico y contactarle por WhatsApp o correo.</p>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="section faq">
+        <div class="section-heading narrow">
+          <h2>Preguntas frecuentes</h2>
+        </div>
+        <div class="faq-list">
+          {faqs.map(([question, answer], index) => (
+            <details open={index === 0}>
+              <summary>{question}</summary>
+              <p>{answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <section class="final-cta">
+        <h2>Su clinica no deberia perder pacientes por responder tarde o depender solo de referidos.</h2>
+        <p>Descubra que le falta a su sistema de captacion. Nosotros le decimos si existe una oportunidad real para trabajar juntos.</p>
+        <a class="button light" href="#diagnostico">Solicitar diagnostico de captacion</a>
+        <span>Cuentenos su especialidad, ciudad y principal reto. Le diremos con honestidad si podemos ayudarle.</span>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>
+        <strong>DoctorMercadeo</strong>
+        <p>Infraestructura digital para atraer, atender y convertir pacientes.</p>
+      </div>
+      <p>Guatemala · El Salvador · Honduras</p>
+      <p>DirectorioMedico.net · TarjetaMedica.org</p>
+      <p>© 2026 DoctorMercadeo. Todos los derechos reservados.</p>
+    </footer>
+
+    <a class="mobile-sticky" href="#diagnostico">Diagnostico sin costo</a>
+  </body>
+</html>
+
+<style>
+  :root {
+    --dm-dark: #00536a;
+    --dm-green: #1e867c;
+    --dm-mint: #d9f2ea;
+    --dm-mint-soft: #effbf7;
+    --dm-ink: #062b35;
+    --dm-muted: #557078;
+    --dm-border: rgba(0, 83, 106, 0.14);
+    --dm-shadow: 0 24px 70px rgba(0, 54, 68, 0.16);
+    --dm-soft-shadow: 0 14px 36px rgba(0, 54, 68, 0.1);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    color: var(--dm-ink);
+    background: #ffffff;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  .topbar {
+    align-items: center;
+    background: rgba(0, 83, 106, 0.94);
+    backdrop-filter: blur(16px);
+    display: flex;
+    justify-content: space-between;
+    min-height: 76px;
+    padding: 16px clamp(18px, 5vw, 72px);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+
+  .logo {
+    display: inline-flex;
+    width: min(240px, 56vw);
+  }
+
+  .logo img {
+    display: block;
+    height: auto;
+    width: 100%;
+  }
+
+  .top-cta,
+  .button,
+  .form-card button,
+  .mobile-sticky {
+    align-items: center;
+    border-radius: 8px;
+    display: inline-flex;
+    font-size: 14px;
+    font-weight: 800;
+    justify-content: center;
+    letter-spacing: 0;
+    min-height: 46px;
+    padding: 0 20px;
+    text-decoration: none;
+  }
+
+  .top-cta {
+    background: #ffffff;
+    color: var(--dm-dark);
+  }
+
+  .section {
+    padding: clamp(74px, 9vw, 122px) clamp(20px, 5vw, 76px);
+  }
+
+  .hero {
+    align-items: center;
+    background:
+      linear-gradient(115deg, rgba(217, 242, 234, 0.86), rgba(255, 255, 255, 0.92) 45%, rgba(30, 134, 124, 0.1)),
+      #ffffff;
+    display: grid;
+    gap: clamp(34px, 6vw, 86px);
+    grid-template-columns: minmax(0, 1.04fr) minmax(360px, 0.96fr);
+    min-height: calc(100vh - 76px);
+    overflow: hidden;
+    padding-top: clamp(54px, 7vw, 88px);
+  }
+
+  .eyebrow {
+    color: var(--dm-green);
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1.4;
+    margin: 0 0 20px;
+    max-width: 620px;
+  }
+
+  h1,
+  h2,
+  h3,
+  p {
+    margin-top: 0;
+  }
+
+  h1 {
+    color: var(--dm-dark);
+    font-size: clamp(48px, 7vw, 92px);
+    letter-spacing: 0;
+    line-height: 0.96;
+    margin-bottom: 26px;
+    max-width: 880px;
+  }
+
+  h2 {
+    color: var(--dm-dark);
+    font-size: clamp(34px, 4.6vw, 62px);
+    letter-spacing: 0;
+    line-height: 1.02;
+    margin-bottom: 18px;
+  }
+
+  h3 {
+    color: var(--dm-dark);
+    font-size: 22px;
+    line-height: 1.16;
+    margin-bottom: 12px;
+  }
+
+  .lead,
+  .section-heading p,
+  .ecosystem-copy p,
+  .patient p,
+  .diagnosis-copy > p,
+  .final-cta p {
+    color: var(--dm-muted);
+    font-size: clamp(17px, 1.55vw, 21px);
+    line-height: 1.62;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 30px 0 14px;
+  }
+
+  .button.primary {
+    background: var(--dm-green);
+    color: #ffffff;
+    box-shadow: 0 16px 34px rgba(30, 134, 124, 0.26);
+  }
+
+  .button.secondary {
+    border: 1px solid var(--dm-border);
+    color: var(--dm-dark);
+  }
+
+  .button.light {
+    background: #ffffff;
+    color: var(--dm-dark);
+    min-height: 54px;
+    padding-inline: 26px;
+  }
+
+  .microcopy,
+  .micro-note {
+    color: #668087;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .hero-system {
+    aspect-ratio: 1.05;
+    background:
+      linear-gradient(145deg, rgba(0, 83, 106, 0.97), rgba(30, 134, 124, 0.92)),
+      var(--dm-dark);
+    border-radius: 8px;
+    box-shadow: var(--dm-shadow);
+    min-height: 460px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hero-system::before {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+    background-size: 42px 42px;
+    content: "";
+    inset: 0;
+    position: absolute;
+  }
+
+  .mock,
+  .signal {
+    background: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 8px;
+    box-shadow: 0 18px 44px rgba(0, 22, 28, 0.2);
+    position: absolute;
+    z-index: 2;
+  }
+
+  .signal {
+    color: var(--dm-dark);
+    font-weight: 900;
+    left: 9%;
+    padding: 12px 18px;
+    top: 11%;
+  }
+
+  .browser {
+    left: 22%;
+    padding: 22px;
+    top: 16%;
+    width: 56%;
+  }
+
+  .browser span,
+  .mock small,
+  .form-header span {
+    color: var(--dm-green);
+    display: block;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    margin-bottom: 9px;
+    text-transform: uppercase;
+  }
+
+  .browser strong,
+  .calendar strong {
+    color: var(--dm-dark);
+    display: block;
+    font-size: 26px;
+    line-height: 1.05;
+  }
+
+  .browser-lines {
+    background:
+      linear-gradient(var(--dm-mint), var(--dm-mint)) 0 0 / 84% 9px no-repeat,
+      linear-gradient(var(--dm-mint), var(--dm-mint)) 0 24px / 64% 9px no-repeat,
+      linear-gradient(var(--dm-mint), var(--dm-mint)) 0 48px / 74% 9px no-repeat;
+    height: 58px;
+    margin-top: 22px;
+  }
+
+  .chat {
+    bottom: 23%;
+    left: 8%;
+    padding: 18px;
+    width: 44%;
+  }
+
+  .chat p {
+    color: var(--dm-ink);
+    font-size: 15px;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  .calendar {
+    bottom: 12%;
+    padding: 20px;
+    right: 8%;
+    width: 40%;
+  }
+
+  .calendar span {
+    color: var(--dm-muted);
+    display: block;
+    font-size: 15px;
+    margin-top: 12px;
+  }
+
+  .flow-lines {
+    inset: 0;
+    position: absolute;
+  }
+
+  .flow-lines path {
+    fill: none;
+    stroke: rgba(217, 242, 234, 0.62);
+    stroke-dasharray: 8 8;
+    stroke-linecap: round;
+    stroke-width: 3;
+  }
+
+  .benefit-strip {
+    background: var(--dm-dark);
+    color: #ffffff;
+    display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .benefit-strip article {
+    align-items: center;
+    background: rgba(255, 255, 255, 0.06);
+    display: flex;
+    gap: 14px;
+    min-height: 108px;
+    padding: 24px clamp(20px, 4vw, 46px);
+  }
+
+  .benefit-strip p {
+    font-size: 17px;
+    font-weight: 750;
+    line-height: 1.35;
+    margin: 0;
+  }
+
+  .check {
+    background: var(--dm-green);
+    border-radius: 8px;
+    display: grid;
+    flex: 0 0 34px;
+    height: 34px;
+    place-items: center;
+  }
+
+  .section-heading {
+    margin: 0 auto 42px;
+    max-width: 980px;
+    text-align: center;
+  }
+
+  .section-heading.narrow {
+    max-width: 800px;
+  }
+
+  .pain {
+    background: var(--dm-mint-soft);
+  }
+
+  .leak-grid,
+  .solution-grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .leak,
+  .solution-grid article,
+  .timeline article,
+  .not-fit,
+  .faq-list details {
+    background: #ffffff;
+    border: 1px solid var(--dm-border);
+    border-radius: 8px;
+    box-shadow: var(--dm-soft-shadow);
+  }
+
+  .leak {
+    min-height: 150px;
+    padding: 24px;
+  }
+
+  .leak span,
+  .solution-icon {
+    background: linear-gradient(135deg, var(--dm-dark), var(--dm-green));
+    border-radius: 8px;
+    display: block;
+    height: 36px;
+    margin-bottom: 18px;
+    width: 36px;
+  }
+
+  .leak p,
+  .solution-grid p,
+  .timeline p,
+  .not-fit li,
+  .faq-list p {
+    color: var(--dm-muted);
+    font-size: 16px;
+    line-height: 1.55;
+    margin-bottom: 0;
+  }
+
+  .soft-link {
+    color: var(--dm-dark);
+    display: table;
+    font-weight: 850;
+    margin: 30px auto 0;
+    text-decoration: none;
+  }
+
+  .comparison {
+    border: 1px solid var(--dm-border);
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0 auto;
+    max-width: 980px;
+    overflow: hidden;
+  }
+
+  .comparison > div {
+    border-bottom: 1px solid var(--dm-border);
+    color: var(--dm-muted);
+    font-size: 16px;
+    line-height: 1.45;
+    padding: 20px 24px;
+  }
+
+  .comparison > div:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+
+  .comparison-head {
+    color: var(--dm-dark) !important;
+    font-weight: 900;
+  }
+
+  .comparison-head.highlighted,
+  .wins {
+    background: var(--dm-mint-soft);
+  }
+
+  .wins {
+    color: var(--dm-ink) !important;
+    font-weight: 760;
+  }
+
+  .steps {
+    background: linear-gradient(180deg, #ffffff, var(--dm-mint-soft));
+  }
+
+  .timeline {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .timeline article {
+    padding: 24px;
+    position: relative;
+  }
+
+  .timeline span {
+    background: var(--dm-dark);
+    border-radius: 8px;
+    color: #ffffff;
+    display: grid;
+    font-weight: 900;
+    height: 38px;
+    margin-bottom: 22px;
+    place-items: center;
+    width: 38px;
+  }
+
+  .timeline h3 {
+    font-size: 19px;
+  }
+
+  .center-action {
+    margin-top: 34px;
+    text-align: center;
+  }
+
+  .center-action p {
+    color: var(--dm-muted);
+    margin: 14px 0 0;
+  }
+
+  .solution-grid article {
+    padding: 28px;
+  }
+
+  .solution-grid strong {
+    color: var(--dm-green);
+    display: block;
+    font-size: 15px;
+    line-height: 1.45;
+    margin-top: 16px;
+  }
+
+  .micro-note {
+    margin: 28px auto 0;
+    max-width: 620px;
+    text-align: center;
+  }
+
+  .ecosystem {
+    align-items: center;
+    background: var(--dm-dark);
+    color: #ffffff;
+    display: grid;
+    gap: clamp(36px, 6vw, 88px);
+    grid-template-columns: 0.86fr 1.14fr;
+  }
+
+  .ecosystem h2,
+  .final-cta h2,
+  .diagnosis h2 {
+    color: #ffffff;
+  }
+
+  .ecosystem-copy p {
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .ecosystem-map {
+    aspect-ratio: 1.25;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 8px;
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(4, 1fr);
+    padding: clamp(18px, 3vw, 34px);
+    position: relative;
+  }
+
+  .ecosystem-map::before {
+    border: 1px dashed rgba(255, 255, 255, 0.24);
+    border-radius: 999px;
+    content: "";
+    inset: 18%;
+    position: absolute;
+  }
+
+  .ecosystem-map span,
+  .core {
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 8px;
+    display: flex;
+    font-size: 14px;
+    font-weight: 800;
+    justify-content: center;
+    min-height: 58px;
+    padding: 10px;
+    text-align: center;
+    z-index: 1;
+  }
+
+  .core {
+    background: #ffffff;
+    color: var(--dm-dark);
+    grid-column: 2 / 4;
+    grid-row: 2 / 4;
+    min-height: 132px;
+  }
+
+  .patient {
+    align-items: center;
+    display: grid;
+    gap: clamp(30px, 6vw, 88px);
+    grid-template-columns: 1fr 0.8fr;
+  }
+
+  .patient blockquote {
+    border-left: 6px solid var(--dm-green);
+    color: var(--dm-dark);
+    font-size: clamp(32px, 4.8vw, 64px);
+    font-weight: 850;
+    line-height: 1.04;
+    margin: 0;
+    padding-left: 28px;
+  }
+
+  .fit {
+    background: var(--dm-mint-soft);
+  }
+
+  .specialties {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 0 auto 32px;
+    max-width: 1000px;
+  }
+
+  .specialties span {
+    background: #ffffff;
+    border: 1px solid var(--dm-border);
+    border-radius: 8px;
+    color: var(--dm-dark);
+    font-weight: 800;
+    padding: 12px 16px;
+  }
+
+  .not-fit {
+    margin: 0 auto;
+    max-width: 760px;
+    padding: 30px;
+  }
+
+  .not-fit ul {
+    display: grid;
+    gap: 10px;
+    margin: 18px 0;
+    padding-left: 22px;
+  }
+
+  .not-fit p {
+    color: var(--dm-muted);
+    margin-bottom: 0;
+  }
+
+  .credibility {
+    background: #ffffff;
+    border-block: 1px solid var(--dm-border);
+    display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .credibility div {
+    padding: clamp(26px, 4vw, 48px);
+  }
+
+  .credibility strong {
+    color: var(--dm-dark);
+    display: block;
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+
+  .credibility span {
+    color: var(--dm-muted);
+    line-height: 1.5;
+  }
+
+  .diagnosis {
+    background:
+      linear-gradient(135deg, rgba(0, 83, 106, 0.96), rgba(30, 134, 124, 0.96)),
+      var(--dm-dark);
+    display: grid;
+    gap: clamp(34px, 6vw, 78px);
+    grid-template-columns: minmax(0, 0.9fr) minmax(360px, 0.76fr);
+    padding: clamp(76px, 9vw, 126px) clamp(20px, 5vw, 76px);
+  }
+
+  .diagnosis-copy p,
+  .diagnosis-copy li {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 17px;
+    line-height: 1.58;
+  }
+
+  .diagnosis-copy ul {
+    display: grid;
+    gap: 12px;
+    margin: 26px 0;
+    padding-left: 22px;
+  }
+
+  .honest {
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    padding-top: 22px;
+  }
+
+  .form-card {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: var(--dm-shadow);
+    padding: clamp(24px, 4vw, 36px);
+  }
+
+  .form-header h3 {
+    font-size: 28px;
+    margin-bottom: 22px;
+  }
+
+  form,
+  label {
+    display: grid;
+  }
+
+  form {
+    gap: 14px;
+  }
+
+  label {
+    color: var(--dm-dark);
+    font-size: 14px;
+    font-weight: 850;
+    gap: 7px;
+  }
+
+  input,
+  select,
+  textarea {
+    background: #f7fbfa;
+    border: 1px solid var(--dm-border);
+    border-radius: 8px;
+    color: var(--dm-ink);
+    font: inherit;
+    min-height: 46px;
+    padding: 11px 12px;
+    width: 100%;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  label small,
+  form p {
+    color: var(--dm-muted);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.45;
+  }
+
+  .form-card button {
+    background: var(--dm-green);
+    border: 0;
+    color: #ffffff;
+    cursor: pointer;
+    margin-top: 4px;
+    width: 100%;
+  }
+
+  form p {
+    margin-bottom: 0;
+    text-align: center;
+  }
+
+  .faq-list {
+    display: grid;
+    gap: 12px;
+    margin: 0 auto;
+    max-width: 900px;
+  }
+
+  .faq-list details {
+    padding: 22px 24px;
+  }
+
+  .faq-list summary {
+    color: var(--dm-dark);
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 850;
+  }
+
+  .faq-list p {
+    margin-top: 14px;
+  }
+
+  .final-cta {
+    background: var(--dm-dark);
+    color: #ffffff;
+    padding: clamp(82px, 10vw, 144px) clamp(20px, 5vw, 76px);
+    text-align: center;
+  }
+
+  .final-cta h2 {
+    font-size: clamp(40px, 6.6vw, 86px);
+    margin-inline: auto;
+    max-width: 1120px;
+  }
+
+  .final-cta p {
+    color: rgba(255, 255, 255, 0.78);
+    margin: 0 auto 28px;
+    max-width: 760px;
+  }
+
+  .final-cta span {
+    color: rgba(255, 255, 255, 0.72);
+    display: block;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 18px auto 0;
+    max-width: 560px;
+  }
+
+  .footer {
+    align-items: center;
+    background: #032f3c;
+    color: rgba(255, 255, 255, 0.72);
+    display: grid;
+    gap: 18px;
+    grid-template-columns: 1.4fr 0.8fr 0.8fr 0.8fr;
+    padding: 30px clamp(20px, 5vw, 76px);
+  }
+
+  .footer strong {
+    color: #ffffff;
+  }
+
+  .footer p {
+    font-size: 13px;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  .mobile-sticky {
+    background: var(--dm-green);
+    bottom: 12px;
+    box-shadow: 0 14px 32px rgba(0, 54, 68, 0.22);
+    color: #ffffff;
+    display: none;
+    left: 12px;
+    min-height: 52px;
+    position: fixed;
+    right: 12px;
+    z-index: 30;
+  }
+
+  @media (max-width: 1050px) {
+    .hero,
+    .ecosystem,
+    .patient,
+    .diagnosis {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-system {
+      min-height: 520px;
+    }
+
+    .timeline,
+    .leak-grid,
+    .solution-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .credibility,
+    .footer {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .topbar {
+      min-height: 68px;
+      padding: 14px 16px;
+    }
+
+    .top-cta {
+      font-size: 12px;
+      min-height: 40px;
+      padding-inline: 12px;
+    }
+
+    .hero {
+      min-height: auto;
+      padding-top: 42px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 13vw, 58px);
+    }
+
+    h2 {
+      font-size: clamp(32px, 10vw, 44px);
+    }
+
+    .actions,
+    .button {
+      width: 100%;
+    }
+
+    .hero-system {
+      aspect-ratio: auto;
+      min-height: 430px;
+    }
+
+    .browser {
+      left: 8%;
+      top: 14%;
+      width: 76%;
+    }
+
+    .chat {
+      bottom: 25%;
+      width: 64%;
+    }
+
+    .calendar {
+      bottom: 9%;
+      right: 6%;
+      width: 58%;
+    }
+
+    .benefit-strip,
+    .timeline,
+    .leak-grid,
+    .solution-grid,
+    .comparison {
+      grid-template-columns: 1fr;
+    }
+
+    .comparison > div {
+      border-bottom: 1px solid var(--dm-border) !important;
+    }
+
+    .comparison > div:last-child {
+      border-bottom: 0 !important;
+    }
+
+    .ecosystem-map {
+      aspect-ratio: auto;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .core {
+      grid-column: 1 / 3;
+      grid-row: auto;
+      min-height: 88px;
+    }
+
+    .patient blockquote {
+      font-size: 34px;
+    }
+
+    .diagnosis {
+      padding-bottom: 96px;
+    }
+
+    .mobile-sticky {
+      display: inline-flex;
+    }
+  }
+</style>

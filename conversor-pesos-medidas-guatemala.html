@@ -1,0 +1,606 @@
+<meta charset="UTF-8">
+<!-- Conversor de pesos y medidas Guatemala - GUIALOCAL.COM.GT -->
+<div id="pmgt-app" lang="es-GT">
+  <style>
+    #pmgt-app{
+      --pmgt-accent:#f9ce0b;
+      --pmgt-ink:#171717;
+      --pmgt-muted:#555555;
+      --pmgt-line:#e7e7e7;
+      --pmgt-soft:rgba(249,206,11,.14);
+      --pmgt-card:#ffffff;
+      color:var(--pmgt-ink);
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+      font-weight:400;
+      line-height:1.5;
+      margin:34px 0;
+      max-width:100%;
+    }
+
+    #pmgt-app *,#pmgt-app *::before,#pmgt-app *::after{box-sizing:border-box;}
+
+    #pmgt-app .pmgt-shell{
+      background:#fff;
+      border:1px solid var(--pmgt-line);
+      border-radius:10px;
+      overflow:hidden;
+    }
+
+    #pmgt-app .pmgt-head{
+      border-left:10px solid var(--pmgt-accent);
+      padding:clamp(22px,4vw,34px);
+    }
+
+    #pmgt-app .pmgt-kicker{
+      align-items:center;
+      background:var(--pmgt-soft);
+      border-radius:999px;
+      color:var(--pmgt-ink);
+      display:inline-flex;
+      font-size:13px;
+      font-weight:850;
+      line-height:1;
+      margin:0 0 14px;
+      min-height:30px;
+      padding:0 12px;
+    }
+
+    #pmgt-app h2,#pmgt-app h3,#pmgt-app p{margin:0;}
+
+    #pmgt-app h2{
+      color:var(--pmgt-ink);
+      font-size:clamp(30px,4.6vw,48px);
+      font-weight:900;
+      letter-spacing:0;
+      line-height:1.1;
+      max-width:980px;
+    }
+
+    #pmgt-app .pmgt-sub{
+      color:var(--pmgt-muted);
+      font-size:clamp(16px,2vw,19px);
+      line-height:1.7;
+      margin-top:14px;
+      max-width:980px;
+    }
+
+    #pmgt-app .pmgt-controls{
+      border-top:1px solid var(--pmgt-line);
+      display:grid;
+      gap:18px;
+      padding:clamp(18px,3vw,26px);
+    }
+
+    #pmgt-app .pmgt-grid{
+      display:grid;
+      gap:14px;
+      grid-template-columns:1.1fr .9fr .9fr .9fr;
+      align-items:end;
+    }
+
+    #pmgt-app label{
+      color:var(--pmgt-ink);
+      display:block;
+      font-size:14px;
+      font-weight:850;
+      margin-bottom:8px;
+    }
+
+    #pmgt-app input,#pmgt-app select{
+      appearance:none;
+      background:#fff;
+      border:1px solid var(--pmgt-line);
+      border-radius:8px;
+      color:var(--pmgt-ink);
+      font:inherit;
+      font-size:16px;
+      min-height:58px;
+      outline:0;
+      padding:0 14px;
+      width:100%;
+    }
+
+    #pmgt-app select{
+      background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);
+      background-position:calc(100% - 18px) 25px,calc(100% - 12px) 25px;
+      background-repeat:no-repeat;
+      background-size:6px 6px,6px 6px;
+      padding-right:38px;
+    }
+
+    #pmgt-app input{
+      font-size:20px;
+      font-weight:800;
+      letter-spacing:.01em;
+    }
+
+    #pmgt-app input:focus,#pmgt-app select:focus{
+      border-color:var(--pmgt-accent);
+      box-shadow:0 0 0 4px rgba(249,206,11,.22);
+    }
+
+    #pmgt-app .pmgt-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    #pmgt-app button{
+      align-items:center;
+      border:1px solid transparent;
+      border-radius:8px;
+      cursor:pointer;
+      display:inline-flex;
+      font:inherit;
+      font-size:16px;
+      font-weight:850;
+      gap:8px;
+      justify-content:center;
+      min-height:52px;
+      padding:0 18px;
+      transition:background .16s,border-color .16s,transform .16s;
+    }
+
+    #pmgt-app button:hover{transform:translateY(-1px);}
+    #pmgt-app button:active{transform:translateY(0);}
+
+    #pmgt-app .pmgt-primary{
+      background:var(--pmgt-accent);
+      border-color:#e2b900;
+      color:var(--pmgt-ink);
+    }
+
+    #pmgt-app .pmgt-secondary{
+      background:#fff;
+      border-color:var(--pmgt-line);
+      color:var(--pmgt-ink);
+    }
+
+    #pmgt-app .pmgt-result{
+      border-top:1px solid var(--pmgt-line);
+      display:grid;
+      gap:18px;
+      padding:clamp(18px,3vw,26px);
+    }
+
+    #pmgt-app .pmgt-result-card{
+      border:1px solid var(--pmgt-line);
+      border-left:10px solid var(--pmgt-accent);
+      border-radius:10px;
+      display:grid;
+      gap:16px;
+      padding:clamp(18px,3vw,26px);
+    }
+
+    #pmgt-app .pmgt-result-label{
+      color:var(--pmgt-muted);
+      font-size:14px;
+      font-weight:800;
+      line-height:1.35;
+    }
+
+    #pmgt-app .pmgt-main-result{
+      color:var(--pmgt-ink);
+      font-size:clamp(30px,5vw,56px);
+      font-weight:950;
+      letter-spacing:0;
+      line-height:1.05;
+      overflow-wrap:anywhere;
+    }
+
+    #pmgt-app .pmgt-explain{
+      color:var(--pmgt-muted);
+      font-size:16px;
+      line-height:1.7;
+      max-width:980px;
+    }
+
+    #pmgt-app .pmgt-quick-title{
+      color:var(--pmgt-ink);
+      font-size:18px;
+      font-weight:900;
+      margin:6px 0 0;
+    }
+
+    #pmgt-app .pmgt-quick-grid{
+      display:grid;
+      gap:10px;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+    }
+
+    #pmgt-app .pmgt-quick{
+      background:#fff;
+      border:1px solid var(--pmgt-line);
+      border-left:7px solid var(--pmgt-accent);
+      border-radius:8px;
+      display:grid;
+      gap:5px;
+      padding:12px 13px;
+    }
+
+    #pmgt-app .pmgt-quick strong{
+      color:var(--pmgt-ink);
+      font-size:18px;
+      font-weight:900;
+      line-height:1.25;
+    }
+
+    #pmgt-app .pmgt-quick span{
+      color:var(--pmgt-muted);
+      font-size:13px;
+      font-weight:700;
+      line-height:1.35;
+    }
+
+    #pmgt-app .pmgt-notes{
+      display:grid;
+      gap:8px;
+    }
+
+    #pmgt-app .pmgt-note{
+      background:var(--pmgt-soft);
+      border:1px solid rgba(249,206,11,.5);
+      border-radius:8px;
+      color:var(--pmgt-ink);
+      font-size:14px;
+      line-height:1.55;
+      padding:11px 13px;
+    }
+
+    #pmgt-app .pmgt-error{
+      color:#b00020;
+      display:none;
+      font-size:14px;
+      font-weight:750;
+      line-height:1.5;
+    }
+
+    #pmgt-app details{
+      border-top:1px solid var(--pmgt-line);
+      padding:18px clamp(18px,3vw,26px) clamp(20px,3vw,26px);
+    }
+
+    #pmgt-app summary{
+      cursor:pointer;
+      font-size:18px;
+      font-weight:900;
+      list-style:none;
+    }
+
+    #pmgt-app summary::-webkit-details-marker{display:none;}
+
+    #pmgt-app .pmgt-unit-list{
+      display:grid;
+      gap:8px;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      margin-top:14px;
+    }
+
+    #pmgt-app .pmgt-unit-item{
+      border:1px solid var(--pmgt-line);
+      border-radius:8px;
+      color:var(--pmgt-muted);
+      font-size:13px;
+      line-height:1.45;
+      padding:10px 12px;
+    }
+
+    #pmgt-app .pmgt-unit-item strong{
+      color:var(--pmgt-ink);
+      display:block;
+      font-size:14px;
+      margin-bottom:3px;
+    }
+
+    #pmgt-app .pmgt-pulse{animation:pmgt-pulse .22s ease both;}
+    @keyframes pmgt-pulse{from{opacity:.65;transform:translateY(3px);}to{opacity:1;transform:none;}}
+
+    @media (max-width:900px){
+      #pmgt-app .pmgt-grid{grid-template-columns:1fr 1fr;}
+      #pmgt-app .pmgt-quick-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+    }
+
+    @media (max-width:640px){
+      #pmgt-app{margin:28px 0;}
+      #pmgt-app .pmgt-grid,
+      #pmgt-app .pmgt-quick-grid,
+      #pmgt-app .pmgt-unit-list{grid-template-columns:1fr;}
+      #pmgt-app .pmgt-actions button{width:100%;}
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      #pmgt-app button{transition:none;}
+      #pmgt-app .pmgt-pulse{animation:none;}
+    }
+  </style>
+
+  <div class="pmgt-shell">
+    <div class="pmgt-head">
+      <span class="pmgt-kicker">Guialocal Guatemala</span>
+      <h2>Conversor de pesos y medidas en Guatemala</h2>
+      <p class="pmgt-sub">Convierte varas, manzanas, cuerdas, caballerías, libras, quintales, galones y más. Consulta equivalencias de medidas tradicionales y modernas utilizadas en Guatemala.</p>
+    </div>
+
+    <div class="pmgt-controls">
+      <div class="pmgt-grid">
+        <div>
+          <label for="pmgt-category">Categoría</label>
+          <select id="pmgt-category"></select>
+        </div>
+        <div>
+          <label for="pmgt-value">Valor</label>
+          <input id="pmgt-value" inputmode="decimal" type="text" value="1" aria-describedby="pmgt-error">
+        </div>
+        <div>
+          <label for="pmgt-from">Convertir de</label>
+          <select id="pmgt-from"></select>
+        </div>
+        <div>
+          <label for="pmgt-to">Convertir a</label>
+          <select id="pmgt-to"></select>
+        </div>
+      </div>
+
+      <div class="pmgt-actions">
+        <button id="pmgt-swap" class="pmgt-primary" type="button" aria-label="Intercambiar unidades">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 7h10.2l-2.6-2.6L16 3l5 5-5 5-1.4-1.4L17.2 9H7V7Zm10 10H6.8l2.6 2.6L8 21l-5-5 5-5 1.4 1.4L6.8 15H17v2Z"/></svg>
+          Intercambiar
+        </button>
+        <button id="pmgt-reset" class="pmgt-secondary" type="button">Limpiar / restablecer</button>
+      </div>
+      <div id="pmgt-error" class="pmgt-error" role="alert"></div>
+    </div>
+
+    <div class="pmgt-result" aria-live="polite">
+      <div class="pmgt-result-card" id="pmgt-result-card">
+        <p class="pmgt-result-label">Resultado</p>
+        <div id="pmgt-main-result" class="pmgt-main-result">1 manzana = 6,988.95 m²</div>
+        <p id="pmgt-explain" class="pmgt-explain">1 manzana equivale aproximadamente a 6,988.95 metros cuadrados.</p>
+      </div>
+
+      <h3 class="pmgt-quick-title">Conversiones rápidas relacionadas</h3>
+      <div id="pmgt-quick-grid" class="pmgt-quick-grid"></div>
+      <div id="pmgt-notes" class="pmgt-notes"></div>
+    </div>
+
+    <details>
+      <summary>Ver unidades disponibles en esta categoría</summary>
+      <div id="pmgt-unit-list" class="pmgt-unit-list"></div>
+    </details>
+  </div>
+
+  <script>
+    (() => {
+      const CATEGORIES = {
+        length: {
+          label: "Longitud y distancia",
+          base: "m",
+          units: [
+            { id: "mm", name: "Milímetro", plural: "milímetros", symbol: "mm", factor: 0.001 },
+            { id: "cm", name: "Centímetro", plural: "centímetros", symbol: "cm", factor: 0.01 },
+            { id: "m", name: "Metro", plural: "metros", symbol: "m", factor: 1 },
+            { id: "km", name: "Kilómetro", plural: "kilómetros", symbol: "km", factor: 1000 },
+            { id: "vara", name: "Vara guatemalteca", plural: "varas guatemaltecas", symbol: "varas", factor: 0.835906 },
+            { id: "in", name: "Pulgada", plural: "pulgadas", symbol: "in", factor: 0.0254 },
+            { id: "ft", name: "Pie", plural: "pies", symbol: "ft", factor: 0.3048 },
+            { id: "yd", name: "Yarda", plural: "yardas", symbol: "yd", factor: 0.9144 },
+            { id: "mi", name: "Milla", plural: "millas", symbol: "mi", factor: 1609.344 }
+          ],
+          defaults: { value: "1", from: "vara", to: "m" },
+          quick: ["m", "cm", "ft", "yd"]
+        },
+        area: {
+          label: "Área y terrenos",
+          base: "m²",
+          units: [
+            { id: "m2", name: "Metro cuadrado", plural: "metros cuadrados", symbol: "m²", factor: 1 },
+            { id: "vara2", name: "Vara cuadrada", plural: "varas cuadradas", symbol: "varas²", factor: 0.698895 },
+            { id: "manzana", name: "Manzana", plural: "manzanas", symbol: "manzanas", factor: 6988.95 },
+            { id: "cuerda", name: "Cuerda tradicional", plural: "cuerdas tradicionales", symbol: "cuerdas", factor: 436.809375 },
+            { id: "ha", name: "Hectárea", plural: "hectáreas", symbol: "ha", factor: 10000 },
+            { id: "acre", name: "Acre", plural: "acres", symbol: "acres", factor: 4046.8564224 },
+            { id: "caballeria", name: "Caballería", plural: "caballerías", symbol: "caballerías", factor: 451256.81 }
+          ],
+          defaults: { value: "1", from: "manzana", to: "m2" },
+          quick: ["m2", "ha", "acre", "vara2", "cuerda"],
+          notes: [
+            "La cuerda puede variar según municipio, actividad agrícola o costumbre local.",
+            "Esta calculadora usa una cuerda tradicional equivalente a 625 varas cuadradas.",
+            "Para compra, venta o trámites de terrenos, confirma siempre las medidas en escritura, plano o levantamiento topográfico."
+          ]
+        },
+        weight: {
+          label: "Peso",
+          base: "g",
+          units: [
+            { id: "g", name: "Gramo", plural: "gramos", symbol: "g", factor: 1 },
+            { id: "kg", name: "Kilogramo", plural: "kilogramos", symbol: "kg", factor: 1000 },
+            { id: "oz", name: "Onza", plural: "onzas", symbol: "oz", factor: 28.349523125 },
+            { id: "lb", name: "Libra", plural: "libras", symbol: "lb", factor: 453.59237 },
+            { id: "arroba", name: "Arroba", plural: "arrobas", symbol: "arrobas", factor: 11339.80925 },
+            { id: "quintal_comercial", name: "Quintal comercial", plural: "quintales comerciales", symbol: "qq comercial", factor: 45359.237 },
+            { id: "quintal_metrico", name: "Quintal métrico", plural: "quintales métricos", symbol: "qq métrico", factor: 100000 },
+            { id: "tonelada", name: "Tonelada métrica", plural: "toneladas métricas", symbol: "t", factor: 1000000 }
+          ],
+          defaults: { value: "1", from: "quintal_comercial", to: "lb" },
+          quick: ["lb", "kg", "arroba", "oz"],
+          notes: ["En Guatemala, el quintal comercial normalmente equivale a 100 libras. El quintal métrico equivale a 100 kilogramos."]
+        },
+        volume: {
+          label: "Volumen y capacidad",
+          base: "L",
+          units: [
+            { id: "ml", name: "Mililitro", plural: "mililitros", symbol: "ml", factor: 0.001 },
+            { id: "l", name: "Litro", plural: "litros", symbol: "L", factor: 1 },
+            { id: "gal_us", name: "Galón estadounidense", plural: "galones estadounidenses", symbol: "gal US", factor: 3.785411784 },
+            { id: "gal_imp", name: "Galón imperial", plural: "galones imperiales", symbol: "gal imp", factor: 4.54609 },
+            { id: "fl_oz_us", name: "Onza líquida estadounidense", plural: "onzas líquidas estadounidenses", symbol: "fl oz US", factor: 0.0295735295625 },
+            { id: "barril55", name: "Barril de 55 galones", plural: "barriles de 55 galones", symbol: "barriles 55 gal", factor: 208.19764812 }
+          ],
+          defaults: { value: "1", from: "gal_us", to: "l" },
+          quick: ["l", "ml", "gal_us", "barril55"],
+          notes: ["En Guatemala, normalmente se utiliza el galón estadounidense para combustibles, pintura, aceites y productos de limpieza."]
+        }
+      };
+
+      const app = document.getElementById("pmgt-app");
+      const $ = (selector) => app.querySelector(selector);
+      const formatter = new Intl.NumberFormat("es-GT", { maximumFractionDigits: 4 });
+      const preciseFormatter = new Intl.NumberFormat("es-GT", { maximumFractionDigits: 8 });
+
+      function parseNumber(value) {
+        const normalized = String(value || "").trim().replace(/\s/g, "").replace(",", ".");
+        if (!normalized) return NaN;
+        return Number(normalized);
+      }
+
+      function formatNumber(value) {
+        if (!Number.isFinite(value)) return "—";
+        const abs = Math.abs(value);
+        if (abs !== 0 && abs < 0.0001) return preciseFormatter.format(value);
+        return formatter.format(value);
+      }
+
+      function getCategory() {
+        return CATEGORIES[$("#pmgt-category").value];
+      }
+
+      function getUnit(category, unitId) {
+        return category.units.find((unit) => unit.id === unitId);
+      }
+
+      function convert(value, from, to) {
+        return (value * from.factor) / to.factor;
+      }
+
+      function unitNameFor(value, unit) {
+        return Math.abs(value) === 1 ? unit.name.toLowerCase() : unit.plural;
+      }
+
+      function fillCategories() {
+        $("#pmgt-category").innerHTML = Object.entries(CATEGORIES).map(([id, category]) => `<option value="${id}">${category.label}</option>`).join("");
+      }
+
+      function fillUnits() {
+        const category = getCategory();
+        const options = category.units.map((unit) => `<option value="${unit.id}">${unit.name}</option>`).join("");
+        $("#pmgt-from").innerHTML = options;
+        $("#pmgt-to").innerHTML = options;
+      }
+
+      function setDefaults(categoryId = "area") {
+        $("#pmgt-category").value = categoryId;
+        fillUnits();
+        const defaults = CATEGORIES[categoryId].defaults;
+        $("#pmgt-value").value = defaults.value;
+        $("#pmgt-from").value = defaults.from;
+        $("#pmgt-to").value = defaults.to;
+        update();
+      }
+
+      function renderNotes(category) {
+        $("#pmgt-notes").innerHTML = (category.notes || []).map((note) => `<div class="pmgt-note">${note}</div>`).join("");
+      }
+
+      function renderUnitList(category) {
+        $("#pmgt-unit-list").innerHTML = category.units.map((unit) => `
+          <div class="pmgt-unit-item">
+            <strong>${unit.name}</strong>
+            1 ${unit.name.toLowerCase()} = ${formatNumber(unit.factor)} ${category.base}
+          </div>
+        `).join("");
+      }
+
+      function renderQuick(category, value, fromUnit) {
+        const targets = category.quick.filter((id) => id !== fromUnit.id).slice(0, 5);
+        $("#pmgt-quick-grid").innerHTML = targets.map((id) => {
+          const target = getUnit(category, id);
+          const result = convert(value, fromUnit, target);
+          return `<div class="pmgt-quick"><strong>${formatNumber(result)} ${target.symbol}</strong><span>${formatNumber(value)} ${unitNameFor(value, fromUnit)}</span></div>`;
+        }).join("");
+      }
+
+      function update() {
+        const category = getCategory();
+        const value = parseNumber($("#pmgt-value").value);
+        const fromUnit = getUnit(category, $("#pmgt-from").value);
+        const toUnit = getUnit(category, $("#pmgt-to").value);
+        const error = $("#pmgt-error");
+
+        renderNotes(category);
+        renderUnitList(category);
+
+        if (!Number.isFinite(value)) {
+          error.textContent = "Ingresa un valor numérico válido. Puedes usar punto o coma decimal.";
+          error.style.display = "block";
+          $("#pmgt-main-result").textContent = "—";
+          $("#pmgt-explain").textContent = "El resultado aparecerá cuando ingreses un número válido.";
+          $("#pmgt-quick-grid").innerHTML = "";
+          return;
+        }
+
+        error.style.display = "none";
+        const result = convert(value, fromUnit, toUnit);
+        const inverse = convert(1, toUnit, fromUnit);
+        const valueLabel = `${formatNumber(value)} ${unitNameFor(value, fromUnit)}`;
+        const resultLabel = `${formatNumber(result)} ${toUnit.symbol}`;
+        $("#pmgt-main-result").textContent = `${valueLabel} = ${resultLabel}`;
+        $("#pmgt-explain").textContent = `${valueLabel} equivale aproximadamente a ${resultLabel}. A la inversa, 1 ${toUnit.name.toLowerCase()} equivale a ${formatNumber(inverse)} ${fromUnit.symbol}.`;
+        renderQuick(category, value, fromUnit);
+
+        const card = $("#pmgt-result-card");
+        card.classList.remove("pmgt-pulse");
+        void card.offsetWidth;
+        card.classList.add("pmgt-pulse");
+      }
+
+      function onCategoryChange() {
+        const id = $("#pmgt-category").value;
+        fillUnits();
+        const defaults = CATEGORIES[id].defaults;
+        $("#pmgt-value").value = defaults.value;
+        $("#pmgt-from").value = defaults.from;
+        $("#pmgt-to").value = defaults.to;
+        update();
+      }
+
+      $("#pmgt-category").addEventListener("change", onCategoryChange);
+      $("#pmgt-value").addEventListener("input", update);
+      $("#pmgt-from").addEventListener("change", update);
+      $("#pmgt-to").addEventListener("change", update);
+      $("#pmgt-swap").addEventListener("click", () => {
+        const from = $("#pmgt-from").value;
+        $("#pmgt-from").value = $("#pmgt-to").value;
+        $("#pmgt-to").value = from;
+        update();
+      });
+      $("#pmgt-reset").addEventListener("click", () => setDefaults("area"));
+
+      const runConversionTests = function() {
+        const area = CATEGORIES.area;
+        const length = CATEGORIES.length;
+        const weight = CATEGORIES.weight;
+        const volume = CATEGORIES.volume;
+        const tests = [
+          ["1 vara = 0.835906 m", convert(1, getUnit(length, "vara"), getUnit(length, "m")), 0.835906],
+          ["1 manzana = 6,988.95 m²", convert(1, getUnit(area, "manzana"), getUnit(area, "m2")), 6988.95],
+          ["1 manzana = 10,000 varas²", convert(1, getUnit(area, "manzana"), getUnit(area, "vara2")), 10000],
+          ["1 manzana = 16 cuerdas", convert(1, getUnit(area, "manzana"), getUnit(area, "cuerda")), 16],
+          ["1 caballería = 451,256.81 m²", convert(1, getUnit(area, "caballeria"), getUnit(area, "m2")), 451256.81],
+          ["1 libra = 0.45359237 kg", convert(1, getUnit(weight, "lb"), getUnit(weight, "kg")), 0.45359237],
+          ["1 arroba = 25 lb", convert(1, getUnit(weight, "arroba"), getUnit(weight, "lb")), 25],
+          ["1 quintal comercial = 100 lb", convert(1, getUnit(weight, "quintal_comercial"), getUnit(weight, "lb")), 100],
+          ["1 galón estadounidense = 3.785411784 L", convert(1, getUnit(volume, "gal_us"), getUnit(volume, "l")), 3.785411784]
+        ];
+        return tests.map(([name, got, expected]) => ({ name, got, expected, pass: Math.abs(got - expected) < 0.00001 }));
+      };
+
+      window.pmgtRunConversionTests = runConversionTests;
+      globalThis.pmgtRunConversionTests = runConversionTests;
+
+      fillCategories();
+      setDefaults("area");
+    })();
+  </script>
+</div>
+<!-- /Conversor de pesos y medidas Guatemala - GUIALOCAL.COM.GT -->

@@ -1,0 +1,640 @@
+<meta charset="UTF-8">
+<!-- Juego de Chapinismos - GUIALOCAL.COM.GT -->
+<section id="gl-chapinismos-game" class="glcg-app" aria-labelledby="glcg-title">
+  <style>
+    #gl-chapinismos-game{
+      --glcg-yellow:#f9ce0b;
+      --glcg-ink:#161616;
+      --glcg-muted:#626262;
+      --glcg-line:#e8e8e8;
+      --glcg-soft:#f7f7f7;
+      --glcg-good:#168a45;
+      --glcg-bad:#c43d32;
+      --glcg-green:#138a43;
+      --glcg-red:#c7332c;
+      color:var(--glcg-ink);
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+      font-weight:400;
+      margin:34px 0;
+      max-width:100%;
+    }
+    #gl-chapinismos-game *{box-sizing:border-box}
+    #gl-chapinismos-game .glcg-shell{
+      border:1px solid var(--glcg-line);
+      border-radius:14px;
+      overflow:hidden;
+      background:#fff;
+      box-shadow:0 18px 45px rgba(0,0,0,.08);
+    }
+    #gl-chapinismos-game .glcg-head{
+      display:grid;
+      gap:14px;
+      padding:clamp(24px,4vw,42px);
+      border-bottom:1px solid var(--glcg-line);
+      background:
+        linear-gradient(135deg,rgba(249,206,11,.2),rgba(255,255,255,0) 46%),
+        #fff;
+    }
+    #gl-chapinismos-game .glcg-kicker{
+      color:#222;
+      font-size:13px;
+      font-weight:850;
+      letter-spacing:.08em;
+      line-height:1.2;
+      margin:0;
+      text-transform:uppercase;
+    }
+    #gl-chapinismos-game h2{
+      color:#111;
+      font-size:clamp(32px,5vw,58px);
+      font-weight:950;
+      letter-spacing:0;
+      line-height:1;
+      margin:0;
+      max-width:820px;
+    }
+    #gl-chapinismos-game .glcg-intro{
+      color:var(--glcg-muted);
+      font-size:clamp(16px,2vw,19px);
+      line-height:1.6;
+      margin:0;
+      max-width:820px;
+    }
+    #gl-chapinismos-game .glcg-game{
+      display:grid;
+      gap:0;
+      grid-template-columns:minmax(0,1fr) 280px;
+    }
+    #gl-chapinismos-game .glcg-main{
+      display:grid;
+      gap:22px;
+      padding:clamp(22px,4vw,38px);
+    }
+    #gl-chapinismos-game .glcg-side{
+      background:#111;
+      color:#fff;
+      display:grid;
+      gap:18px;
+      align-content:start;
+      padding:clamp(22px,3vw,30px);
+    }
+    #gl-chapinismos-game .glcg-counter{
+      align-items:center;
+      display:flex;
+      gap:10px;
+      justify-content:space-between;
+    }
+    #gl-chapinismos-game .glcg-pill{
+      align-items:center;
+      border:1px solid rgba(255,255,255,.2);
+      border-radius:999px;
+      display:inline-flex;
+      font-size:13px;
+      font-weight:850;
+      min-height:32px;
+      padding:0 12px;
+      width:max-content;
+    }
+    #gl-chapinismos-game .glcg-score{
+      color:var(--glcg-yellow);
+      font-size:42px;
+      font-weight:950;
+      line-height:1;
+    }
+    #gl-chapinismos-game .glcg-score-label{
+      color:#cfcfcf;
+      font-size:14px;
+      line-height:1.45;
+      margin:0;
+    }
+    #gl-chapinismos-game .glcg-meter{
+      background:rgba(255,255,255,.16);
+      border-radius:999px;
+      height:10px;
+      overflow:hidden;
+      width:100%;
+    }
+    #gl-chapinismos-game .glcg-meter span{
+      background:var(--glcg-yellow);
+      border-radius:inherit;
+      display:block;
+      height:100%;
+      transition:width .25s ease;
+      width:20%;
+    }
+    #gl-chapinismos-game .glcg-note{
+      border-top:1px solid rgba(255,255,255,.18);
+      color:#d7d7d7;
+      font-size:13px;
+      line-height:1.55;
+      margin:0;
+      padding-top:16px;
+    }
+    #gl-chapinismos-game .glcg-card{
+      background:var(--glcg-soft);
+      border:1px solid var(--glcg-line);
+      border-radius:12px;
+      display:grid;
+      gap:16px;
+      padding:clamp(20px,3vw,28px);
+    }
+    #gl-chapinismos-game .glcg-label{
+      color:#777;
+      font-size:13px;
+      font-weight:850;
+      letter-spacing:.08em;
+      line-height:1.2;
+      margin:0;
+      text-transform:uppercase;
+    }
+    #gl-chapinismos-game .glcg-question{
+      color:#111;
+      font-size:clamp(22px,3.6vw,34px);
+      font-weight:900;
+      letter-spacing:0;
+      line-height:1.14;
+      margin:0;
+    }
+    #gl-chapinismos-game .glcg-helper{
+      color:var(--glcg-muted);
+      font-size:15px;
+      line-height:1.55;
+      margin:0;
+    }
+    #gl-chapinismos-game .glcg-options{
+      display:grid;
+      gap:12px;
+    }
+    #gl-chapinismos-game .glcg-option{
+      align-items:center;
+      background:#fff;
+      border:1px solid var(--glcg-line);
+      border-radius:10px;
+      color:#151515;
+      cursor:pointer;
+      display:flex;
+      font-family:inherit;
+      font-size:clamp(17px,2vw,20px);
+      font-weight:850;
+      justify-content:space-between;
+      line-height:1.25;
+      min-height:64px;
+      padding:14px 16px;
+      text-align:left;
+      transition:background .18s,border-color .18s,transform .18s,box-shadow .18s;
+      width:100%;
+    }
+    #gl-chapinismos-game .glcg-option::after{
+      border:2px solid currentColor;
+      border-radius:999px;
+      content:"";
+      flex:0 0 auto;
+      height:18px;
+      opacity:.28;
+      width:18px;
+    }
+    #gl-chapinismos-game .glcg-option:hover:not(:disabled),
+    #gl-chapinismos-game .glcg-option:focus-visible{
+      background:var(--glcg-yellow);
+      border-color:#111;
+      box-shadow:0 10px 22px rgba(0,0,0,.08);
+      color:#111;
+      outline:none;
+      transform:translateY(-1px);
+    }
+    #gl-chapinismos-game .glcg-option:disabled{
+      cursor:not-allowed;
+      opacity:.88;
+    }
+    #gl-chapinismos-game .glcg-option.is-correct{
+      background:rgba(22,138,69,.12);
+      border-color:rgba(22,138,69,.65);
+      color:var(--glcg-good);
+    }
+    #gl-chapinismos-game .glcg-option.is-wrong{
+      background:rgba(196,61,50,.1);
+      border-color:rgba(196,61,50,.55);
+      color:var(--glcg-bad);
+    }
+    #gl-chapinismos-game .glcg-feedback{
+      border-left:5px solid var(--glcg-yellow);
+      color:#333;
+      display:none;
+      font-size:15px;
+      line-height:1.55;
+      margin:0;
+      padding:2px 0 2px 14px;
+    }
+    #gl-chapinismos-game .glcg-feedback.is-visible{display:block}
+    #gl-chapinismos-game .glcg-actions{
+      align-items:center;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      justify-content:space-between;
+    }
+    #gl-chapinismos-game .glcg-button{
+      align-items:center;
+      background:#111;
+      border:1px solid #111;
+      border-radius:999px;
+      color:#fff;
+      cursor:pointer;
+      display:inline-flex;
+      font-family:inherit;
+      font-size:15px;
+      font-weight:900;
+      justify-content:center;
+      min-height:46px;
+      padding:0 20px;
+      transition:background .18s,border-color .18s,color .18s,transform .18s;
+    }
+    #gl-chapinismos-game .glcg-button:hover,
+    #gl-chapinismos-game .glcg-button:focus-visible{
+      background:var(--glcg-yellow);
+      border-color:#111;
+      color:#111;
+      outline:none;
+      transform:translateY(-1px);
+    }
+    #gl-chapinismos-game .glcg-button:disabled{
+      background:#d8d8d8;
+      border-color:#d8d8d8;
+      color:#777;
+      cursor:not-allowed;
+      transform:none;
+    }
+    #gl-chapinismos-game .glcg-next-action{
+      background:var(--glcg-green);
+      border-color:var(--glcg-green);
+      color:#fff;
+      margin-left:auto;
+    }
+    #gl-chapinismos-game .glcg-next-action:hover,
+    #gl-chapinismos-game .glcg-next-action:focus-visible{
+      background:#0f7337;
+      border-color:#0f7337;
+      color:#fff;
+    }
+    #gl-chapinismos-game .glcg-reset-action{
+      background:var(--glcg-red);
+      border-color:var(--glcg-red);
+      color:#fff;
+      margin-right:auto;
+    }
+    #gl-chapinismos-game .glcg-reset-action:hover,
+    #gl-chapinismos-game .glcg-reset-action:focus-visible{
+      background:#a92824;
+      border-color:#a92824;
+      color:#fff;
+    }
+    #gl-chapinismos-game .glcg-button:disabled:hover,
+    #gl-chapinismos-game .glcg-button:disabled:focus-visible{
+      background:#d8d8d8;
+      border-color:#d8d8d8;
+      color:#777;
+      transform:none;
+    }
+    #gl-chapinismos-game .glcg-result{
+      display:none;
+      gap:18px;
+    }
+    #gl-chapinismos-game .glcg-result.is-visible{display:grid}
+    #gl-chapinismos-game .glcg-final{
+      color:#111;
+      font-size:clamp(30px,5vw,48px);
+      font-weight:950;
+      line-height:1.05;
+      margin:0;
+    }
+    #gl-chapinismos-game .glcg-final-copy{
+      color:var(--glcg-muted);
+      font-size:17px;
+      line-height:1.65;
+      margin:0;
+    }
+    #gl-chapinismos-game .glcg-review{
+      display:grid;
+      gap:10px;
+      list-style:none;
+      margin:0;
+      padding:0;
+    }
+    #gl-chapinismos-game .glcg-review li{
+      background:#fff;
+      border:1px solid var(--glcg-line);
+      border-radius:10px;
+      color:#333;
+      font-size:14px;
+      line-height:1.5;
+      padding:12px 14px;
+    }
+    #gl-chapinismos-game .glcg-review strong{color:#111}
+    #gl-chapinismos-game .glcg-live{
+      height:1px;
+      left:-9999px;
+      overflow:hidden;
+      position:absolute;
+      top:auto;
+      width:1px;
+    }
+    @media (max-width:820px){
+      #gl-chapinismos-game .glcg-game{grid-template-columns:1fr}
+      #gl-chapinismos-game .glcg-side{order:-1}
+      #gl-chapinismos-game .glcg-counter{align-items:flex-start}
+      #gl-chapinismos-game .glcg-option{min-height:58px}
+    }
+    @media (prefers-reduced-motion:reduce){
+      #gl-chapinismos-game .glcg-meter span,
+      #gl-chapinismos-game .glcg-button,
+      #gl-chapinismos-game .glcg-option{transition:none}
+    }
+  </style>
+
+  <div class="glcg-shell">
+    <header class="glcg-head">
+      <p class="glcg-kicker">Juego chapín de Guialocal</p>
+      <h2 id="glcg-title">Adiviná el chapinismo</h2>
+      <p class="glcg-intro">Te damos el significado de una palabra o frase chapina. Elegí la respuesta correcta entre cuatro opciones. Son 5 rondas rápidas y al final ves tu puntaje.</p>
+    </header>
+
+    <div class="glcg-game">
+      <main class="glcg-main">
+        <div id="glcg-quiz" class="glcg-card">
+          <p class="glcg-label">Significado</p>
+          <p id="glcg-question" class="glcg-question"></p>
+          <p class="glcg-helper">Seleccioná el chapinismo que mejor coincide con esta definición.</p>
+          <div id="glcg-options" class="glcg-options" role="group" aria-label="Opciones de respuesta"></div>
+          <p id="glcg-feedback" class="glcg-feedback" aria-live="polite"></p>
+          <div class="glcg-actions">
+            <button id="glcg-restart-mini" class="glcg-button glcg-reset-action" type="button">Reiniciar</button>
+            <button id="glcg-next" class="glcg-button glcg-next-action" type="button" disabled>Siguiente</button>
+          </div>
+        </div>
+
+        <div id="glcg-result" class="glcg-card glcg-result" aria-live="polite">
+          <p class="glcg-label">Resultado final</p>
+          <p id="glcg-final" class="glcg-final"></p>
+          <p id="glcg-final-copy" class="glcg-final-copy"></p>
+          <ul id="glcg-review" class="glcg-review"></ul>
+          <div class="glcg-actions">
+            <button id="glcg-restart" class="glcg-button glcg-reset-action" type="button">Jugar otra vez</button>
+          </div>
+        </div>
+      </main>
+
+      <aside class="glcg-side" aria-label="Progreso del juego">
+        <div class="glcg-counter">
+          <span id="glcg-round" class="glcg-pill">Ronda 1 de 5</span>
+          <span id="glcg-points" class="glcg-pill">0 puntos</span>
+        </div>
+        <div>
+          <div id="glcg-score" class="glcg-score">0/5</div>
+          <p class="glcg-score-label">Cada respuesta correcta suma un punto. La vuelta es corta, así que confiá en tu oído chapín.</p>
+        </div>
+        <div class="glcg-meter" aria-hidden="true"><span id="glcg-meter"></span></div>
+        <p class="glcg-note">Las palabras pueden cambiar de sentido según el tono, el lugar y la confianza. Ese es parte del encanto del español chapín.</p>
+      </aside>
+    </div>
+  </div>
+
+  <div id="glcg-live" class="glcg-live" aria-live="polite"></div>
+
+  <script>
+    (function(){
+      const app = document.getElementById("gl-chapinismos-game");
+      if(!app) return;
+
+      const questions = [
+        {term:"Púchica",meaning:"Expresión de sorpresa, asombro o frustración, usada como sustituto suave de una grosería.",example:"¡Púchica, qué carrazo se compró el maje!"},
+        {term:"Primero Dios",meaning:"Forma cotidiana de decir ojalá, espero que sí o si todo sale bien.",example:"Primero Dios, mañana no hay tráfico."},
+        {term:"Chapín",meaning:"Persona guatemalteca o algo propio de Guatemala.",example:"Soy chapín de corazón, vos."},
+        {term:"Maje",meaning:"Puede ser tonto o amigo, según el tono y la confianza.",example:"No seás maje, pasame el pisto."},
+        {term:"Codo",meaning:"Alguien tacaño, que no quiere gastar ni compartir.",example:"Ese cuate es tan codo que ni refacción comparte."},
+        {term:"Shute",meaning:"Persona entrometida o metiche.",example:"Dejá de ser tan shute, no es tu clavo."},
+        {term:"Chispudo",meaning:"Persona inteligente, astuta o muy despierta.",example:"Ese patojo es bien chispudo."},
+        {term:"Canche",meaning:"Persona rubia o de piel clara.",example:"El canche de la esquina vende unos shucos riquísimos."},
+        {term:"Patojo",meaning:"Niño, niña o joven.",example:"Los patojos están jugando chamusca."},
+        {term:"Caquero",meaning:"Persona presumida o creída.",example:"Se cree caquero porque tiene teléfono nuevo."},
+        {term:"Estar de goma",meaning:"Tener resaca después de haber tomado licor.",example:"Ayer me puse una papalina y hoy estoy de goma."},
+        {term:"Poner la pata",meaning:"Cometer un error o meterse en problemas.",example:"Puse la pata al contarle el chisme al jefe."},
+        {term:"Dar jalón",meaning:"Llevar a alguien en carro o darle aventón.",example:"Dame jalón hasta el parqueo, vos."},
+        {term:"Chingar la pita",meaning:"Molestar, fastidiar o irritar a alguien.",example:"Dejá de chingar la pita, estoy trabajando."},
+        {term:"Echar los perros",meaning:"Intentar conquistar o coquetear con alguien.",example:"Le está echando los perros a la nueva del chance."},
+        {term:"Estar con filo",meaning:"Tener hambre.",example:"Estoy con filo, vamos por un shuco."},
+        {term:"Dar riata",meaning:"Pelear físicamente o golpear.",example:"Se dieron riata por un clavo en el mercado."},
+        {term:"Quemar el rancho",meaning:"Ser infiel en una relación.",example:"Quemó el rancho y ahora anda con clavo."},
+        {term:"Shuco",meaning:"Hot dog guatemalteco o algo sucio, según el contexto.",example:"Me comí un shuco en la esquina."},
+        {term:"Chumpa",meaning:"Chaqueta, chamarra o abrigo.",example:"Ponete la chumpa, está haciendo frío."},
+        {term:"Camioneta",meaning:"Autobús, especialmente el transporte colectivo tradicional.",example:"La camioneta al pueblo pasa temprano."},
+        {term:"Pichel",meaning:"Jarra para servir agua, fresco u otro líquido.",example:"Servime agua del pichel, porfa."},
+        {term:"Pisto",meaning:"Dinero.",example:"No tengo pisto para la coperacha."},
+        {term:"Refacción",meaning:"Merienda o comida pequeña entre comidas.",example:"Traje refacción para el recreo."},
+        {term:"Parqueo",meaning:"Estacionamiento.",example:"Buscá parqueo cerca del chance."},
+        {term:"Túmulo",meaning:"Reductor de velocidad en la calle.",example:"Casi me estrello con el túmulo nuevo."},
+        {term:"Convivio",meaning:"Reunión con comida para celebrar.",example:"El convivio de fin de año estuvo nítido."},
+        {term:"Nítido",meaning:"Excelente, perfecto o muy bueno.",example:"El paisaje del lago está nítido."},
+        {term:"Está yuca",meaning:"Algo está complicado, difícil o pesado.",example:"Conseguir chance ahorita está bien yuca."},
+        {term:"Virgo",meaning:"Sin problemas, tranquilo o todo bien.",example:"Todo está virgo, no hay clavo."},
+        {term:"Chafa",meaning:"De mala calidad o mal hecho.",example:"Ese teléfono es bien chafa."},
+        {term:"Cabal",meaning:"Todo bien, correcto, exacto o perfecto.",example:"¿Terminaste? Cabal, vos."},
+        {term:"Simón",meaning:"Sí, de acuerdo o claro.",example:"Simón, voy al toque."},
+        {term:"Órale",meaning:"Puede significar vamos, dale o adiós, según el momento.",example:"Órale, compa, nos vemos luego."},
+        {term:"Colazo",meaning:"Paseo o vuelta en algún transporte.",example:"Nos dimos un colazo al lago."},
+        {term:"Virula",meaning:"Bicicleta.",example:"Subí la virula al túmulo."},
+        {term:"Hecho pistola",meaning:"Hacer algo muy rápido o llegar corriendo.",example:"Llegó hecho pistola pa no perder la camioneta."},
+        {term:"Capear",meaning:"Escaparse, evitar algo o huir.",example:"Me capeé del colegio pa ir al toque."},
+        {term:"Chamba",meaning:"Trabajo informal o empleo.",example:"Conseguí una chamba en el mercado."},
+        {term:"Coperacha",meaning:"Colecta de dinero entre varias personas.",example:"Hagamos una coperacha para comprar refacción."},
+        {term:"Chance",meaning:"Trabajo, oportunidad o empleo.",example:"Me salió un chance en la zona 10."},
+        {term:"Vara",meaning:"Quetzal, usado para hablar de dinero.",example:"Préstame 50 varas, vos."},
+        {term:"Bolo",meaning:"Persona borracha.",example:"El maje estaba bien bolo en el convivio."},
+        {term:"Chela",meaning:"Cerveza.",example:"Vamos por unas chelas al toque."},
+        {term:"Ponerse una papalina",meaning:"Emborracharse bastante.",example:"Se puso una papalina y agarró furia."},
+        {term:"Toque",meaning:"Fiesta, concierto o evento para salir.",example:"El toque de anoche estuvo chilero."},
+        {term:"Traida",meaning:"Novia, pareja o enamorada.",example:"Mi traida me mandó un mensaje."},
+        {term:"Colgado",meaning:"Muy enamorado de alguien.",example:"Está colgado de esa patoja."},
+        {term:"Xocomil",meaning:"Viento fuerte de la tarde, especialmente asociado al lago de Atitlán.",example:"Se levantó el Xocomil y casi se vuela mi chumpa."},
+        {term:"Chipi-chipi",meaning:"Llovizna suave.",example:"Está cayendo chipi-chipi."},
+        {term:"Chaparrones",meaning:"Lluvia fuerte y repentina.",example:"Me agarraron los chaparrones sin paraguas."},
+        {term:"Rieles",meaning:"Zapatos.",example:"Me compré unos rieles nuevos."},
+        {term:"Choco",meaning:"Persona con mala vista.",example:"Ya estoy choco, dame mis lentes."},
+        {term:"Basca",meaning:"Náusea o ganas de vomitar.",example:"Me dio basca después de ese shuco viejo."},
+        {term:"Chola",meaning:"Cabeza.",example:"Usá la chola, no seás maje."},
+        {term:"Titiritar",meaning:"Temblar de frío o de miedo.",example:"Estaba titiritando con ese chipi-chipi."},
+        {term:"Lica",meaning:"Película.",example:"Vamos a ver una lica de terror."},
+        {term:"Meter un timbrazo",meaning:"Llamar por teléfono.",example:"Meteme un timbrazo cuando llegués."},
+        {term:"Quemar pestañas",meaning:"Estudiar o trabajar duro durante mucho tiempo.",example:"Quemé pestañas toda la noche."},
+        {term:"Chamusca",meaning:"Partido de fútbol informal.",example:"Echamos una chamusca en el baldío."},
+        {term:"Cincos",meaning:"Canicas, juego tradicional de niños.",example:"Jugamos cincos y me gané todas."},
+        {term:"Chonte",meaning:"Policía, normalmente dicho de forma coloquial.",example:"El chonte me paró por ir hecho bala."},
+        {term:"Clavo",meaning:"Problema o inconveniente.",example:"Tengo un clavo con el carro."},
+        {term:"Chanchuyo",meaning:"Trampa, arreglo raro o algo deshonesto.",example:"Hizo un chanchuyo para ganar."},
+        {term:"Migueles",meaning:"Minutos o un ratito.",example:"Esperame unos migueles, ya voy."},
+        {term:"Chilazo",meaning:"Rápido o de inmediato.",example:"Hacelo chilazo, no hay tiempo."},
+        {term:"Ya merito",meaning:"Casi listo o muy cerca de ocurrir.",example:"Ya merito termino."},
+        {term:"Estar lentejas",meaning:"Ser lento o tardarse mucho.",example:"Ese maje está lentejas."},
+        {term:"Chanin, chanin",meaning:"Rápido, con apuro.",example:"Corré chanin, chanin."},
+        {term:"Puesto",meaning:"Puesto pequeño de venta callejera.",example:"Compré tamales en el puesto."},
+        {term:"Ulugrún",meaning:"Exclamación de asombro.",example:"¡Ulugrún, qué caro está todo!"},
+        {term:"Sho",meaning:"Cállate o silencio.",example:"¡Sho, que estoy oyendo la lica!"}
+      ];
+
+      const totalRounds = 5;
+      const state = {
+        round: 0,
+        score: 0,
+        selected: null,
+        answered: false,
+        currentSet: [],
+        history: []
+      };
+
+      const els = {
+        quiz: app.querySelector("#glcg-quiz"),
+        result: app.querySelector("#glcg-result"),
+        question: app.querySelector("#glcg-question"),
+        options: app.querySelector("#glcg-options"),
+        feedback: app.querySelector("#glcg-feedback"),
+        next: app.querySelector("#glcg-next"),
+        restartMini: app.querySelector("#glcg-restart-mini"),
+        restart: app.querySelector("#glcg-restart"),
+        round: app.querySelector("#glcg-round"),
+        points: app.querySelector("#glcg-points"),
+        score: app.querySelector("#glcg-score"),
+        meter: app.querySelector("#glcg-meter"),
+        final: app.querySelector("#glcg-final"),
+        finalCopy: app.querySelector("#glcg-final-copy"),
+        review: app.querySelector("#glcg-review"),
+        live: app.querySelector("#glcg-live")
+      };
+
+      function shuffle(items){
+        const copy = items.slice();
+        for(let i = copy.length - 1; i > 0; i--){
+          const j = Math.floor(Math.random() * (i + 1));
+          [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+        return copy;
+      }
+
+      function pickDistractors(answer){
+        return shuffle(questions.filter(item => item.term !== answer.term))
+          .slice(0,3)
+          .map(item => item.term);
+      }
+
+      function startGame(){
+        state.round = 0;
+        state.score = 0;
+        state.selected = null;
+        state.answered = false;
+        state.currentSet = shuffle(questions).slice(0,totalRounds);
+        state.history = [];
+        els.quiz.style.display = "grid";
+        els.result.classList.remove("is-visible");
+        renderRound();
+      }
+
+      function renderRound(){
+        const current = state.currentSet[state.round];
+        const options = shuffle([current.term].concat(pickDistractors(current)));
+        state.selected = null;
+        state.answered = false;
+
+        els.question.textContent = current.meaning;
+        els.options.innerHTML = "";
+        els.feedback.textContent = "";
+        els.feedback.classList.remove("is-visible");
+        els.next.disabled = true;
+        els.next.textContent = state.round === totalRounds - 1 ? "Ver puntaje" : "Siguiente";
+
+        options.forEach(option => {
+          const button = document.createElement("button");
+          button.className = "glcg-option";
+          button.type = "button";
+          button.textContent = option;
+          button.setAttribute("aria-label", "Respuesta: " + option);
+          button.addEventListener("click", () => answer(option, button));
+          els.options.appendChild(button);
+        });
+
+        updateStats();
+        els.live.textContent = "Ronda " + (state.round + 1) + " de " + totalRounds + ".";
+      }
+
+      function answer(option){
+        if(state.answered) return;
+        const current = state.currentSet[state.round];
+        const correct = option === current.term;
+        state.answered = true;
+        state.selected = option;
+        if(correct) state.score += 1;
+
+        Array.from(els.options.children).forEach(button => {
+          button.disabled = true;
+          if(button.textContent === current.term) button.classList.add("is-correct");
+          if(button.textContent === option && !correct) button.classList.add("is-wrong");
+        });
+
+        els.feedback.innerHTML = correct
+          ? "<strong>Cabal.</strong> La respuesta es <strong>" + current.term + "</strong>. " + current.example
+          : "<strong>Casi.</strong> La respuesta correcta era <strong>" + current.term + "</strong>. " + current.example;
+        els.feedback.classList.add("is-visible");
+        els.next.disabled = false;
+        state.history.push({current, option, correct});
+        updateStats();
+        els.live.textContent = correct ? "Respuesta correcta." : "Respuesta incorrecta. La respuesta era " + current.term + ".";
+      }
+
+      function nextRound(){
+        if(!state.answered) return;
+        if(state.round >= totalRounds - 1){
+          showResult();
+          return;
+        }
+        state.round += 1;
+        renderRound();
+      }
+
+      function updateStats(){
+        els.round.textContent = "Ronda " + Math.min(state.round + 1,totalRounds) + " de " + totalRounds;
+        els.points.textContent = state.score + (state.score === 1 ? " punto" : " puntos");
+        els.score.textContent = state.score + "/" + totalRounds;
+        els.meter.style.width = (((state.round + (state.answered ? 1 : 0)) / totalRounds) * 100) + "%";
+      }
+
+      function showResult(){
+        const score = state.score;
+        let title = "Sacaste " + score + " de " + totalRounds + ".";
+        let copy = "Buen intento. Estos chapinismos tienen vueltas de tono, contexto y confianza.";
+        if(score === 5){
+          copy = "Nivel chapín de mercado, camioneta y convivio. Cabal, lo tenés dominado.";
+        }else if(score >= 3){
+          copy = "Vas nítido. Ya reconocés bastante del sabor chapín, aunque todavía hay palabras que se esconden.";
+        }else if(score >= 1){
+          copy = "Hay buena base, pero falta calle, refacción y un par de conversaciones con los cuates.";
+        }
+
+        els.quiz.style.display = "none";
+        els.result.classList.add("is-visible");
+        els.final.textContent = title;
+        els.finalCopy.textContent = copy;
+        els.review.innerHTML = "";
+
+        state.history.forEach((item,index) => {
+          const li = document.createElement("li");
+          li.innerHTML = "<strong>" + (index + 1) + ". " + item.current.term + ":</strong> " +
+            item.current.meaning + " <br>Tu respuesta: <strong>" + item.option + "</strong>.";
+          els.review.appendChild(li);
+        });
+        els.live.textContent = "Juego terminado. Puntaje final " + score + " de " + totalRounds + ".";
+      }
+
+      els.next.addEventListener("click", nextRound);
+      els.restart.addEventListener("click", startGame);
+      els.restartMini.addEventListener("click", startGame);
+      startGame();
+    })();
+  </script>
+</section>

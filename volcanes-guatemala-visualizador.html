@@ -1,0 +1,439 @@
+<meta charset="UTF-8">
+<!-- Volcanes de Guatemala, visualizador por altura - GUIALOCAL.COM.GT -->
+<section id="volcanes-gt-app" lang="es-GT" aria-labelledby="vgt-title">
+  <style>
+    #volcanes-gt-app{
+      --vgt-yellow:#f9ce0b;
+      --vgt-ink:#f7fbff;
+      --vgt-muted:#b9c7d4;
+      --vgt-line:rgba(255,255,255,.16);
+      --vgt-panel:rgba(8,18,32,.72);
+      --vgt-panel-strong:rgba(10,23,40,.92);
+      color:var(--vgt-ink);
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+      margin:34px 0;
+      max-width:100%;
+    }
+    #volcanes-gt-app *{box-sizing:border-box}
+    #volcanes-gt-app .vgt-shell{
+      background:
+        radial-gradient(circle at 20% 10%,rgba(249,206,11,.13),transparent 28%),
+        linear-gradient(180deg,#0b1829 0%,#14283d 46%,#09111d 100%);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:12px;
+      min-height:680px;
+      overflow:hidden;
+      position:relative;
+    }
+    #volcanes-gt-app .vgt-sky{
+      inset:0;
+      overflow:hidden;
+      position:absolute;
+    }
+    #volcanes-gt-app .vgt-cloud{
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
+      border-radius:999px;
+      filter:blur(10px);
+      height:34px;
+      left:-25%;
+      position:absolute;
+      width:48%;
+      animation:vgt-cloud 36s linear infinite;
+    }
+    #volcanes-gt-app .vgt-cloud:nth-child(1){top:14%;opacity:.45;animation-duration:48s}
+    #volcanes-gt-app .vgt-cloud:nth-child(2){top:31%;opacity:.3;animation-duration:62s;animation-delay:-18s;width:62%}
+    #volcanes-gt-app .vgt-cloud:nth-child(3){top:48%;opacity:.2;animation-duration:76s;animation-delay:-32s;width:70%}
+    @keyframes vgt-cloud{from{transform:translateX(0)}to{transform:translateX(275%)}}
+
+    #volcanes-gt-app .vgt-content{
+      display:grid;
+      grid-template-rows:auto minmax(360px,1fr) auto;
+      min-height:680px;
+      position:relative;
+      z-index:2;
+    }
+    #volcanes-gt-app .vgt-header{
+      display:grid;
+      gap:12px;
+      max-width:760px;
+      padding:clamp(22px,4vw,38px);
+      position:relative;
+      z-index:3;
+    }
+    #volcanes-gt-app .vgt-badge{
+      align-items:center;
+      background:rgba(249,206,11,.14);
+      border:1px solid rgba(249,206,11,.34);
+      border-radius:999px;
+      color:#fff4b0;
+      display:inline-flex;
+      font-size:13px;
+      font-weight:850;
+      min-height:30px;
+      padding:0 12px;
+      width:max-content;
+    }
+    #volcanes-gt-app h2{
+      color:#fff;
+      font-size:clamp(36px,6vw,76px);
+      font-weight:950;
+      letter-spacing:0;
+      line-height:.98;
+      margin:0;
+      text-shadow:0 12px 34px rgba(0,0,0,.42);
+    }
+    #volcanes-gt-app .vgt-meta{
+      align-items:center;
+      color:var(--vgt-muted);
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px 12px;
+      font-size:15px;
+      font-weight:750;
+    }
+    #volcanes-gt-app .vgt-pill{
+      background:rgba(255,255,255,.08);
+      border:1px solid var(--vgt-line);
+      border-radius:999px;
+      color:#eaf2fb;
+      padding:7px 10px;
+    }
+    #volcanes-gt-app .vgt-pill-active{
+      background:rgba(255,108,40,.18);
+      border-color:rgba(255,139,66,.45);
+      color:#ffd0b7;
+    }
+    #volcanes-gt-app .vgt-desc{
+      color:#d5e0eb;
+      font-size:clamp(16px,2vw,19px);
+      line-height:1.65;
+      margin:0;
+      max-width:720px;
+    }
+    #volcanes-gt-app .vgt-position{
+      color:#fff;
+      font-size:14px;
+      font-weight:900;
+      letter-spacing:.02em;
+    }
+    #volcanes-gt-app .vgt-stage{
+      align-items:end;
+      display:grid;
+      min-height:360px;
+      position:relative;
+    }
+    #volcanes-gt-app .vgt-art{
+      height:100%;
+      min-height:390px;
+      width:100%;
+    }
+    #volcanes-gt-app .vgt-nav{
+      align-items:center;
+      display:flex;
+      inset:50% clamp(12px,2vw,22px) auto;
+      justify-content:space-between;
+      pointer-events:none;
+      position:absolute;
+      transform:translateY(-35%);
+      z-index:5;
+    }
+    #volcanes-gt-app .vgt-arrow{
+      align-items:center;
+      background:rgba(8,18,32,.76);
+      border:1px solid rgba(255,255,255,.2);
+      border-radius:999px;
+      color:#fff;
+      cursor:pointer;
+      display:inline-flex;
+      height:54px;
+      justify-content:center;
+      pointer-events:auto;
+      transition:background .18s,transform .18s;
+      width:54px;
+    }
+    #volcanes-gt-app .vgt-arrow:hover{
+      background:rgba(249,206,11,.92);
+      color:#171717;
+      transform:translateY(-1px);
+    }
+    #volcanes-gt-app .vgt-controls{
+      background:linear-gradient(180deg,transparent,rgba(5,12,22,.82) 20%,rgba(5,12,22,.94));
+      display:grid;
+      gap:14px;
+      padding:26px clamp(18px,4vw,38px) clamp(20px,3vw,28px);
+    }
+    #volcanes-gt-app .vgt-slider-row{
+      align-items:center;
+      display:grid;
+      gap:14px;
+      grid-template-columns:minmax(0,1fr) auto;
+    }
+    #volcanes-gt-app input[type=range]{
+      accent-color:var(--vgt-yellow);
+      cursor:pointer;
+      width:100%;
+    }
+    #volcanes-gt-app .vgt-current{
+      color:#fff;
+      font-size:14px;
+      font-weight:900;
+      text-align:right;
+      white-space:nowrap;
+    }
+    #volcanes-gt-app .vgt-legend{
+      color:var(--vgt-muted);
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px 16px;
+      font-size:13px;
+      line-height:1.45;
+    }
+    #volcanes-gt-app .vgt-live{
+      height:1px;
+      left:-9999px;
+      overflow:hidden;
+      position:absolute;
+      top:auto;
+      width:1px;
+    }
+    #volcanes-gt-app .vgt-fade{
+      animation:vgt-fade .34s ease both;
+    }
+    @keyframes vgt-fade{from{opacity:.55;transform:translateY(8px) scale(.995)}to{opacity:1;transform:none}}
+    @media (max-width:720px){
+      #volcanes-gt-app .vgt-shell,
+      #volcanes-gt-app .vgt-content{min-height:720px}
+      #volcanes-gt-app .vgt-header{padding:24px 22px 10px}
+      #volcanes-gt-app .vgt-stage{min-height:360px}
+      #volcanes-gt-app .vgt-art{min-height:360px}
+      #volcanes-gt-app .vgt-nav{inset:auto 18px 174px}
+      #volcanes-gt-app .vgt-arrow{height:58px;width:58px}
+      #volcanes-gt-app .vgt-slider-row{grid-template-columns:1fr}
+      #volcanes-gt-app .vgt-current{text-align:left}
+    }
+    @media (prefers-reduced-motion:reduce){
+      #volcanes-gt-app .vgt-cloud,
+      #volcanes-gt-app .vgt-fade{animation:none}
+      #volcanes-gt-app .vgt-arrow{transition:none}
+    }
+  </style>
+
+  <div class="vgt-shell">
+    <div class="vgt-sky" aria-hidden="true">
+      <span class="vgt-cloud"></span><span class="vgt-cloud"></span><span class="vgt-cloud"></span>
+    </div>
+    <div class="vgt-content">
+      <header class="vgt-header">
+        <span class="vgt-badge">Volcanes de Guatemala</span>
+        <h2 id="vgt-title">Culma</h2>
+        <div class="vgt-meta">
+          <span id="vgt-dept" class="vgt-pill">Jutiapa</span>
+          <span id="vgt-height" class="vgt-pill">1,027 msnm</span>
+          <span id="vgt-state" class="vgt-pill">Inactivo</span>
+          <span id="vgt-activity" class="vgt-pill">Sin actividad eruptiva visible</span>
+        </div>
+        <p id="vgt-desc" class="vgt-desc"></p>
+        <span id="vgt-position" class="vgt-position">1 de 36</span>
+      </header>
+      <div class="vgt-stage" id="vgt-stage">
+        <svg id="vgt-art" class="vgt-art" viewBox="0 0 1200 520" role="img" aria-label="Ilustración del volcán seleccionado"></svg>
+        <div class="vgt-nav">
+          <button id="vgt-prev" class="vgt-arrow" type="button" aria-label="Volcán anterior">
+            <svg viewBox="0 0 24 24" width="25" height="25" aria-hidden="true"><path fill="currentColor" d="m15.7 4.3 1.4 1.4L10.8 12l6.3 6.3-1.4 1.4L8 12z"/></svg>
+          </button>
+          <button id="vgt-next" class="vgt-arrow" type="button" aria-label="Volcán siguiente">
+            <svg viewBox="0 0 24 24" width="25" height="25" aria-hidden="true"><path fill="currentColor" d="M8.3 19.7 6.9 18.3l6.3-6.3-6.3-6.3 1.4-1.4L16 12z"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="vgt-controls">
+        <div class="vgt-slider-row">
+          <input id="vgt-slider" type="range" min="0" max="35" value="0" aria-label="Seleccionar volcán por altura">
+          <div id="vgt-current" class="vgt-current">Culma · 1,027 msnm</div>
+        </div>
+        <div class="vgt-legend">
+          <span>Los volcanes activos se representan con señales visuales de actividad volcánica.</span>
+          <span>Las condiciones volcánicas pueden cambiar. Consulta boletines oficiales de INSIVUMEH y CONRED antes de realizar actividades en zonas volcánicas.</span>
+        </div>
+      </div>
+    </div>
+    <div id="vgt-live" class="vgt-live" aria-live="polite"></div>
+  </div>
+
+  <script>
+    (() => {
+      const volcanes = [
+        {nombre:"Culma",departamento:"Jutiapa",altura:1027,estado:"Inactivo",descripcion:"Una elevación volcánica del oriente guatemalteco, de perfil bajo y entorno seco.",shapeType:"low-ridge",lavaEnabled:false},
+        {nombre:"Amayo",departamento:"Jutiapa",altura:1044,estado:"Inactivo",descripcion:"Volcán de baja altura con laderas suaves y paisaje característico del suroriente.",shapeType:"weathered-cone",lavaEnabled:false},
+        {nombre:"Las Víboras",departamento:"Jutiapa",altura:1070,estado:"Inactivo",descripcion:"Formación volcánica de relieve suave, integrada al paisaje montañoso de Jutiapa.",shapeType:"rounded-hill",lavaEnabled:false},
+        {nombre:"Cerro Redondo",departamento:"Santa Rosa",altura:1267,estado:"Inactivo",descripcion:"Elevación de perfil redondeado y vegetación propia del sur del país.",shapeType:"rounded-massif",lavaEnabled:false},
+        {nombre:"Monterrico",departamento:"Jutiapa",altura:1285,estado:"Inactivo",descripcion:"Volcán de baja altura, con una silueta erosionada y amplia.",shapeType:"eroded-hill",lavaEnabled:false},
+        {nombre:"Ixtepeque",departamento:"Jutiapa",altura:1292,estado:"Inactivo",descripcion:"Formación volcánica de baja altura con una presencia discreta dentro del paisaje oriental.",shapeType:"rocky-ridge",lavaEnabled:false},
+        {nombre:"Moyuta",departamento:"Jutiapa",altura:1622,estado:"Inactivo",descripcion:"Volcán de laderas amplias y vegetación variable, cercano a la frontera suroriental.",shapeType:"broad-cone",lavaEnabled:false},
+        {nombre:"Ipala",departamento:"Chiquimula",altura:1650,estado:"Inactivo",descripcion:"Conocido por su cráter amplio y su laguna volcánica.",shapeType:"crater-lake",lavaEnabled:false},
+        {nombre:"Cruz Quemada",departamento:"Santa Rosa",altura:1690,estado:"Inactivo",descripcion:"Elevación volcánica de perfil irregular y laderas erosionadas.",shapeType:"eroded-ridge",lavaEnabled:false},
+        {nombre:"Tahual",departamento:"Jalapa",altura:1716,estado:"Inactivo",descripcion:"Volcán de relieve medio, con pendientes suaves y textura montañosa.",shapeType:"soft-cone",lavaEnabled:false},
+        {nombre:"Chingo",departamento:"Jutiapa",altura:1775,estado:"Inactivo",descripcion:"Volcán fronterizo de silueta amplia y cumbre irregular.",shapeType:"broad-ridge",lavaEnabled:false},
+        {nombre:"Jumaytepeque",departamento:"Santa Rosa",altura:1815,estado:"Inactivo",descripcion:"Macizo volcánico de laderas verdes y perfil poco simétrico.",shapeType:"vegetated-massif",lavaEnabled:false},
+        {nombre:"Tecuamburro",departamento:"Santa Rosa",altura:1840,estado:"Inactivo",descripcion:"Complejo volcánico de relieve quebrado y presencia geotérmica en su región.",shapeType:"complex-crater",lavaEnabled:false},
+        {nombre:"Quetzaltepeque",departamento:"Chiquimula",altura:1904,estado:"Inactivo",descripcion:"Volcán del oriente con una silueta ancha, erosionada y montañosa.",shapeType:"wide-eroded-cone",lavaEnabled:false},
+        {nombre:"Suchitán",departamento:"Jutiapa",altura:2042,estado:"Inactivo",descripcion:"Macizo volcánico del suroriente, con laderas extensas y cumbre redondeada.",shapeType:"wide-massif",lavaEnabled:false},
+        {nombre:"Alzatate",departamento:"Jalapa",altura:2050,estado:"Inactivo",descripcion:"Volcán de perfil irregular, parte importante del relieve montañoso de Jalapa.",shapeType:"irregular-cone",lavaEnabled:false},
+        {nombre:"Tobón",departamento:"Jalapa",altura:2087,estado:"Inactivo",descripcion:"Elevación volcánica de laderas pronunciadas y textura de montaña erosionada.",shapeType:"steep-ridge",lavaEnabled:false},
+        {nombre:"Jumay",departamento:"Jalapa",altura:2176,estado:"Inactivo",descripcion:"Volcán de porte medio, con relieve montañoso y vegetación densa.",shapeType:"green-massif",lavaEnabled:false},
+        {nombre:"Santiaguito",departamento:"Quetzaltenango",altura:2500,estado:"Activo",descripcion:"Complejo de domos volcánicos asociado al sistema de Santa María.",shapeType:"lava-dome-complex",lavaEnabled:true},
+        {nombre:"Pacaya",departamento:"Escuintla y Guatemala",altura:2522,estado:"Activo",descripcion:"Uno de los volcanes más conocidos y activos de Guatemala.",shapeType:"active-black-cone",lavaEnabled:true},
+        {nombre:"San Antonio",departamento:"San Marcos",altura:2550,estado:"Inactivo",descripcion:"Volcán de occidente con laderas largas y una cumbre amplia.",shapeType:"highland-cone",lavaEnabled:false},
+        {nombre:"Lacandón",departamento:"Quetzaltenango",altura:2748,estado:"Inactivo",descripcion:"Volcán occidental de laderas pronunciadas y textura de alta montaña.",shapeType:"rocky-highland",lavaEnabled:false},
+        {nombre:"Chicabal",departamento:"Quetzaltenango",altura:2900,estado:"Inactivo",descripcion:"Volcán de cráter profundo, asociado a una laguna de gran valor cultural y natural.",shapeType:"crater-lagoon",lavaEnabled:false},
+        {nombre:"San Pedro",departamento:"Sololá",altura:3020,estado:"Inactivo",descripcion:"Volcán de forma marcada que domina el paisaje del lago de Atitlán.",shapeType:"lake-cone",lavaEnabled:false},
+        {nombre:"Cuxliquel",departamento:"Totonicapán",altura:3050,estado:"Inactivo",descripcion:"Elevación volcánica de altiplano, con una presencia amplia y montañosa.",shapeType:"highland-massif",lavaEnabled:false},
+        {nombre:"Tolimán",departamento:"Sololá",altura:3150,estado:"Inactivo",descripcion:"Volcán de laderas escarpadas y fuerte relación visual con el lago de Atitlán.",shapeType:"lake-ridge-cone",lavaEnabled:false},
+        {nombre:"Cerro Quemado",departamento:"Quetzaltenango",altura:3197,estado:"Complejo volcánico",descripcion:"Complejo de estructuras volcánicas irregulares cercano a Quetzaltenango.",shapeType:"complex-jagged",lavaEnabled:false},
+        {nombre:"Santo Tomás o Pecul",departamento:"Sololá",altura:3505,estado:"Inactivo",descripcion:"Volcán de gran altura con laderas extensas y vegetación de montaña.",shapeType:"high-massif",lavaEnabled:false},
+        {nombre:"Atitlán",departamento:"Sololá",altura:3537,estado:"Inactivo",descripcion:"Una de las siluetas volcánicas más emblemáticas del paisaje lacustre guatemalteco.",shapeType:"lake-twin-peak",lavaEnabled:false},
+        {nombre:"Zunil",departamento:"Quetzaltenango",altura:3542,estado:"Inactivo",descripcion:"Volcán de occidente, alto, verde y de relieve amplio.",shapeType:"high-green-cone",lavaEnabled:false},
+        {nombre:"Volcán de Fuego",departamento:"Chimaltenango, Escuintla y Sacatepéquez",altura:3763,estado:"Activo",descripcion:"Volcán de actividad frecuente, reconocido por sus explosiones y fumarolas.",shapeType:"active-jagged-cone",lavaEnabled:true},
+        {nombre:"Volcán de Agua",departamento:"Sacatepéquez",altura:3766,estado:"Inactivo",descripcion:"Una de las montañas más reconocibles de Guatemala, visible desde Antigua y la capital.",shapeType:"tall-elegant-cone",lavaEnabled:false},
+        {nombre:"Santa María",departamento:"Quetzaltenango",altura:3772,estado:"Inactivo",descripcion:"Macizo volcánico monumental, vinculado geológicamente al complejo Santiaguito.",shapeType:"massive-crater-ridge",lavaEnabled:false},
+        {nombre:"Acatenango",departamento:"Chimaltenango",altura:3976,estado:"Inactivo",descripcion:"Volcán de gran altitud y doble cumbre, vecino directo del Volcán de Fuego.",shapeType:"double-peak-highland",lavaEnabled:false},
+        {nombre:"Tacaná",departamento:"San Marcos",altura:4092,estado:"Inactivo",descripcion:"Uno de los grandes volcanes de Guatemala, cercano a la frontera con México.",shapeType:"tall-border-massif",lavaEnabled:false},
+        {nombre:"Tajumulco",departamento:"San Marcos",altura:4220,estado:"Inactivo",descripcion:"La cumbre más alta de Guatemala y de Centroamérica.",shapeType:"highest-broad-massif",lavaEnabled:false}
+      ];
+
+      const app = document.getElementById("volcanes-gt-app");
+      const $ = (id) => app.querySelector(id);
+      const nf = new Intl.NumberFormat("es-GT");
+      const maxH = Math.max(...volcanes.map(v => v.altura));
+      let index = 0;
+      let touchStart = null;
+
+      function hashText(text){
+        return [...text].reduce((acc,ch)=>(acc*31+ch.charCodeAt(0))>>>0,7);
+      }
+      function seeded(seed){
+        let x = seed || 1;
+        return () => {
+          x ^= x << 13; x ^= x >>> 17; x ^= x << 5;
+          return ((x >>> 0) % 1000) / 1000;
+        };
+      }
+      function profile(volcano){
+        const seed = hashText(volcano.nombre + volcano.shapeType);
+        const rnd = seeded(seed);
+        const high = volcano.altura / maxH;
+        const lake = volcano.shapeType.includes("lake") || volcano.shapeType.includes("lagoon");
+        const jagged = volcano.shapeType.includes("jagged") || volcano.shapeType.includes("rocky") || volcano.shapeType.includes("eroded") || volcano.lavaEnabled;
+        const complex = volcano.shapeType.includes("complex") || volcano.shapeType.includes("dome") || volcano.shapeType.includes("double") || volcano.shapeType.includes("twin");
+        return {
+          seed,rnd,high,lake,jagged,complex,
+          baseWidth: 560 + rnd()*260 + high*130,
+          height: 160 + high*190,
+          peakOffset: (rnd()-.5)*170,
+          ridgeCount: 8 + Math.floor(rnd()*7) + (jagged ? 5 : 0),
+          vegetation: Math.max(.15, .74 - high*.42 + rnd()*.18),
+          rock: .25 + high*.42 + (jagged ? .22 : 0),
+          crater: volcano.shapeType.includes("crater") || volcano.lavaEnabled || volcano.shapeType.includes("lagoon"),
+          secondary: complex
+        };
+      }
+      function makePath(volcano, p){
+        const left = 600 - p.baseWidth/2;
+        const right = 600 + p.baseWidth/2;
+        const baseY = 452;
+        const peakX = 600 + p.peakOffset;
+        const peakY = baseY - p.height;
+        const pts = [[left, baseY]];
+        const count = p.ridgeCount;
+        for(let i=1;i<count;i++){
+          const t = i / count;
+          const sideX = left + (right-left)*t;
+          const up = 1 - Math.abs(t - (peakX-left)/(right-left))*2;
+          const rugged = (p.rnd()-.5) * (p.jagged ? 42 : 24);
+          const shoulder = p.secondary ? Math.sin(t*Math.PI*3)*28 : Math.sin(t*Math.PI)*12;
+          const y = baseY - Math.max(0, up) * p.height + rugged - shoulder;
+          pts.push([sideX,y]);
+        }
+        pts.push([right, baseY]);
+        return "M" + pts.map(pt => pt.map(n => n.toFixed(1)).join(",")).join(" L") + " Z";
+      }
+      function renderSvg(volcano){
+        const p = profile(volcano);
+        const path = makePath(volcano,p);
+        const active = volcano.lavaEnabled;
+        const lake = p.lake ? `<ellipse cx="600" cy="432" rx="250" ry="26" fill="rgba(71,151,172,.38)"/><path d="M360 430 C470 407 590 450 720 424 C790 412 845 420 900 435" fill="none" stroke="rgba(150,218,234,.42)" stroke-width="5"/>` : "";
+        const lava = active ? `
+          <path d="M590 ${285 - p.high*70} C610 ${330 - p.high*46} 625 356 636 420" fill="none" stroke="#ff6b22" stroke-width="6" stroke-linecap="round" opacity=".8"/>
+          <path d="M556 ${320 - p.high*40} C544 360 548 388 528 426" fill="none" stroke="#df351d" stroke-width="4" stroke-linecap="round" opacity=".58"/>
+          <circle cx="594" cy="${284 - p.high*70}" r="17" fill="rgba(255,112,31,.38)"/>
+          <path class="vgt-smoke" d="M595 ${265 - p.high*70} C570 238 632 222 608 194 C650 215 634 247 668 260" fill="none" stroke="rgba(210,213,210,.52)" stroke-width="10" stroke-linecap="round"/>
+        ` : "";
+        const crater = p.crater ? `<ellipse cx="${600+p.peakOffset}" cy="${452-p.height+18}" rx="${active?40:58}" ry="${active?10:13}" fill="${active?'rgba(255,118,34,.45)':'rgba(10,18,25,.4)'}"/>` : "";
+        const snow = p.high > .88 ? `<path d="M${520+p.peakOffset} ${452-p.height+70} L${600+p.peakOffset} ${452-p.height+8} L${675+p.peakOffset} ${452-p.height+72} C640 ${452-p.height+56} 610 ${452-p.height+86} 575 ${452-p.height+58} C558 ${452-p.height+72} 540 ${452-p.height+75} ${520+p.peakOffset} ${452-p.height+70}Z" fill="rgba(230,239,243,.68)"/>` : "";
+        return `
+          <defs>
+            <linearGradient id="vgt-mountain" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="${active ? '#2a2b2d' : '#43586a'}"/>
+              <stop offset=".56" stop-color="${active ? '#1d2225' : '#263f3d'}"/>
+              <stop offset="1" stop-color="#122415"/>
+            </linearGradient>
+            <linearGradient id="vgt-ground" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#182c2c"/><stop offset="1" stop-color="#07110f"/>
+            </linearGradient>
+          </defs>
+          <rect width="1200" height="520" fill="transparent"/>
+          <path d="M0 385 C170 330 290 390 430 350 C600 300 745 390 930 338 C1038 306 1120 335 1200 315 L1200 520 L0 520Z" fill="rgba(7,16,27,.42)"/>
+          <path d="M0 420 C180 380 310 430 478 392 C640 355 820 432 1000 382 C1085 358 1140 380 1200 365 L1200 520 L0 520Z" fill="rgba(4,12,20,.68)"/>
+          ${lake}
+          <g class="vgt-volcano">
+            <path d="${path}" fill="url(#vgt-mountain)" stroke="rgba(255,255,255,.08)" stroke-width="2"/>
+            <path d="M390 455 C460 390 500 340 610 260 C560 360 535 400 510 455Z" fill="rgba(255,255,255,.08)"/>
+            <path d="M700 455 C680 370 640 318 590 260 C720 350 770 405 835 455Z" fill="rgba(0,0,0,.22)"/>
+            <path d="M360 455 C440 430 520 438 600 414 C690 388 780 436 875 405" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="4" opacity=".55"/>
+            <path d="M385 455 C500 416 612 450 730 420 C795 405 865 430 930 414" fill="none" stroke="rgba(249,206,11,.11)" stroke-width="7" opacity=".5"/>
+            ${snow}${crater}${lava}
+          </g>
+          <path d="M0 462 C130 440 240 474 370 452 C520 425 690 476 860 446 C1010 419 1090 450 1200 430 L1200 520 L0 520Z" fill="url(#vgt-ground)"/>
+          <path d="M0 472 C190 456 310 500 500 468 C690 436 800 490 1000 455 C1090 440 1140 456 1200 448 L1200 520 L0 520Z" fill="rgba(2,9,9,.78)"/>
+          <line x1="1045" y1="${452-p.height}" x2="1045" y2="452" stroke="rgba(255,255,255,.28)" stroke-width="3"/>
+          <circle cx="1045" cy="${452-p.height}" r="6" fill="#f9ce0b"/>
+        `;
+      }
+      function setIndex(next){
+        index = (next + volcanes.length) % volcanes.length;
+        const v = volcanes[index];
+        $("#vgt-title").textContent = v.nombre;
+        $("#vgt-dept").textContent = v.departamento;
+        $("#vgt-height").textContent = `${nf.format(v.altura)} msnm`;
+        $("#vgt-state").textContent = v.estado;
+        $("#vgt-desc").textContent = v.descripcion;
+        $("#vgt-position").textContent = `${index+1} de ${volcanes.length}`;
+        $("#vgt-slider").value = index;
+        $("#vgt-current").textContent = `${v.nombre} · ${nf.format(v.altura)} msnm`;
+        $("#vgt-activity").textContent = v.lavaEnabled ? "Actividad volcánica" : "Sin actividad eruptiva visible";
+        $("#vgt-activity").classList.toggle("vgt-pill-active", v.lavaEnabled);
+        $("#vgt-art").innerHTML = renderSvg(v);
+        $("#vgt-art").classList.remove("vgt-fade");
+        void $("#vgt-art").offsetWidth;
+        $("#vgt-art").classList.add("vgt-fade");
+        $("#vgt-live").textContent = `${v.nombre}, ${nf.format(v.altura)} metros sobre el nivel del mar`;
+      }
+      $("#vgt-prev").addEventListener("click",()=>setIndex(index-1));
+      $("#vgt-next").addEventListener("click",()=>setIndex(index+1));
+      $("#vgt-slider").addEventListener("input",(e)=>setIndex(Number(e.target.value)));
+      app.addEventListener("keydown",(e)=>{
+        if(e.key==="ArrowLeft") setIndex(index-1);
+        if(e.key==="ArrowRight") setIndex(index+1);
+      });
+      app.setAttribute("tabindex","0");
+      $("#vgt-stage").addEventListener("touchstart",(e)=>{touchStart=e.touches[0].clientX},{passive:true});
+      $("#vgt-stage").addEventListener("touchend",(e)=>{
+        if(touchStart===null) return;
+        const delta=e.changedTouches[0].clientX-touchStart;
+        if(Math.abs(delta)>45) setIndex(index + (delta<0 ? 1 : -1));
+        touchStart=null;
+      },{passive:true});
+      setIndex(0);
+    })();
+  </script>
+</section>

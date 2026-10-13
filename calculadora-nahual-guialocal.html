@@ -1,0 +1,834 @@
+<meta charset="UTF-8">
+<!-- Calculadora de Nahual - GUIALOCAL.COM.GT -->
+<div id="nahual-app" class="nahual-calculator" lang="es-GT">
+  <style>
+    #nahual-app {
+      --gl-accent: #f9ce0b;
+      --gl-ink: #171717;
+      --gl-muted: #555555;
+      --gl-border: #e7e7e7;
+      --gl-soft: rgba(249, 206, 11, 0.14);
+      --gl-card: #ffffff;
+      color: var(--gl-ink);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      font-weight: 400;
+      margin: 34px 0;
+      max-width: 100%;
+    }
+
+    #nahual-app * {
+      box-sizing: border-box;
+    }
+
+    #nahual-app .nahual-shell {
+      border: 1px solid var(--gl-border);
+      border-radius: 10px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    #nahual-app .nahual-head {
+      border-left: 10px solid var(--gl-accent);
+      padding: clamp(22px, 4vw, 34px);
+    }
+
+    #nahual-app .nahual-kicker {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: var(--gl-soft);
+      color: var(--gl-ink);
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+
+    #nahual-app h2,
+    #nahual-app h3,
+    #nahual-app p {
+      margin: 0;
+    }
+
+    #nahual-app h2 {
+      color: var(--gl-ink);
+      font-size: clamp(30px, 4.6vw, 48px);
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.1;
+      max-width: 900px;
+    }
+
+    #nahual-app .nahual-sub {
+      color: var(--gl-muted);
+      font-size: clamp(16px, 2vw, 19px);
+      line-height: 1.7;
+      margin-top: 14px;
+      max-width: 900px;
+    }
+
+    #nahual-app .nahual-form {
+      display: grid;
+      gap: 18px;
+      padding: clamp(20px, 4vw, 34px);
+      border-top: 1px solid var(--gl-border);
+    }
+
+    #nahual-app .nahual-form-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: end;
+    }
+
+    #nahual-app label {
+      color: var(--gl-ink);
+      display: block;
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    #nahual-app input[type="date"] {
+      appearance: none;
+      background: #fff;
+      border: 1px solid var(--gl-border);
+      border-radius: 8px;
+      color: var(--gl-ink);
+      font: inherit;
+      font-size: 18px;
+      min-height: 58px;
+      padding: 0 16px;
+      width: 100%;
+    }
+
+    #nahual-app input[type="date"]:focus {
+      border-color: var(--gl-accent);
+      box-shadow: 0 0 0 4px rgba(249, 206, 11, 0.22);
+      outline: 0;
+    }
+
+    #nahual-app .nahual-hint {
+      color: var(--gl-muted);
+      font-size: 13px;
+      line-height: 1.5;
+      margin-top: 8px;
+    }
+
+    #nahual-app .nahual-btns {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    #nahual-app button {
+      align-items: center;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      font: inherit;
+      font-size: 16px;
+      font-weight: 850;
+      justify-content: center;
+      min-height: 58px;
+      padding: 0 20px;
+      transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+    }
+
+    #nahual-app button:hover {
+      transform: translateY(-1px);
+    }
+
+    #nahual-app .nahual-primary {
+      background: var(--gl-accent);
+      color: var(--gl-ink);
+    }
+
+    #nahual-app .nahual-secondary {
+      background: #fff;
+      border-color: var(--gl-border);
+      color: var(--gl-ink);
+    }
+
+    #nahual-app .nahual-error {
+      border-left: 6px solid #b00020;
+      color: #b00020;
+      display: none;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.5;
+      padding: 8px 0 8px 12px;
+    }
+
+    #nahual-app .nahual-result {
+      border-top: 1px solid var(--gl-border);
+      display: none;
+      padding: clamp(20px, 4vw, 34px);
+    }
+
+    #nahual-app .result-card {
+      display: grid;
+      grid-template-columns: minmax(126px, 180px) minmax(0, 1fr);
+      gap: clamp(18px, 3vw, 30px);
+      align-items: start;
+    }
+
+    #nahual-app .result-image {
+      align-items: center;
+      border: 3px solid var(--gl-accent);
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      min-height: 180px;
+      padding: 18px;
+    }
+
+    #nahual-app .result-image img {
+      display: block;
+      height: auto;
+      max-width: 140px;
+      width: 100%;
+    }
+
+    #nahual-app .result-copy {
+      display: grid;
+      gap: 14px;
+    }
+
+    #nahual-app .result-topline {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    #nahual-app .pill {
+      align-items: center;
+      background: var(--gl-soft);
+      border: 1px solid rgba(249, 206, 11, 0.55);
+      border-radius: 999px;
+      display: inline-flex;
+      font-size: 13px;
+      font-weight: 800;
+      min-height: 32px;
+      padding: 0 12px;
+    }
+
+    #nahual-app .result-copy h3 {
+      color: var(--gl-ink);
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 900;
+      line-height: 1.08;
+    }
+
+    #nahual-app .result-copy p {
+      color: var(--gl-muted);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    #nahual-app .trait-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px;
+      margin: 2px 0 0;
+      padding: 0;
+    }
+
+    #nahual-app .trait-grid li {
+      background: var(--gl-soft);
+      border: 1px solid rgba(249, 206, 11, 0.5);
+      border-radius: 8px;
+      color: var(--gl-ink);
+      font-size: 14px;
+      font-weight: 750;
+      line-height: 1.35;
+      list-style: none;
+      padding: 10px 12px;
+    }
+
+    #nahual-app .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    #nahual-app .meta-item {
+      border: 1px solid var(--gl-border);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    #nahual-app .meta-label {
+      color: var(--gl-muted);
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.35;
+    }
+
+    #nahual-app .meta-value {
+      color: var(--gl-ink);
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-top: 5px;
+    }
+
+    #nahual-app .tone-meaning {
+      border: 1px solid rgba(249, 206, 11, 0.65);
+      border-left: 8px solid var(--gl-accent);
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      margin-top: 2px;
+      padding: 14px 16px;
+    }
+
+    #nahual-app .tone-meaning strong {
+      color: var(--gl-ink);
+      display: block;
+      font-size: 17px;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+
+    #nahual-app .tone-meaning span {
+      color: var(--gl-muted);
+      display: block;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    #nahual-app details {
+      border-top: 1px solid var(--gl-border);
+      margin-top: 26px;
+      padding-top: 18px;
+    }
+
+    #nahual-app summary {
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 900;
+      list-style: none;
+    }
+
+    #nahual-app summary::-webkit-details-marker {
+      display: none;
+    }
+
+    #nahual-app .nahual-list {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 14px;
+    }
+
+    #nahual-app .mini-nahual {
+      border: 1px solid var(--gl-border);
+      border-radius: 8px;
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr);
+      gap: 10px;
+      align-items: center;
+      padding: 10px;
+    }
+
+    #nahual-app .mini-nahual img {
+      width: 44px;
+      height: auto;
+    }
+
+    #nahual-app .mini-nahual strong {
+      display: block;
+      font-size: 15px;
+      line-height: 1.2;
+    }
+
+    #nahual-app .mini-nahual span {
+      color: var(--gl-muted);
+      display: block;
+      font-size: 12px;
+      line-height: 1.35;
+      margin-top: 3px;
+    }
+
+    @media (max-width: 760px) {
+      #nahual-app .nahual-form-grid,
+      #nahual-app .result-card,
+      #nahual-app .meta-grid,
+      #nahual-app .nahual-list,
+      #nahual-app .trait-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #nahual-app .nahual-btns button,
+      #nahual-app .nahual-form-grid button {
+        width: 100%;
+      }
+
+      #nahual-app .result-image {
+        min-height: 140px;
+      }
+
+      #nahual-app .result-image img {
+        max-width: 118px;
+      }
+    }
+  </style>
+
+  <div class="nahual-shell">
+    <div class="nahual-head">
+      <span class="nahual-kicker">Guialocal Guatemala</span>
+      <h2>Calculadora de Nahual Maya</h2>
+      <p class="nahual-sub">
+        Ingresa tu fecha de nacimiento y descubre tu nahual según el calendario sagrado Cholq'ij:
+        su tono, glifo, significado y rasgos de personalidad.
+      </p>
+    </div>
+
+    <div class="nahual-form" aria-labelledby="nahual-form-title">
+      <div class="nahual-form-grid">
+        <div>
+          <label id="nahual-form-title" for="nahual-dob">Fecha de nacimiento</label>
+          <input id="nahual-dob" type="date" aria-describedby="nahual-date-hint">
+          <p id="nahual-date-hint" class="nahual-hint">Usa el formato año, mes y día. No necesitas ingresar hora de nacimiento.</p>
+        </div>
+        <button id="nahual-calc" class="nahual-primary" type="button">Calcular mi nahual</button>
+      </div>
+
+      <div class="nahual-btns">
+        <button id="nahual-copy" class="nahual-secondary" type="button">Copiar resultado</button>
+        <button id="nahual-clear" class="nahual-secondary" type="button">Limpiar</button>
+      </div>
+
+      <div id="nahual-error" class="nahual-error" role="alert"></div>
+    </div>
+
+    <div id="nahual-result" class="nahual-result" aria-live="polite">
+      <div class="result-card">
+        <div class="result-image">
+          <img id="nahual-image" src="" alt="" loading="lazy">
+        </div>
+
+        <div class="result-copy">
+          <div class="result-topline">
+            <span id="nahual-tone" class="pill">Tono —</span>
+            <span id="nahual-yucatec" class="pill">Equivalente —</span>
+          </div>
+          <h3 id="nahual-name">Tu nahual</h3>
+          <p id="nahual-summary"></p>
+          <p id="nahual-personality"></p>
+          <div class="tone-meaning">
+            <strong id="nahual-tone-title">Significado del tono energético</strong>
+            <span id="nahual-tone-description"></span>
+          </div>
+          <ul id="nahual-traits" class="trait-grid"></ul>
+
+          <div class="meta-grid">
+            <div class="meta-item">
+              <div class="meta-label">Fecha ingresada</div>
+              <div id="nahual-date" class="meta-value">—</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Nahual k'iche'</div>
+              <div id="nahual-kiche" class="meta-value">—</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Tono energético</div>
+              <div id="nahual-tone-value" class="meta-value">—</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <details>
+        <summary>Ver los 20 nahuales</summary>
+        <div id="nahual-list" class="nahual-list"></div>
+      </details>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const NAHUALES = [
+        {
+          id: "imox",
+          kiche: "Imox",
+          yucatec: "Imix",
+          image: "https://res.cloudinary.com/djkxtpn57/image/upload/v1782151229/01-imox.jpg_ogrtie.svg",
+          title: "Imox: agua primordial",
+          summary: "Representa la intuición, los sueños, la sensibilidad y el origen creativo. Imox se relaciona con el agua primordial: aquello que todavía no tiene forma, pero contiene posibilidades profundas.",
+          personality: "Quienes se identifican con esta energía suelen percibir señales sutiles, conectar con símbolos y crear desde la emoción. Su aprendizaje principal es ordenar su sensibilidad para que la imaginación no se convierta en confusión.",
+          traits: ["Imaginación profunda", "Compasión", "Creatividad artística", "Necesita límites claros"]
+        },
+        {
+          id: "iq",
+          kiche: "Iq",
+          yucatec: "Ik'",
+          image: "https://res.cloudinary.com/djkxtpn57/image/upload/v1782151243/02-iq.jpg_opjkch.svg",
+          title: "Iq: viento y palabra",
+          summary: "Simboliza el aire, el aliento, la comunicación y la renovación. Iq recuerda que la palabra puede mover, sanar, enseñar y abrir nuevas ideas cuando se usa con conciencia.",
+          personality: "Las personas guiadas por este nahual suelen destacar por su mente despierta, facilidad para expresar conocimientos y gusto por el aprendizaje. Su reto es no quedarse atrapadas en el exceso de análisis o en cambios impulsivos.",
+          traits: ["Inteligencia verbal", "Facilidad para enseñar", "Talento artístico", "Puede ser muy analítico"]
+        },
+        {
+          id: "aqabal",
+          kiche: "Aq'ab'al",
+          yucatec: "Ak'b'al",
+          image: "https://res.cloudinary.com/djkxtpn57/image/upload/v1782151245/03-aqab.jpg_jiafle.svg",
+          title: "Aq'ab'al: amanecer y claridad",
+          summary: "Representa la luz que aparece tras la oscuridad, la visión clara y la capacidad de cumplir compromisos. Aq'ab'al anuncia el amanecer: el momento en que algo empieza a entenderse.",
+          personality: "Esta energía favorece a personas responsables, constantes y capaces de acompañar procesos de sanación. Su personalidad busca claridad, pero debe cuidar no exigir respuestas inmediatas cuando la vida todavía está revelando el camino.",
+          traits: ["Confiabilidad", "Claridad práctica", "Capacidad sanadora", "Busca comprender antes de actuar"]
+        },
+        {
+          id: "kat",
+          kiche: "K'at",
+          yucatec: "K'an",
+          image: "https://res.cloudinary.com/djkxtpn57/image/upload/v1782151237/05-kat.jpg_dyzxqv.svg",
+          title: "K'at: red y orden",
+          summary: "Representa la red que recoge aprendizajes, vínculos y experiencias, pero también los nudos que deben resolverse. K'at ayuda a ordenar lo acumulado y a liberar lo que ya no corresponde.",
+          personality: "Su personalidad se expresa en método, memoria, análisis y capacidad de estructurar procesos. Su desafío es no quedarse reteniendo cargas, objetos, pendientes o relaciones que impiden avanzar con ligereza.",
+          traits: ["Mente organizada", "Memoria funcional", "Pensamiento analítico", "Debe evitar acumular cargas"]
+        },
+        {
+          id: "kan",
+          kiche: "Kan",
+          yucatec: "Chikchan",
+          image: "https://res.cloudinary.com/djkxtpn57/image/upload/v1782151236/04-kan.jpg_gqu2qi.svg",
+          title: "Kan: serpiente emplumada",
+          summary: "Se relaciona con la creación, la abundancia material y la solución de problemas. Kan es la serpiente emplumada, símbolo de transformación y de conexión entre lo espiritual y lo terrenal.",
+          personality: "Las personas bajo esta influencia suelen ser leales, intensas y comprometidas con lo que consideran importante. Tienen fuerza para crear y resolver, aunque necesitan usar su poder con equilibrio para no volverse controladoras.",
+          traits: ["Lealtad", "Fidelidad a sus compromisos", "Poder creativo", "Busca resolver necesidades"]
+        },
+        {
+          id: "keme",
+          kiche: "Keme",
+          yucatec: "Kimi",
+          image: "https://res.cloudinary.com/djkxtpn57/image/upload/v1782151229/06-kamey.jpg_ekr1jz.svg",
+          title: "Keme: transición y descanso",
+          summary: "Se asocia con la muerte entendida como cambio, descanso y paz. Keme no habla solo de finales: también señala la transición necesaria para que una etapa pueda transformarse en otra.",
+          personality: "Quienes vibran con esta energía pueden tener gran profundidad interior, sensibilidad espiritual y habilidad para crear con las manos. Su camino pide aceptar los cierres sin miedo y convertir la experiencia en sabiduría.",
+          traits: ["Habilidad manual", "Talento para artes u oficios", "Profundidad espiritual", "Capacidad de purificación"]
+        },
+        {
+          id: "kej",
+          kiche: "Kej",
+          yucatec: "Manik'",
+          image: "https://res.cloudinary.com/djkxtpn57/image/upload/v1782151229/07-kej.jpg_ohyfmh.svg",
+          title: "Kej: venado y bosque",
+          summary: "Simboliza fuerza en equilibrio con la naturaleza, disciplina, vitalidad y conexión con montañas, plantas y territorio. Kej enseña que la verdadera fortaleza no destruye: sostiene.",
+          personality: "Las personas Kej suelen liderar con el ejemplo, valorar la constancia y buscar coherencia entre cuerpo, mente y entorno. Su reto está en flexibilizarse y no convertir la disciplina en imposición.",
+          traits: ["Resistencia", "Constancia", "Liderazgo con ejemplo", "Debe evitar la rigidez"]
+        },
+        {
+          id: "qanil",
+          kiche: "Q'anil",
+          yucatec: "Lamat",
+          image: "https://res.cloudinary.com/djkxtpn57/image/upload/v1782151243/08-qane.jpg_nzprl1.svg",
+          title: "Q'anil: semilla y prosperidad",
+          summary: "Habla de siembra, floración, creatividad y abundancia bien cuidada. Q'anil recuerda que toda cosecha empieza con una semilla pequeña, protegida con paciencia y propósito.",
+          personality: "Esta personalidad suele mirar a largo plazo, cuidar procesos y aportar belleza a lo que toca. Su aprendizaje es sostener el enfoque, celebrar avances pequeños y no abandonar antes de que el proyecto madure.",
+          traits: ["Visión de largo plazo", "Paciencia activa", "Sensibilidad estética", "Debe evitar dispersarse"]
+        },
+        {
+          id: "toj",
+          kiche: "Toj",
+          yucatec: "Muluk",
+          image: "https://res.cloudinary.com/djkxtpn57/image/upload/v1782151237/09-toj.jpg_swm5kl.svg",
+          title: "Toj: ofrenda y gratitud",
+          summary: "Representa el pago, la ofrenda, la lluvia y el equilibrio de deudas materiales, emocionales o espirituales. Toj invita a agradecer lo recibido y a devolver con conciencia.",
+          personality: "Quienes nacen bajo esta energía suelen ser sensibles, expresivos y muy conectados con el arte o las emociones. Su reto es no cargar culpas innecesarias y aprender a equilibrar lo que dan con lo que también necesitan recibir.",
+          traits: ["Sensibilidad emocional", "Conexión con las artes", "Gratitud", "Facilidad para conmoverse"]
+        },
+        {
+          id: "tzi",
+          kiche: "Tzi",
+          yucatec: "Ok",
+          image: "https://res.cloudinary.com/djkxtpn57/image/upload/v1782151236/10-tzi.jpg_fawrex.svg",
+          title: "Tzi: perro y lealtad",
+          summary: "Simboliza fidelidad, protección, justicia y guía espiritual. Tzi acompaña, cuida y ayuda a encontrar el camino correcto, como un guardián atento de la comunidad y los afectos.",
+          personality: "Su personalidad suele ser noble, servicial y confiable. Las personas Tzi pueden convertirse en grandes amistades y defensoras de lo justo, siempre que cuiden no reaccionar desde la dureza cuando sienten que deben proteger.",
+          traits: ["Lealtad profunda", "Sentido de justicia", "Vocación protectora", "Buen amigo y confidente"]
+        },
+        {
+          id: "batz",
+          kiche: "B'atz",
+          yucatec: "Chuwen",
+          image: "https://res.cloudinary.com/djkxtpn57/image/upload/v1782151244/11-batz-150x150_ijcdhm.svg",
+          title: "B'atz: hilo de la vida",
+          summary: "Marca inicio, abundancia, amor, inteligencia y continuidad de ceremonias. B'atz es el hilo de la vida: conecta origen, historia, creatividad y propósito.",
+          personality: "Las personas con esta energía suelen ser generosas, expresivas y capaces de enseñar o preservar tradiciones. Su don está en crear vínculos y proyectos fértiles; su reto es sostenerlos con orden y humildad.",
+          traits: ["Generosidad", "Creatividad", "Capacidad de enseñar", "Conexión con tradiciones"]
+        },
+        {
+          id: "ee",
+          kiche: "Ee",
+          yucatec: "Eb'",
+          image: "https://res.cloudinary.com/djkxtpn57/image/upload/v1782151230/12-ey-150x150_gvpldx.svg",
+          title: "Ee: camino y dirección",
+          summary: "Es el nawal de los caminos, los viajes, los negocios y los dirigentes. Ee habla del trayecto de vida: la dirección que se elige y la disciplina necesaria para recorrerla.",
+          personality: "Quienes se identifican con este nahual suelen abrir rutas para otras personas, tomar iniciativa y conducir procesos. Su aprendizaje es liderar con servicio, sin perder sensibilidad hacia quienes caminan a otro ritmo.",
+          traits: ["Liderazgo natural", "Determinación", "Capacidad de guiar", "Busca abrir caminos"]
+        },
+        {
+          id: "aj",
+          kiche: "Aj",
+          yucatec: "B'en",
+          image: "https://res.cloudinary.com/djkxtpn57/image/upload/v1782151229/13-aj1.jpg_afsy6h.svg",
+          title: "Aj: protección y perseverancia",
+          summary: "Asociado con el armadillo, simboliza protección, fuerza, determinación y conexión con la tierra. Aj representa la estructura que sostiene, cuida y resiste ante la adversidad.",
+          personality: "Su personalidad puede ser perseverante, previsora y profundamente protectora con su familia o comunidad. El desafío está en no encerrarse demasiado en su caparazón y permitir que la confianza también sea una forma de fuerza.",
+          traits: ["Persistencia", "Espíritu protector", "Valentía", "Planificación y previsión"]
+        },
+        {
+          id: "ix",
+          kiche: "Ix",
+          yucatec: "Ix",
+          image: "https://res.cloudinary.com/djkxtpn57/image/upload/v1782151236/14-ix1.jpg_lubjqf.svg",
+          title: "Ix: jaguar y poder interior",
+          summary: "Representa al jaguar, guardián de lo sagrado, la naturaleza viva y los espacios ceremoniales. Ix habla de poder interior, intuición fina y respeto por el territorio propio y colectivo.",
+          personality: "Las personas Ix suelen tener presencia fuerte, liderazgo discreto y una percepción aguda de lo que ocurre a su alrededor. Su aprendizaje es usar esa fuerza para cuidar, no para dominar.",
+          traits: ["Autoridad serena", "Intuición aguda", "Protección del linaje", "Debe cuidar el orgullo"]
+        },
+        {
+          id: "tzikin",
+          kiche: "Tz'ikin",
+          yucatec: "Men",
+          image: "https://res.cloudinary.com/djkxtpn57/image/upload/v1782151236/15-tzik.jpg_bjkrhg.svg",
+          title: "Tz'ikin: pájaro y buena fortuna",
+          summary: "Se vincula con los pájaros, el bienestar económico, la comunicación y la conexión entre cielo y tierra. Tz'ikin eleva la mirada y ayuda a reconocer oportunidades.",
+          personality: "Su personalidad puede destacar por la facilidad para relacionarse, mediar y construir prosperidad con inteligencia. El reto es mantener los pies en la tierra para que la buena fortuna se convierta en decisiones concretas.",
+          traits: ["Buena comunicación", "Intermediación", "Visión de prosperidad", "Construye su bienestar"]
+        },
+        {
+          id: "ajmaq",
+          kiche: "Ajmaq",
+          yucatec: "Kib'",
+          image: "https://res.cloudinary.com/djkxtpn57/image/upload/v1782151250/16-ajmaq.jpg_t1ufow.svg",
+          title: "Ajmaq: memoria y perdón",
+          summary: "Invita a transformar culpa en sabiduría, reparar vínculos y cerrar ciclos con humildad. Ajmaq se relaciona con la memoria ancestral y con la posibilidad de aprender del error.",
+          personality: "Las personas bajo esta energía suelen ser introspectivas, empáticas y sensibles a los procesos de sanación emocional. Su desafío es no quedarse atrapadas en la autocrítica, sino convertir la experiencia en reparación y crecimiento.",
+          traits: ["Introspección", "Empatía", "Sanación de vínculos", "Debe evitar la autocrítica excesiva"]
+        },
+        {
+          id: "noj",
+          kiche: "No'j",
+          yucatec: "Kab'an",
+          image: "https://res.cloudinary.com/djkxtpn57/image/upload/v1782151229/17-noj.jpg_ihqyja.svg",
+          title: "No'j: sabiduría y pensamiento",
+          summary: "Representa conocimiento, ciencia, inteligencia y buen consejo. No'j es la energía de la mente clara, de la planificación y de la sabiduría que se construye en comunidad.",
+          personality: "Quienes se identifican con este nahual suelen tener facilidad para aprender, aconsejar y tomar decisiones razonadas. Su reto es equilibrar inteligencia con humildad para que el conocimiento no se convierta en orgullo.",
+          traits: ["Inteligencia activa", "Buen consejo", "Toma de decisiones", "Debe evitar orgullo e ira"]
+        },
+        {
+          id: "tijax",
+          kiche: "Tijax",
+          yucatec: "Etz'nab'",
+          image: "https://res.cloudinary.com/djkxtpn57/image/upload/v1782151250/18-tijax.jpg_zcwadl.svg",
+          title: "Tijax: cuchillo y sanación",
+          summary: "Simboliza corte, limpieza, justicia y curación. Tijax es el cuchillo de obsidiana que separa lo necesario de lo innecesario y abre espacio para sanar.",
+          personality: "Su personalidad puede ser directa, valiente, intuitiva y firme frente a la injusticia. El aprendizaje está en usar la precisión con compasión, evitando que la claridad se convierta en dureza.",
+          traits: ["Claridad mental", "Sentido de justicia", "Valentía", "Debe evitar la intolerancia"]
+        },
+        {
+          id: "kawoq",
+          kiche: "Kawoq",
+          yucatec: "Kawak",
+          image: "https://res.cloudinary.com/djkxtpn57/image/upload/v1782151243/19-kawoq.jpg_atv75w.svg",
+          title: "Kawoq: tormenta y comunidad",
+          summary: "Representa familia, comunidad, cooperación y cuidado colectivo. Kawoq es la tormenta que limpia, agrupa y recuerda que la fuerza también vive en la red de apoyo.",
+          personality: "Las personas Kawoq suelen ser hospitalarias, diplomáticas y capaces de contener emocionalmente a otros. Su reto es no cargar con todo y aprender a pedir ayuda cuando también necesitan sostén.",
+          traits: ["Liderazgo comunitario", "Hospitalidad", "Diplomacia", "Debe aprender a pedir ayuda"]
+        },
+        {
+          id: "ajpu",
+          kiche: "Ajpu",
+          yucatec: "Ajaw",
+          image: "https://res.cloudinary.com/djkxtpn57/image/upload/v1782151243/20-ajpu.jpg_e3gerr.svg",
+          title: "Ajpu: sol y guerrero iluminado",
+          summary: "Se asocia con el sol, el liderazgo, la transformación y la capacidad de vencer obstáculos internos para alcanzar grandeza espiritual. Ajpu ilumina, dirige y enfrenta pruebas con valentía.",
+          personality: "Quienes nacen bajo esta energía pueden ser líderes naturales, soñadores, trabajadores y defensores de lo que aman. Su desafío principal es cuidar el ego y orientar su fuerza hacia el servicio.",
+          traits: ["Valentía", "Liderazgo", "Generosidad", "Debe cuidar el ego"]
+        }
+      ];
+
+      const TONES = {
+        1: {
+          name: "El Principio / Unidad",
+          description: "Representa el inicio, la creación, el liderazgo y la fuerza de voluntad. Este tono habla de la primera chispa: el momento en que una idea, una decisión o un camino comienza a tomar forma. En la vida personal, invita a confiar en la propia iniciativa, actuar con claridad y sembrar una intención firme. También recuerda que liderar no es imponer, sino abrir una ruta con conciencia y responsabilidad."
+        },
+        2: {
+          name: "La Dualidad",
+          description: "Simboliza los opuestos: luz y oscuridad, positivo y negativo, razón y emoción, impulso y pausa. Este tono enseña que la vida no siempre avanza en una sola dirección, y que muchas respuestas nacen al observar ambos lados de una situación. En lo personal, invita a buscar equilibrio, mediar conflictos y tomar decisiones sin negar las contradicciones internas."
+        },
+        3: {
+          name: "La Acción",
+          description: "Es la energía del movimiento, la comunicación, la creatividad y el trabajo en equipo. Este tono impulsa a pasar de la intención a la acción, a compartir ideas y a crear junto con otras personas. En la vida cotidiana, favorece los proyectos que necesitan dinamismo, conversación y colaboración. También recuerda que actuar no significa apresurarse, sino mover la energía con propósito."
+        },
+        4: {
+          name: "La Estabilidad",
+          description: "Representa la base firme, los cuatro puntos cardinales, el orden, la disciplina y la construcción. Este tono pide estructura: organizar lo importante, poner límites claros y crear cimientos que puedan sostener el crecimiento. En la personalidad, puede expresar constancia, sentido práctico y capacidad de trabajo. Su enseñanza es que lo espiritual también necesita orden para manifestarse."
+        },
+        5: {
+          name: "El Poder y Autoridad",
+          description: "Es la fuerza física y mental, la capacidad de concretar proyectos y tomar decisiones firmes. Este tono habla del poder personal y de la autoridad bien dirigida: la energía para asumir responsabilidades, sostener decisiones y llevar algo hasta su realización. Su aprendizaje principal es usar la fuerza con sabiduría, evitando la rigidez o el deseo de controlar a los demás."
+        },
+        6: {
+          name: "El Flujo",
+          description: "Simboliza el equilibrio natural, el respeto por las leyes del cosmos y la adaptación a los cambios. Este tono enseña a moverse con la vida en lugar de luchar contra cada giro del camino. Invita a reconocer ritmos, ciclos y señales, aceptando que no todo se resuelve por fuerza. En lo personal, favorece la flexibilidad, la armonía y la capacidad de responder con serenidad ante lo inesperado."
+        },
+        7: {
+          name: "La Ley y Justicia",
+          description: "Representa la conexión divina, la reflexión profunda, la sabiduría y el camino correcto. Este tono invita a detenerse, observar y escuchar la conciencia antes de actuar. Está asociado con la búsqueda de sentido, la introspección y la necesidad de alinear las decisiones con principios más altos. Su energía ayuda a distinguir entre lo conveniente y lo verdaderamente justo."
+        },
+        8: {
+          name: "La Justicia Divina / Equilibrio",
+          description: "Es la balanza, la equidad, el análisis y la capacidad de regeneración. Este tono profundiza en la justicia como equilibrio vivo: dar a cada cosa su lugar, reparar lo que se ha desordenado y recuperar armonía. En la vida diaria, favorece decisiones maduras, conversaciones honestas y procesos de sanación. También recuerda que el equilibrio no es quietud, sino ajuste constante."
+        },
+        9: {
+          name: "El Límite / Expansión",
+          description: "Simboliza la preparación para trascender, el alcance de metas y el servicio a la humanidad. Este tono marca un umbral: el punto en que una persona reconoce sus límites actuales y se prepara para expandirse. Invita a mirar más allá del beneficio individual y preguntarse cómo los propios dones pueden servir a otros. Su energía une crecimiento personal con propósito colectivo."
+        },
+        10: {
+          name: "La Manifestación",
+          description: "Representa la materialización de las ideas, el respeto a los mayores y el florecimiento. Este tono muestra el momento en que lo pensado, trabajado o sembrado comienza a hacerse visible. Invita a honrar la experiencia, escuchar la sabiduría de quienes abrieron camino y reconocer los frutos del esfuerzo. Su energía es práctica: convierte intención en resultado."
+        },
+        11: {
+          name: "La Transformación",
+          description: "Es la energía del cambio constante, la superación de pruebas, el perdón y la limpieza espiritual. Este tono puede sentirse intenso porque mueve lo estancado y revela lo que necesita ser liberado. Su propósito no es castigar, sino renovar. En la personalidad, impulsa a atravesar desafíos, perdonar, limpiar cargas internas y permitir que una versión más consciente de uno mismo pueda nacer."
+        },
+        12: {
+          name: "La Comprensión",
+          description: "Simboliza la visión de conjunto, el apoyo a los demás, la unión familiar y la madurez. Este tono permite integrar experiencias que antes parecían separadas y comprender cómo cada parte pertenece a un proceso mayor. Favorece la empatía, el acompañamiento y la capacidad de sostener a otros sin perder el propio centro. Su enseñanza es mirar con amplitud y actuar con madurez."
+        },
+        13: {
+          name: "El Trascender / Culminación",
+          description: "Representa la culminación de un ciclo, la iluminación, la conexión con los ancestros y el universo. Este tono señala cierre, integración y elevación espiritual. No es solo final: es el punto donde la experiencia se transforma en sabiduría y puede abrir un nuevo comienzo desde un nivel más alto de conciencia. Invita a agradecer el camino recorrido y reconocer la guía ancestral."
+        }
+      };
+
+      const GMT = 584283;
+      const app = document.getElementById("nahual-app");
+      const $ = (selector) => app.querySelector(selector);
+
+      function toJDN(year, month, day) {
+        const a = Math.floor((14 - month) / 12);
+        const y = year + 4800 - a;
+        const m = month + 12 * a - 3;
+        return day + Math.floor((153 * m + 2) / 5) + 365 * y + Math.floor(y / 4) - Math.floor(y / 100) + Math.floor(y / 400) - 32045;
+      }
+
+      function calculate(dateValue) {
+        const date = new Date(`${dateValue}T12:00:00`);
+        if (Number.isNaN(date.getTime())) return null;
+
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        const jdn = toJDN(year, month, day);
+        const index260 = ((jdn - GMT) % 260 + 260) % 260;
+        const tone = ((index260 + 3) % 13) + 1;
+        const dayIndex = (index260 + 19) % 20;
+
+        return { year, month, day, tone, nahual: NAHUALES[dayIndex] };
+      }
+
+      function formatDate(result) {
+        return `${String(result.day).padStart(2, "0")}/${String(result.month).padStart(2, "0")}/${result.year}`;
+      }
+
+      function renderResult(result) {
+        const nahual = result.nahual;
+        $("#nahual-image").src = nahual.image;
+        $("#nahual-image").alt = `Glifo del nahual ${nahual.kiche}`;
+        $("#nahual-tone").textContent = `Tono ${result.tone}`;
+        $("#nahual-yucatec").textContent = `Equivalente yucateco: ${nahual.yucatec}`;
+        $("#nahual-name").textContent = nahual.title;
+        $("#nahual-summary").textContent = nahual.summary;
+        $("#nahual-personality").textContent = nahual.personality;
+        $("#nahual-tone-title").textContent = `Tono ${result.tone}: ${TONES[result.tone].name}`;
+        $("#nahual-tone-description").textContent = TONES[result.tone].description;
+        $("#nahual-date").textContent = formatDate(result);
+        $("#nahual-kiche").textContent = nahual.kiche;
+        $("#nahual-tone-value").textContent = `${result.tone}: ${TONES[result.tone].name}`;
+        $("#nahual-traits").innerHTML = nahual.traits.map((trait) => `<li>${trait}</li>`).join("");
+        $("#nahual-result").style.display = "block";
+        $("#nahual-error").style.display = "none";
+      }
+
+      function renderList() {
+        $("#nahual-list").innerHTML = NAHUALES.map((nahual) => `
+          <div class="mini-nahual">
+            <img src="${nahual.image}" alt="Glifo de ${nahual.kiche}" loading="lazy">
+            <div>
+              <strong>${nahual.kiche}</strong>
+              <span>${nahual.title.replace(`${nahual.kiche}: `, "")}</span>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      function showError(message) {
+        $("#nahual-error").textContent = message;
+        $("#nahual-error").style.display = "block";
+      }
+
+      $("#nahual-calc").addEventListener("click", () => {
+        const value = $("#nahual-dob").value;
+        if (!value) {
+          showError("Selecciona tu fecha de nacimiento para calcular tu nahual.");
+          return;
+        }
+
+        const result = calculate(value);
+        if (!result) {
+          showError("La fecha no es válida. Revisa el día, mes y año.");
+          return;
+        }
+
+        renderResult(result);
+      });
+
+      $("#nahual-clear").addEventListener("click", () => {
+        $("#nahual-dob").value = "";
+        $("#nahual-result").style.display = "none";
+        $("#nahual-error").style.display = "none";
+      });
+
+      $("#nahual-copy").addEventListener("click", async () => {
+        if ($("#nahual-result").style.display === "none" || !$("#nahual-name").textContent.trim()) {
+          showError("Primero calcula tu nahual para poder copiar el resultado.");
+          return;
+        }
+
+        const text = [
+          "Calculadora de Nahual Maya - Guialocal.com.gt",
+          $("#nahual-name").textContent,
+          $("#nahual-tone").textContent,
+          $("#nahual-tone-title").textContent,
+          $("#nahual-tone-description").textContent,
+          $("#nahual-yucatec").textContent,
+          `Fecha: ${$("#nahual-date").textContent}`,
+          $("#nahual-summary").textContent,
+          $("#nahual-personality").textContent
+        ].join("\n");
+
+        try {
+          await navigator.clipboard.writeText(text);
+          $("#nahual-copy").textContent = "Resultado copiado";
+          setTimeout(() => { $("#nahual-copy").textContent = "Copiar resultado"; }, 1600);
+        } catch (error) {
+          showError("No se pudo copiar automáticamente. Puedes seleccionar el resultado y copiarlo manualmente.");
+        }
+      });
+
+      renderList();
+    })();
+  </script>
+</div>
+<!-- /Calculadora de Nahual - GUIALOCAL.COM.GT -->

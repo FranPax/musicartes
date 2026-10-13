@@ -1,0 +1,509 @@
+<section class="nahuales-section" aria-labelledby="nahuales-title">
+  <style>
+    .nahuales-section {
+      --nahual-ink: #171717;
+      --nahual-muted: #555555;
+      --nahual-green: #143f31;
+      --nahual-accent: #f9ce0b;
+      --nahual-border: #e7e7e7;
+      --nahual-card: #ffffff;
+      --nahual-soft: rgba(249, 206, 11, 0.14);
+      color: var(--nahual-ink);
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      font-weight: 400;
+      margin: 36px 0;
+      max-width: 100%;
+      overflow: visible;
+      padding: 0;
+    }
+
+    .nahuales-section * {
+      box-sizing: border-box;
+    }
+
+    .nahuales-intro {
+      display: grid;
+      gap: 14px;
+      margin: 0 0 26px;
+      max-width: 960px;
+    }
+
+    .nahuales-intro h2 {
+      color: var(--nahual-ink);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      font-size: clamp(30px, 4.5vw, 48px);
+      font-weight: 900;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    .nahuales-intro h2::after {
+      background: var(--nahual-accent);
+      border-radius: 999px;
+      content: "";
+      display: block;
+      height: 7px;
+      margin-top: 16px;
+      width: min(170px, 46vw);
+    }
+
+    .nahuales-intro p {
+      color: var(--nahual-muted);
+      font-size: clamp(16px, 2vw, 19px);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    .nahuales-fan {
+      display: grid;
+      gap: 12px;
+      position: relative;
+    }
+
+    .nahual-item {
+      background: transparent;
+      border: 0;
+      margin: 0;
+      transition: filter 180ms ease;
+    }
+
+    .nahual-item[open] {
+      filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.08));
+    }
+
+    .nahual-tab {
+      align-items: center;
+      background: var(--nahual-card);
+      border: 1px solid var(--nahual-border);
+      border-left: 8px solid var(--nahual-accent);
+      border-radius: 8px;
+      color: var(--nahual-ink);
+      cursor: pointer;
+      display: flex;
+      font-size: clamp(18px, 2vw, 22px);
+      font-weight: 800;
+      justify-content: space-between;
+      letter-spacing: 0;
+      list-style: none;
+      min-height: 68px;
+      padding: 0 22px 0 18px;
+      transition: background 180ms ease, border-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .nahual-tab:hover {
+      background: var(--nahual-accent);
+      border-color: var(--nahual-accent);
+      color: var(--nahual-ink);
+    }
+
+    .nahual-tab::-webkit-details-marker {
+      display: none;
+    }
+
+    .nahual-tab::after {
+      border-bottom: 2px solid currentColor;
+      border-right: 2px solid currentColor;
+      content: "";
+      height: 9px;
+      margin-left: 16px;
+      transform: rotate(45deg) translateY(-2px);
+      transition: transform 180ms ease;
+      width: 9px;
+    }
+
+    .nahual-item[open] .nahual-tab {
+      background: var(--nahual-accent);
+      border-color: var(--nahual-accent);
+      color: var(--nahual-ink);
+      box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+    }
+
+    .nahual-item[open] .nahual-tab::after {
+      transform: rotate(225deg) translate(-2px, -2px);
+    }
+
+    .nahual-panel {
+      background: var(--nahual-card);
+      border: 1px solid var(--nahual-border);
+      border-top: 0;
+      border-radius: 0 0 8px 8px;
+      display: grid;
+      gap: clamp(18px, 3vw, 28px);
+      grid-template-columns: minmax(116px, 168px) minmax(0, 1fr);
+      padding: clamp(18px, 3vw, 28px);
+    }
+
+    .nahual-image {
+      align-items: center;
+      background: transparent;
+      border: 2px solid var(--nahual-accent);
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      min-height: 160px;
+      padding: 18px;
+    }
+
+    .nahual-image img {
+      display: block;
+      height: auto;
+      max-width: 136px;
+      width: 100%;
+    }
+
+    .nahual-copy {
+      display: grid;
+      gap: 12px;
+    }
+
+    .nahual-copy h3 {
+      color: var(--nahual-ink);
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 800;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    .nahual-copy p {
+      color: var(--nahual-muted);
+      font-size: 15.5px;
+      line-height: 1.78;
+      margin: 0;
+    }
+
+    .nahual-traits {
+      display: grid;
+      gap: 9px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin: 6px 0 0;
+      padding: 0;
+    }
+
+    .nahual-traits li {
+      background: var(--nahual-soft);
+      border: 1px solid rgba(249, 206, 11, 0.5);
+      border-radius: 8px;
+      color: var(--nahual-ink);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.35;
+      list-style: none;
+      padding: 10px 12px;
+    }
+
+    @media (max-width: 720px) {
+      .nahuales-section {
+        margin: 30px 0;
+      }
+
+      .nahual-tab {
+        font-size: 18px;
+        min-height: 62px;
+      }
+
+      .nahual-panel,
+      .nahual-traits {
+        grid-template-columns: 1fr;
+      }
+
+      .nahual-image {
+        min-height: 130px;
+      }
+
+      .nahual-image img {
+        max-width: 112px;
+      }
+    }
+  </style>
+
+  <div class="nahuales-intro">
+    <h2 id="nahuales-title">Conoce cada uno de los Nahuales Mayas y su significado para ti</h2>
+    <p>
+      En la tradición maya, cada nahual o nawal representa una energía del calendario sagrado,
+      un glifo y una forma particular de comprender la personalidad. Explora cada pestaña para
+      conocer su símbolo, su significado espiritual, sus dones principales y los desafíos que
+      pueden orientar la vida cotidiana.
+    </p>
+  </div>
+
+  <div class="nahuales-fan">
+    <details class="nahual-item">
+      <summary class="nahual-tab">Imox</summary>
+      <div class="nahual-panel">
+        <div class="nahual-image"><img src="https://res.cloudinary.com/djkxtpn57/image/upload/v1782151229/01-imox.jpg_ogrtie.svg" alt="Glifo del nahual Imox" loading="lazy"></div>
+        <div class="nahual-copy">
+          <h3>Imox: agua primordial</h3>
+          <p>Representa la intuición, los sueños, la sensibilidad y el origen creativo. Imox se relaciona con el agua primordial: aquello que todavía no tiene forma, pero contiene posibilidades profundas.</p>
+          <p>Quienes se identifican con esta energía suelen percibir señales sutiles, conectar con símbolos y crear desde la emoción. Su aprendizaje principal es ordenar su sensibilidad para que la imaginación no se convierta en confusión.</p>
+          <ul class="nahual-traits"><li>Imaginación profunda</li><li>Compasión</li><li>Creatividad artística</li><li>Necesita límites claros</li></ul>
+        </div>
+      </div>
+    </details>
+
+    <details class="nahual-item">
+      <summary class="nahual-tab">Iq</summary>
+      <div class="nahual-panel">
+        <div class="nahual-image"><img src="https://res.cloudinary.com/djkxtpn57/image/upload/v1782151243/02-iq.jpg_opjkch.svg" alt="Glifo del nahual Iq" loading="lazy"></div>
+        <div class="nahual-copy">
+          <h3>Iq: viento y palabra</h3>
+          <p>Simboliza el aire, el aliento, la comunicación y la renovación. Iq recuerda que la palabra puede mover, sanar, enseñar y abrir nuevas ideas cuando se usa con conciencia.</p>
+          <p>Las personas guiadas por este nahual suelen destacar por su mente despierta, facilidad para expresar conocimientos y gusto por el aprendizaje. Su reto es no quedarse atrapadas en el exceso de análisis o en cambios impulsivos.</p>
+          <ul class="nahual-traits"><li>Inteligencia verbal</li><li>Facilidad para enseñar</li><li>Talento artístico</li><li>Puede ser muy analítico</li></ul>
+        </div>
+      </div>
+    </details>
+
+    <details class="nahual-item">
+      <summary class="nahual-tab">Aq'ab'al</summary>
+      <div class="nahual-panel">
+        <div class="nahual-image"><img src="https://res.cloudinary.com/djkxtpn57/image/upload/v1782151245/03-aqab.jpg_jiafle.svg" alt="Glifo del nahual Aq'ab'al" loading="lazy"></div>
+        <div class="nahual-copy">
+          <h3>Aq'ab'al: amanecer y claridad</h3>
+          <p>Representa la luz que aparece tras la oscuridad, la visión clara y la capacidad de cumplir compromisos. Aq'ab'al anuncia el amanecer: el momento en que algo empieza a entenderse.</p>
+          <p>Esta energía favorece a personas responsables, constantes y capaces de acompañar procesos de sanación. Su personalidad busca claridad, pero debe cuidar no exigir respuestas inmediatas cuando la vida todavía está revelando el camino.</p>
+          <ul class="nahual-traits"><li>Confiabilidad</li><li>Claridad práctica</li><li>Capacidad sanadora</li><li>Busca comprender antes de actuar</li></ul>
+        </div>
+      </div>
+    </details>
+
+    <details class="nahual-item">
+      <summary class="nahual-tab">Kan</summary>
+      <div class="nahual-panel">
+        <div class="nahual-image"><img src="https://res.cloudinary.com/djkxtpn57/image/upload/v1782151236/04-kan.jpg_gqu2qi.svg" alt="Glifo del nahual Kan" loading="lazy"></div>
+        <div class="nahual-copy">
+          <h3>Kan: serpiente emplumada</h3>
+          <p>Se relaciona con la creación, la abundancia material y la solución de problemas. Kan es la serpiente emplumada, símbolo de transformación y de conexión entre lo espiritual y lo terrenal.</p>
+          <p>Las personas bajo esta influencia suelen ser leales, intensas y comprometidas con lo que consideran importante. Tienen fuerza para crear y resolver, aunque necesitan usar su poder con equilibrio para no volverse controladoras.</p>
+          <ul class="nahual-traits"><li>Lealtad</li><li>Fidelidad a sus compromisos</li><li>Poder creativo</li><li>Busca resolver necesidades</li></ul>
+        </div>
+      </div>
+    </details>
+
+    <details class="nahual-item">
+      <summary class="nahual-tab">K'at</summary>
+      <div class="nahual-panel">
+        <div class="nahual-image"><img src="https://res.cloudinary.com/djkxtpn57/image/upload/v1782151237/05-kat.jpg_dyzxqv.svg" alt="Glifo del nahual K'at" loading="lazy"></div>
+        <div class="nahual-copy">
+          <h3>K'at: red y orden</h3>
+          <p>Representa la red que recoge aprendizajes, vínculos y experiencias, pero también los nudos que deben resolverse. K'at ayuda a ordenar lo acumulado y a liberar lo que ya no corresponde.</p>
+          <p>Su personalidad se expresa en método, memoria, análisis y capacidad de estructurar procesos. Su desafío es no quedarse reteniendo cargas, objetos, pendientes o relaciones que impiden avanzar con ligereza.</p>
+          <ul class="nahual-traits"><li>Mente organizada</li><li>Memoria funcional</li><li>Pensamiento analítico</li><li>Debe evitar acumular cargas</li></ul>
+        </div>
+      </div>
+    </details>
+
+    <details class="nahual-item">
+      <summary class="nahual-tab">Keme</summary>
+      <div class="nahual-panel">
+        <div class="nahual-image"><img src="https://res.cloudinary.com/djkxtpn57/image/upload/v1782151229/06-kamey.jpg_ekr1jz.svg" alt="Glifo del nahual Keme" loading="lazy"></div>
+        <div class="nahual-copy">
+          <h3>Keme: transición y descanso</h3>
+          <p>Se asocia con la muerte entendida como cambio, descanso y paz. Keme no habla solo de finales: también señala la transición necesaria para que una etapa pueda transformarse en otra.</p>
+          <p>Quienes vibran con esta energía pueden tener gran profundidad interior, sensibilidad espiritual y habilidad para crear con las manos. Su camino pide aceptar los cierres sin miedo y convertir la experiencia en sabiduría.</p>
+          <ul class="nahual-traits"><li>Habilidad manual</li><li>Talento para artes u oficios</li><li>Profundidad espiritual</li><li>Capacidad de purificación</li></ul>
+        </div>
+      </div>
+    </details>
+
+    <details class="nahual-item">
+      <summary class="nahual-tab">Kej</summary>
+      <div class="nahual-panel">
+        <div class="nahual-image"><img src="https://res.cloudinary.com/djkxtpn57/image/upload/v1782151229/07-kej.jpg_ohyfmh.svg" alt="Glifo del nahual Kej" loading="lazy"></div>
+        <div class="nahual-copy">
+          <h3>Kej: venado y bosque</h3>
+          <p>Simboliza fuerza en equilibrio con la naturaleza, disciplina, vitalidad y conexión con montañas, plantas y territorio. Kej enseña que la verdadera fortaleza no destruye: sostiene.</p>
+          <p>Las personas Kej suelen liderar con el ejemplo, valorar la constancia y buscar coherencia entre cuerpo, mente y entorno. Su reto está en flexibilizarse y no convertir la disciplina en imposición.</p>
+          <ul class="nahual-traits"><li>Resistencia</li><li>Constancia</li><li>Liderazgo con ejemplo</li><li>Debe evitar la rigidez</li></ul>
+        </div>
+      </div>
+    </details>
+
+    <details class="nahual-item">
+      <summary class="nahual-tab">Q'anil</summary>
+      <div class="nahual-panel">
+        <div class="nahual-image"><img src="https://res.cloudinary.com/djkxtpn57/image/upload/v1782151243/08-qane.jpg_nzprl1.svg" alt="Glifo del nahual Q'anil" loading="lazy"></div>
+        <div class="nahual-copy">
+          <h3>Q'anil: semilla y prosperidad</h3>
+          <p>Habla de siembra, floración, creatividad y abundancia bien cuidada. Q'anil recuerda que toda cosecha empieza con una semilla pequeña, protegida con paciencia y propósito.</p>
+          <p>Esta personalidad suele mirar a largo plazo, cuidar procesos y aportar belleza a lo que toca. Su aprendizaje es sostener el enfoque, celebrar avances pequeños y no abandonar antes de que el proyecto madure.</p>
+          <ul class="nahual-traits"><li>Visión de largo plazo</li><li>Paciencia activa</li><li>Sensibilidad estética</li><li>Debe evitar dispersarse</li></ul>
+        </div>
+      </div>
+    </details>
+
+    <details class="nahual-item">
+      <summary class="nahual-tab">Toj</summary>
+      <div class="nahual-panel">
+        <div class="nahual-image"><img src="https://res.cloudinary.com/djkxtpn57/image/upload/v1782151237/09-toj.jpg_swm5kl.svg" alt="Glifo del nahual Toj" loading="lazy"></div>
+        <div class="nahual-copy">
+          <h3>Toj: ofrenda y gratitud</h3>
+          <p>Representa el pago, la ofrenda, la lluvia y el equilibrio de deudas materiales, emocionales o espirituales. Toj invita a agradecer lo recibido y a devolver con conciencia.</p>
+          <p>Quienes nacen bajo esta energía suelen ser sensibles, expresivos y muy conectados con el arte o las emociones. Su reto es no cargar culpas innecesarias y aprender a equilibrar lo que dan con lo que también necesitan recibir.</p>
+          <ul class="nahual-traits"><li>Sensibilidad emocional</li><li>Conexión con las artes</li><li>Gratitud</li><li>Facilidad para conmoverse</li></ul>
+        </div>
+      </div>
+    </details>
+
+    <details class="nahual-item">
+      <summary class="nahual-tab">Tzi</summary>
+      <div class="nahual-panel">
+        <div class="nahual-image"><img src="https://res.cloudinary.com/djkxtpn57/image/upload/v1782151236/10-tzi.jpg_fawrex.svg" alt="Glifo del nahual Tzi" loading="lazy"></div>
+        <div class="nahual-copy">
+          <h3>Tzi: perro y lealtad</h3>
+          <p>Simboliza fidelidad, protección, justicia y guía espiritual. Tzi acompaña, cuida y ayuda a encontrar el camino correcto, como un guardián atento de la comunidad y los afectos.</p>
+          <p>Su personalidad suele ser noble, servicial y confiable. Las personas Tzi pueden convertirse en grandes amistades y defensoras de lo justo, siempre que cuiden no reaccionar desde la dureza cuando sienten que deben proteger.</p>
+          <ul class="nahual-traits"><li>Lealtad profunda</li><li>Sentido de justicia</li><li>Vocación protectora</li><li>Buen amigo y confidente</li></ul>
+        </div>
+      </div>
+    </details>
+
+    <details class="nahual-item">
+      <summary class="nahual-tab">B'atz</summary>
+      <div class="nahual-panel">
+        <div class="nahual-image"><img src="https://res.cloudinary.com/djkxtpn57/image/upload/v1782151244/11-batz-150x150_ijcdhm.svg" alt="Glifo del nahual B'atz" loading="lazy"></div>
+        <div class="nahual-copy">
+          <h3>B'atz: hilo de la vida</h3>
+          <p>Marca inicio, abundancia, amor, inteligencia y continuidad de ceremonias. B'atz es el hilo de la vida: conecta origen, historia, creatividad y propósito.</p>
+          <p>Las personas con esta energía suelen ser generosas, expresivas y capaces de enseñar o preservar tradiciones. Su don está en crear vínculos y proyectos fértiles; su reto es sostenerlos con orden y humildad.</p>
+          <ul class="nahual-traits"><li>Generosidad</li><li>Creatividad</li><li>Capacidad de enseñar</li><li>Conexión con tradiciones</li></ul>
+        </div>
+      </div>
+    </details>
+
+    <details class="nahual-item">
+      <summary class="nahual-tab">Ee</summary>
+      <div class="nahual-panel">
+        <div class="nahual-image"><img src="https://res.cloudinary.com/djkxtpn57/image/upload/v1782151230/12-ey-150x150_gvpldx.svg" alt="Glifo del nahual Ee" loading="lazy"></div>
+        <div class="nahual-copy">
+          <h3>Ee: camino y dirección</h3>
+          <p>Es el nawal de los caminos, los viajes, los negocios y los dirigentes. Ee habla del trayecto de vida: la dirección que se elige y la disciplina necesaria para recorrerla.</p>
+          <p>Quienes se identifican con este nahual suelen abrir rutas para otras personas, tomar iniciativa y conducir procesos. Su aprendizaje es liderar con servicio, sin perder sensibilidad hacia quienes caminan a otro ritmo.</p>
+          <ul class="nahual-traits"><li>Liderazgo natural</li><li>Determinación</li><li>Capacidad de guiar</li><li>Busca abrir caminos</li></ul>
+        </div>
+      </div>
+    </details>
+
+    <details class="nahual-item">
+      <summary class="nahual-tab">Aj</summary>
+      <div class="nahual-panel">
+        <div class="nahual-image"><img src="https://res.cloudinary.com/djkxtpn57/image/upload/v1782151229/13-aj1.jpg_afsy6h.svg" alt="Glifo del nahual Aj" loading="lazy"></div>
+        <div class="nahual-copy">
+          <h3>Aj: protección y perseverancia</h3>
+          <p>Asociado con el armadillo, simboliza protección, fuerza, determinación y conexión con la tierra. Aj representa la estructura que sostiene, cuida y resiste ante la adversidad.</p>
+          <p>Su personalidad puede ser perseverante, previsora y profundamente protectora con su familia o comunidad. El desafío está en no encerrarse demasiado en su caparazón y permitir que la confianza también sea una forma de fuerza.</p>
+          <ul class="nahual-traits"><li>Persistencia</li><li>Espíritu protector</li><li>Valentía</li><li>Planificación y previsión</li></ul>
+        </div>
+      </div>
+    </details>
+
+    <details class="nahual-item">
+      <summary class="nahual-tab">Ix</summary>
+      <div class="nahual-panel">
+        <div class="nahual-image"><img src="https://res.cloudinary.com/djkxtpn57/image/upload/v1782151236/14-ix1.jpg_lubjqf.svg" alt="Glifo del nahual Ix" loading="lazy"></div>
+        <div class="nahual-copy">
+          <h3>Ix: jaguar y poder interior</h3>
+          <p>Representa al jaguar, guardián de lo sagrado, la naturaleza viva y los espacios ceremoniales. Ix habla de poder interior, intuición fina y respeto por el territorio propio y colectivo.</p>
+          <p>Las personas Ix suelen tener presencia fuerte, liderazgo discreto y una percepción aguda de lo que ocurre a su alrededor. Su aprendizaje es usar esa fuerza para cuidar, no para dominar.</p>
+          <ul class="nahual-traits"><li>Autoridad serena</li><li>Intuición aguda</li><li>Protección del linaje</li><li>Debe cuidar el orgullo</li></ul>
+        </div>
+      </div>
+    </details>
+
+    <details class="nahual-item">
+      <summary class="nahual-tab">Tz'ikin</summary>
+      <div class="nahual-panel">
+        <div class="nahual-image"><img src="https://res.cloudinary.com/djkxtpn57/image/upload/v1782151236/15-tzik.jpg_bjkrhg.svg" alt="Glifo del nahual Tz'ikin" loading="lazy"></div>
+        <div class="nahual-copy">
+          <h3>Tz'ikin: pájaro y buena fortuna</h3>
+          <p>Se vincula con los pájaros, el bienestar económico, la comunicación y la conexión entre cielo y tierra. Tz'ikin eleva la mirada y ayuda a reconocer oportunidades.</p>
+          <p>Su personalidad puede destacar por la facilidad para relacionarse, mediar y construir prosperidad con inteligencia. El reto es mantener los pies en la tierra para que la buena fortuna se convierta en decisiones concretas.</p>
+          <ul class="nahual-traits"><li>Buena comunicación</li><li>Intermediación</li><li>Visión de prosperidad</li><li>Construye su bienestar</li></ul>
+        </div>
+      </div>
+    </details>
+
+    <details class="nahual-item">
+      <summary class="nahual-tab">Ajmaq</summary>
+      <div class="nahual-panel">
+        <div class="nahual-image"><img src="https://res.cloudinary.com/djkxtpn57/image/upload/v1782151250/16-ajmaq.jpg_t1ufow.svg" alt="Glifo del nahual Ajmaq" loading="lazy"></div>
+        <div class="nahual-copy">
+          <h3>Ajmaq: memoria y perdón</h3>
+          <p>Invita a transformar culpa en sabiduría, reparar vínculos y cerrar ciclos con humildad. Ajmaq se relaciona con la memoria ancestral y con la posibilidad de aprender del error.</p>
+          <p>Las personas bajo esta energía suelen ser introspectivas, empáticas y sensibles a los procesos de sanación emocional. Su desafío es no quedarse atrapadas en la autocrítica, sino convertir la experiencia en reparación y crecimiento.</p>
+          <ul class="nahual-traits"><li>Introspección</li><li>Empatía</li><li>Sanación de vínculos</li><li>Debe evitar la autocrítica excesiva</li></ul>
+        </div>
+      </div>
+    </details>
+
+    <details class="nahual-item">
+      <summary class="nahual-tab">No'j</summary>
+      <div class="nahual-panel">
+        <div class="nahual-image"><img src="https://res.cloudinary.com/djkxtpn57/image/upload/v1782151229/17-noj.jpg_ihqyja.svg" alt="Glifo del nahual No'j" loading="lazy"></div>
+        <div class="nahual-copy">
+          <h3>No'j: sabiduría y pensamiento</h3>
+          <p>Representa conocimiento, ciencia, inteligencia y buen consejo. No'j es la energía de la mente clara, de la planificación y de la sabiduría que se construye en comunidad.</p>
+          <p>Quienes se identifican con este nahual suelen tener facilidad para aprender, aconsejar y tomar decisiones razonadas. Su reto es equilibrar inteligencia con humildad para que el conocimiento no se convierta en orgullo.</p>
+          <ul class="nahual-traits"><li>Inteligencia activa</li><li>Buen consejo</li><li>Toma de decisiones</li><li>Debe evitar orgullo e ira</li></ul>
+        </div>
+      </div>
+    </details>
+
+    <details class="nahual-item">
+      <summary class="nahual-tab">Tijax</summary>
+      <div class="nahual-panel">
+        <div class="nahual-image"><img src="https://res.cloudinary.com/djkxtpn57/image/upload/v1782151250/18-tijax.jpg_zcwadl.svg" alt="Glifo del nahual Tijax" loading="lazy"></div>
+        <div class="nahual-copy">
+          <h3>Tijax: cuchillo y sanación</h3>
+          <p>Simboliza corte, limpieza, justicia y curación. Tijax es el cuchillo de obsidiana que separa lo necesario de lo innecesario y abre espacio para sanar.</p>
+          <p>Su personalidad puede ser directa, valiente, intuitiva y firme frente a la injusticia. El aprendizaje está en usar la precisión con compasión, evitando que la claridad se convierta en dureza.</p>
+          <ul class="nahual-traits"><li>Claridad mental</li><li>Sentido de justicia</li><li>Valentía</li><li>Debe evitar la intolerancia</li></ul>
+        </div>
+      </div>
+    </details>
+
+    <details class="nahual-item">
+      <summary class="nahual-tab">Kawoq</summary>
+      <div class="nahual-panel">
+        <div class="nahual-image"><img src="https://res.cloudinary.com/djkxtpn57/image/upload/v1782151243/19-kawoq.jpg_atv75w.svg" alt="Glifo del nahual Kawoq" loading="lazy"></div>
+        <div class="nahual-copy">
+          <h3>Kawoq: tormenta y comunidad</h3>
+          <p>Representa familia, comunidad, cooperación y cuidado colectivo. Kawoq es la tormenta que limpia, agrupa y recuerda que la fuerza también vive en la red de apoyo.</p>
+          <p>Las personas Kawoq suelen ser hospitalarias, diplomáticas y capaces de contener emocionalmente a otros. Su reto es no cargar con todo y aprender a pedir ayuda cuando también necesitan sostén.</p>
+          <ul class="nahual-traits"><li>Liderazgo comunitario</li><li>Hospitalidad</li><li>Diplomacia</li><li>Debe aprender a pedir ayuda</li></ul>
+        </div>
+      </div>
+    </details>
+
+    <details class="nahual-item">
+      <summary class="nahual-tab">Ajpu</summary>
+      <div class="nahual-panel">
+        <div class="nahual-image"><img src="https://res.cloudinary.com/djkxtpn57/image/upload/v1782151243/20-ajpu.jpg_e3gerr.svg" alt="Glifo del nahual Ajpu" loading="lazy"></div>
+        <div class="nahual-copy">
+          <h3>Ajpu: sol y guerrero iluminado</h3>
+          <p>Se asocia con el sol, el liderazgo, la transformación y la capacidad de vencer obstáculos internos para alcanzar grandeza espiritual. Ajpu ilumina, dirige y enfrenta pruebas con valentía.</p>
+          <p>Quienes nacen bajo esta energía pueden ser líderes naturales, soñadores, trabajadores y defensores de lo que aman. Su desafío principal es cuidar el ego y orientar su fuerza hacia el servicio.</p>
+          <ul class="nahual-traits"><li>Valentía</li><li>Liderazgo</li><li>Generosidad</li><li>Debe cuidar el ego</li></ul>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <script>
+    (() => {
+      const section = document.currentScript.closest(".nahuales-section");
+      const items = section.querySelectorAll(".nahual-item");
+
+      items.forEach((item) => {
+        item.addEventListener("toggle", () => {
+          if (!item.open) return;
+          items.forEach((otherItem) => {
+            if (otherItem !== item) otherItem.removeAttribute("open");
+          });
+        });
+      });
+    })();
+  </script>
+</section>

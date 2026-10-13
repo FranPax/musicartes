@@ -1,0 +1,620 @@
+<meta charset="UTF-8">
+<!-- Identificador de compañía telefónica Guatemala - GUIALOCAL.COM.GT -->
+<div id="tcgt-app" lang="es-GT">
+  <style>
+    #tcgt-app{
+      --tcgt-accent:#f9ce0b;
+      --tcgt-ink:#171717;
+      --tcgt-muted:#555555;
+      --tcgt-line:#e7e7e7;
+      --tcgt-soft:rgba(249,206,11,.14);
+      --tcgt-card:#ffffff;
+      color:var(--tcgt-ink);
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+      font-weight:400;
+      line-height:1.5;
+      margin:34px 0;
+      max-width:100%;
+    }
+
+    #tcgt-app *,#tcgt-app *::before,#tcgt-app *::after{box-sizing:border-box;}
+
+    #tcgt-app .tcgt-shell{
+      background:#fff;
+      border:1px solid var(--tcgt-line);
+      border-radius:10px;
+      overflow:hidden;
+    }
+
+    #tcgt-app .tcgt-head{
+      border-left:10px solid var(--tcgt-accent);
+      padding:clamp(22px,4vw,34px);
+    }
+
+    #tcgt-app .tcgt-kicker{
+      align-items:center;
+      background:var(--tcgt-soft);
+      border-radius:999px;
+      color:var(--tcgt-ink);
+      display:inline-flex;
+      font-size:13px;
+      font-weight:850;
+      line-height:1;
+      margin:0 0 14px;
+      min-height:30px;
+      padding:0 12px;
+    }
+
+    #tcgt-app h2,#tcgt-app h3,#tcgt-app p{margin:0;}
+
+    #tcgt-app h2{
+      color:var(--tcgt-ink);
+      font-size:clamp(30px,4.6vw,48px);
+      font-weight:900;
+      letter-spacing:0;
+      line-height:1.1;
+      max-width:920px;
+    }
+
+    #tcgt-app .tcgt-sub{
+      color:var(--tcgt-muted);
+      font-size:clamp(16px,2vw,19px);
+      line-height:1.7;
+      margin-top:14px;
+      max-width:920px;
+    }
+
+    #tcgt-app .tcgt-form{
+      border-top:1px solid var(--tcgt-line);
+      display:grid;
+      gap:18px;
+      padding:clamp(18px,3vw,26px);
+    }
+
+    #tcgt-app label{
+      color:var(--tcgt-ink);
+      display:block;
+      font-size:15px;
+      font-weight:850;
+      margin-bottom:8px;
+    }
+
+    #tcgt-app .tcgt-input-row{
+      display:grid;
+      gap:12px;
+      grid-template-columns:minmax(0,1fr) auto;
+      align-items:end;
+    }
+
+    #tcgt-app .tcgt-input-wrap{
+      position:relative;
+    }
+
+    #tcgt-app input{
+      background:#fff;
+      border:1px solid var(--tcgt-line);
+      border-radius:8px;
+      color:var(--tcgt-ink);
+      font:inherit;
+      font-size:20px;
+      font-weight:750;
+      letter-spacing:.03em;
+      min-height:62px;
+      outline:0;
+      padding:0 48px 0 16px;
+      width:100%;
+    }
+
+    #tcgt-app input:focus{
+      border-color:var(--tcgt-accent);
+      box-shadow:0 0 0 4px rgba(249,206,11,.22);
+    }
+
+    #tcgt-app input::placeholder{
+      color:#777;
+      font-weight:500;
+      letter-spacing:0;
+    }
+
+    #tcgt-app .tcgt-clear{
+      align-items:center;
+      background:transparent;
+      border:0;
+      border-radius:50%;
+      color:var(--tcgt-muted);
+      cursor:pointer;
+      display:none;
+      font:inherit;
+      font-size:26px;
+      height:38px;
+      justify-content:center;
+      line-height:1;
+      padding:0;
+      position:absolute;
+      right:8px;
+      top:12px;
+      width:38px;
+    }
+
+    #tcgt-app .tcgt-clear:hover{background:var(--tcgt-soft);color:var(--tcgt-ink);}
+
+    #tcgt-app button{
+      align-items:center;
+      border:1px solid transparent;
+      border-radius:8px;
+      cursor:pointer;
+      display:inline-flex;
+      font:inherit;
+      font-size:16px;
+      font-weight:850;
+      justify-content:center;
+      min-height:62px;
+      padding:0 20px;
+      transition:background .16s,border-color .16s,transform .16s;
+    }
+
+    #tcgt-app button:hover{transform:translateY(-1px);}
+    #tcgt-app button:active{transform:translateY(0);}
+
+    #tcgt-app .tcgt-primary{
+      background:var(--tcgt-accent);
+      border-color:#e2b900;
+      color:var(--tcgt-ink);
+    }
+
+    #tcgt-app .tcgt-secondary{
+      background:#fff;
+      border-color:var(--tcgt-line);
+      color:var(--tcgt-ink);
+    }
+
+    #tcgt-app .tcgt-hint{
+      color:var(--tcgt-muted);
+      font-size:13px;
+      line-height:1.55;
+      margin-top:8px;
+    }
+
+    #tcgt-app .tcgt-examples{
+      display:flex;
+      flex-wrap:wrap;
+      gap:9px;
+    }
+
+    #tcgt-app .tcgt-chip{
+      background:#fff;
+      border:1px solid var(--tcgt-line);
+      border-left:6px solid var(--tcgt-accent);
+      border-radius:8px;
+      color:var(--tcgt-ink);
+      cursor:pointer;
+      font-size:14px;
+      font-weight:800;
+      padding:10px 13px;
+      transition:background .16s,border-color .16s,transform .16s;
+      user-select:none;
+    }
+
+    #tcgt-app .tcgt-chip:hover{
+      background:var(--tcgt-accent);
+      border-color:var(--tcgt-accent);
+      transform:translateY(-1px);
+    }
+
+    #tcgt-app .tcgt-error{
+      border-left:6px solid #b00020;
+      color:#b00020;
+      display:none;
+      font-size:14px;
+      font-weight:750;
+      line-height:1.5;
+      padding:8px 0 8px 12px;
+    }
+
+    #tcgt-app .tcgt-result{
+      border-top:1px solid var(--tcgt-line);
+      display:none;
+      padding:clamp(18px,3vw,26px);
+    }
+
+    #tcgt-app .tcgt-card{
+      border:1px solid var(--tcgt-line);
+      border-left:10px solid var(--tcgt-accent);
+      border-radius:10px;
+      display:grid;
+      gap:18px;
+      grid-template-columns:minmax(0,1fr) auto;
+      padding:clamp(18px,3vw,26px);
+      align-items:center;
+    }
+
+    #tcgt-app .tcgt-company{
+      color:var(--tcgt-ink);
+      font-size:clamp(32px,5vw,58px);
+      font-weight:950;
+      letter-spacing:0;
+      line-height:1;
+      margin-top:6px;
+    }
+
+    #tcgt-app .tcgt-status{
+      color:var(--tcgt-muted);
+      font-size:15px;
+      font-weight:750;
+      line-height:1.45;
+    }
+
+    #tcgt-app .tcgt-prefix{
+      background:var(--tcgt-accent);
+      border:1px solid #e2b900;
+      border-radius:10px;
+      color:var(--tcgt-ink);
+      display:grid;
+      min-width:150px;
+      padding:14px 16px;
+      text-align:center;
+    }
+
+    #tcgt-app .tcgt-prefix span{
+      font-size:12px;
+      font-weight:850;
+      line-height:1.2;
+      text-transform:uppercase;
+    }
+
+    #tcgt-app .tcgt-prefix strong{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      font-size:30px;
+      font-weight:950;
+      line-height:1.15;
+      margin-top:4px;
+    }
+
+    #tcgt-app .tcgt-note{
+      color:var(--tcgt-muted);
+      font-size:15px;
+      line-height:1.65;
+      margin-top:12px;
+    }
+
+    #tcgt-app .tcgt-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+
+    #tcgt-app details{
+      border-top:1px solid var(--tcgt-line);
+      padding:18px clamp(18px,3vw,26px) clamp(20px,3vw,26px);
+    }
+
+    #tcgt-app summary{
+      cursor:pointer;
+      font-size:18px;
+      font-weight:900;
+      list-style:none;
+    }
+
+    #tcgt-app summary::-webkit-details-marker{display:none;}
+
+    #tcgt-app .tcgt-rules{
+      display:grid;
+      gap:8px;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      margin-top:14px;
+    }
+
+    #tcgt-app .tcgt-rule{
+      border:1px solid var(--tcgt-line);
+      border-radius:8px;
+      display:grid;
+      gap:4px;
+      padding:11px 12px;
+    }
+
+    #tcgt-app .tcgt-rule strong{
+      color:var(--tcgt-ink);
+      font-size:14px;
+      line-height:1.25;
+    }
+
+    #tcgt-app .tcgt-rule span{
+      color:var(--tcgt-muted);
+      font-size:13px;
+      line-height:1.35;
+    }
+
+    @media (max-width:720px){
+      #tcgt-app{margin:28px 0;}
+      #tcgt-app .tcgt-input-row,
+      #tcgt-app .tcgt-card,
+      #tcgt-app .tcgt-rules{
+        grid-template-columns:1fr;
+      }
+      #tcgt-app .tcgt-input-row button,
+      #tcgt-app .tcgt-actions button{
+        width:100%;
+      }
+      #tcgt-app .tcgt-prefix{
+        min-width:0;
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      #tcgt-app button,
+      #tcgt-app .tcgt-chip{transition:none;}
+    }
+  </style>
+
+  <div class="tcgt-shell">
+    <div class="tcgt-head">
+      <span class="tcgt-kicker">Guialocal Guatemala</span>
+      <h2>¿Mi número es Claro o Tigo?</h2>
+      <p class="tcgt-sub">Ingresa un número de teléfono de Guatemala y descubre a qué compañía pertenece según sus primeros 4 dígitos.</p>
+    </div>
+
+    <div class="tcgt-form">
+      <div>
+        <label for="tcgt-phone">Número de teléfono</label>
+        <div class="tcgt-input-row">
+          <div class="tcgt-input-wrap">
+            <input id="tcgt-phone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="Ej: 5512 3456 o +502 3229 0000" aria-describedby="tcgt-hint">
+            <button id="tcgt-clear" class="tcgt-clear" type="button" aria-label="Limpiar número">×</button>
+          </div>
+          <button id="tcgt-check" class="tcgt-primary" type="button">Consultar compañía</button>
+        </div>
+        <p id="tcgt-hint" class="tcgt-hint">Puedes escribir el número con espacios, guiones o código de país +502. La herramienta usa los primeros 4 dígitos del número local.</p>
+      </div>
+
+      <div class="tcgt-examples" aria-label="Ejemplos rápidos">
+        <span class="tcgt-chip" data-phone="3229 0000">3229 Claro</span>
+        <span class="tcgt-chip" data-phone="3230 0000">3230 Tigo</span>
+        <span class="tcgt-chip" data-phone="4476 0000">4476 Tigo</span>
+        <span class="tcgt-chip" data-phone="4700 0000">4700 Claro</span>
+        <span class="tcgt-chip" data-phone="5554 0000">5554 Claro</span>
+        <span class="tcgt-chip" data-phone="5999 0000">5999 Tigo</span>
+      </div>
+
+      <div id="tcgt-error" class="tcgt-error" role="alert"></div>
+    </div>
+
+    <div id="tcgt-result" class="tcgt-result" aria-live="polite">
+      <div class="tcgt-card">
+        <div>
+          <p id="tcgt-status" class="tcgt-status">Resultado</p>
+          <h3 id="tcgt-company" class="tcgt-company">—</h3>
+          <p id="tcgt-note" class="tcgt-note"></p>
+          <div class="tcgt-actions">
+            <button id="tcgt-copy" class="tcgt-secondary" type="button">Copiar resultado</button>
+          </div>
+        </div>
+        <div class="tcgt-prefix">
+          <span>Primeros 4 dígitos</span>
+          <strong id="tcgt-prefix">—</strong>
+        </div>
+      </div>
+    </div>
+
+    <details>
+      <summary>Ver reglas usadas por la calculadora</summary>
+      <div id="tcgt-rules" class="tcgt-rules"></div>
+    </details>
+  </div>
+
+  <script>
+    (() => {
+      function initTcgtApp() {
+        const app = document.getElementById("tcgt-app");
+        if (!app || app.dataset.tcgtReady === "true") return;
+        app.dataset.tcgtReady = "true";
+
+      const RULES = [
+        { start: 3000, end: 3099, company: "Tigo", note: "Antes: Comcel" },
+        { start: 3100, end: 3199, company: "Tigo" },
+        { start: 3200, end: 3228, company: "Tigo" },
+        { start: 3229, end: 3229, company: "Claro" },
+        { start: 3230, end: 3299, company: "Tigo" },
+        { start: 3300, end: 3359, company: "Tigo" },
+        { start: 3400, end: 3499, company: "Claro", note: "Antes: Movistar" },
+        { start: 3500, end: 3564, company: "Claro", note: "Antes: Movistar" },
+        { start: 4000, end: 4099, company: "Tigo" },
+        { start: 4100, end: 4199, company: "Claro", note: "PCS Digital" },
+        { start: 4200, end: 4299, company: "Claro" },
+        { start: 4300, end: 4399, company: "Claro", note: "Antes: Movistar" },
+        { start: 4400, end: 4475, company: "Claro", note: "Antes: Movistar" },
+        { start: 4476, end: 4699, company: "Tigo" },
+        { start: 4700, end: 4772, company: "Claro" },
+        { start: 4773, end: 4799, company: "Tigo" },
+        { start: 4800, end: 4819, company: "Tigo" },
+        { start: 4820, end: 4899, company: "Tigo" },
+        { start: 4900, end: 4999, company: "Tigo" },
+        { start: 5000, end: 5009, company: "Tigo" },
+        { start: 5010, end: 5019, company: "Claro" },
+        { start: 5020, end: 5029, company: "Claro", note: "Antes: Movistar" },
+        { start: 5030, end: 5069, company: "Tigo" },
+        { start: 5070, end: 5099, company: "Claro", note: "Antes: Movistar" },
+        { start: 5100, end: 5109, company: "Claro", note: "Antes: Movistar" },
+        { start: 5110, end: 5139, company: "Claro" },
+        { start: 5140, end: 5149, company: "Claro", note: "Antes: Movistar" },
+        { start: 5150, end: 5199, company: "Tigo" },
+        { start: 5200, end: 5209, company: "Tigo" },
+        { start: 5210, end: 5299, company: "Claro", note: "Antes: Movistar" },
+        { start: 5300, end: 5309, company: "Tigo" },
+        { start: 5310, end: 5311, company: "Claro" },
+        { start: 5312, end: 5313, company: "Claro", note: "Antes: Movistar" },
+        { start: 5314, end: 5389, company: "Tigo" },
+        { start: 5390, end: 5399, company: "Claro", note: "Antes: Movistar" },
+        { start: 5400, end: 5409, company: "Claro", note: "Antes: Movistar" },
+        { start: 5410, end: 5499, company: "Claro" },
+        { start: 5500, end: 5509, company: "Claro", note: "Antes: Movistar" },
+        { start: 5510, end: 5517, company: "Claro" },
+        { start: 5518, end: 5519, company: "Claro", note: "Antes: Movistar" },
+        { start: 5520, end: 5529, company: "Tigo" },
+        { start: 5530, end: 5539, company: "Claro" },
+        { start: 5540, end: 5542, company: "Claro", note: "Antes: Movistar" },
+        { start: 5543, end: 5544, company: "Claro" },
+        { start: 5545, end: 5549, company: "Claro", note: "Antes: Movistar" },
+        { start: 5550, end: 5553, company: "Tigo" },
+        { start: 5554, end: 5579, company: "Claro" },
+        { start: 5580, end: 5581, company: "Tigo" },
+        { start: 5582, end: 5599, company: "Claro" },
+        { start: 5600, end: 5609, company: "Claro", note: "Antes: Movistar" },
+        { start: 5610, end: 5639, company: "Claro" },
+        { start: 5640, end: 5689, company: "Claro", note: "Antes: Movistar" },
+        { start: 5690, end: 5699, company: "Claro" },
+        { start: 5700, end: 5709, company: "Tigo" },
+        { start: 5710, end: 5718, company: "Claro" },
+        { start: 5719, end: 5789, company: "Tigo" },
+        { start: 5790, end: 5799, company: "Claro", note: "Antes: Movistar" },
+        { start: 5800, end: 5809, company: "Tigo" },
+        { start: 5810, end: 5818, company: "Claro" },
+        { start: 5819, end: 5819, company: "Tigo" },
+        { start: 5820, end: 5879, company: "Claro" },
+        { start: 5880, end: 5899, company: "Tigo" },
+        { start: 5900, end: 5909, company: "Tigo" },
+        { start: 5910, end: 5914, company: "Claro" },
+        { start: 5915, end: 5917, company: "Claro", note: "Antes: Movistar" },
+        { start: 5918, end: 5919, company: "Tigo" },
+        { start: 5920, end: 5989, company: "Claro" },
+        { start: 5990, end: 5999, company: "Tigo" }
+      ];
+
+      const $ = (selector) => app.querySelector(selector);
+
+      function onlyDigits(value) {
+        return (value || "").replace(/\D/g, "");
+      }
+
+      function localDigits(value) {
+        let digits = onlyDigits(value);
+        if (digits.length > 8 && digits.startsWith("502")) digits = digits.slice(3);
+        return digits;
+      }
+
+      function formatRange(rule) {
+        return rule.start === rule.end ? String(rule.start) : `${rule.start} al ${rule.end}`;
+      }
+
+      function findCompany(value) {
+        const digits = localDigits(value);
+        if (digits.length < 4) {
+          return { error: "Ingresa al menos los primeros 4 dígitos del número." };
+        }
+
+        const prefixText = digits.slice(0, 4);
+        const prefix = Number(prefixText);
+        const rule = RULES.find((item) => prefix >= item.start && prefix <= item.end);
+
+        if (!rule) {
+          return {
+            digits,
+            prefixText,
+            company: "No identificado",
+            note: "No encontramos este prefijo en la tabla de reglas disponible. Revisa que sea un número móvil de Guatemala o consulta con tu operador."
+          };
+        }
+
+        return { digits, prefixText, rule, company: rule.company, note: rule.note || "" };
+      }
+
+      function renderResult(result) {
+        const warning = result.digits && result.digits.length !== 8
+          ? " El número local normalmente tiene 8 dígitos; se usaron los primeros 4 para identificar la compañía."
+          : "";
+
+        $("#tcgt-prefix").textContent = result.prefixText || "—";
+        $("#tcgt-company").textContent = result.company;
+        $("#tcgt-status").textContent = result.company === "No identificado"
+          ? "No se encontró una coincidencia exacta"
+          : `Este número pertenece a ${result.company}`;
+
+        if (result.rule) {
+          const legacy = result.note ? ` (${result.note})` : "";
+          $("#tcgt-note").textContent = `Regla aplicada: prefijo ${formatRange(result.rule)} → ${result.company}${legacy}.${warning}`;
+        } else {
+          $("#tcgt-note").textContent = result.note;
+        }
+
+        $("#tcgt-result").style.display = "block";
+        $("#tcgt-error").style.display = "none";
+      }
+
+      function showError(message) {
+        $("#tcgt-error").textContent = message;
+        $("#tcgt-error").style.display = "block";
+      }
+
+      function checkNumber() {
+        const result = findCompany($("#tcgt-phone").value);
+        if (result.error) {
+          showError(result.error);
+          $("#tcgt-result").style.display = "none";
+          return;
+        }
+        renderResult(result);
+      }
+
+      function renderRules() {
+        $("#tcgt-rules").innerHTML = RULES.map((rule) => {
+          const note = rule.note ? ` · ${rule.note}` : "";
+          return `<div class="tcgt-rule"><strong>${formatRange(rule)}</strong><span>${rule.company}${note}</span></div>`;
+        }).join("");
+      }
+
+      $("#tcgt-check").addEventListener("click", checkNumber);
+
+      $("#tcgt-phone").addEventListener("input", () => {
+        $("#tcgt-clear").style.display = $("#tcgt-phone").value ? "inline-flex" : "none";
+        $("#tcgt-error").style.display = "none";
+      });
+
+      $("#tcgt-phone").addEventListener("keydown", (event) => {
+        if (event.key === "Enter") checkNumber();
+      });
+
+      $("#tcgt-clear").addEventListener("click", () => {
+        $("#tcgt-phone").value = "";
+        $("#tcgt-clear").style.display = "none";
+        $("#tcgt-result").style.display = "none";
+        $("#tcgt-error").style.display = "none";
+        $("#tcgt-phone").focus();
+      });
+
+      app.querySelectorAll(".tcgt-chip").forEach((chip) => {
+        chip.addEventListener("click", () => {
+          $("#tcgt-phone").value = chip.getAttribute("data-phone");
+          $("#tcgt-clear").style.display = "inline-flex";
+          checkNumber();
+        });
+      });
+
+      $("#tcgt-copy").addEventListener("click", async () => {
+        const text = [
+          "Identificador de compañía telefónica - Guialocal.com.gt",
+          `Prefijo: ${$("#tcgt-prefix").textContent}`,
+          `Resultado: ${$("#tcgt-company").textContent}`,
+          $("#tcgt-note").textContent
+        ].join("\n");
+
+        try {
+          await navigator.clipboard.writeText(text);
+          $("#tcgt-copy").textContent = "Resultado copiado";
+          setTimeout(() => { $("#tcgt-copy").textContent = "Copiar resultado"; }, 1500);
+        } catch (error) {
+          showError("No se pudo copiar automáticamente. Puedes seleccionar el resultado y copiarlo manualmente.");
+        }
+      });
+
+      renderRules();
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initTcgtApp);
+      } else {
+        initTcgtApp();
+      }
+    })();
+  </script>
+</div>
+<!-- /Identificador de compañía telefónica Guatemala - GUIALOCAL.COM.GT -->
